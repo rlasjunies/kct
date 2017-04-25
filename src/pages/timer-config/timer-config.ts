@@ -2,15 +2,15 @@ import * as moment from 'moment';
 
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import {FORM_DIRECTIVES, FormBuilder, FormGroup, Validators, FormControl, NgControl, ControlValueAccessor } from '@angular/forms';
+import { FORM_DIRECTIVES, FormBuilder, FormGroup, Validators, FormControl, NgControl, ControlValueAccessor } from '@angular/forms';
 import { IonicPage, NavController, NavParams, Events, AlertController } from 'ionic-angular';
 
 import * as model from 'models/timer';
-import * as misc  from '../../misc/misc';
+import * as misc from '../../misc/misc';
 import * as constant from '../../constant';
 
-import {TimerService} from '../../providers/timer-service/timer-service';
-import {TimerConfigService} from '../../providers/timer-config-service/timer-config-service';
+import { TimerService } from '../../providers/timer-service/timer-service';
+import { TimerConfigService } from '../../providers/timer-config-service/timer-config-service';
 
 
 @IonicPage()
@@ -68,11 +68,11 @@ export class TimerConfigPage {
 
         if (!id) {
             console.log('TimerConfigPage: ID param missing');
-        } else if (id === -1 ) {
+        } else if (id === -1) {
             this.timerConfig = timerConfigService.new_();
         } else {
             // TODO should be passed to a control, the data Human interaction & persistance must be decoupled 
-            this.timerConfig = timerConfigService.get(<string> id);
+            this.timerConfig = timerConfigService.get(<string>id);
         }
 
         // Hours and minutes
@@ -86,7 +86,7 @@ export class TimerConfigPage {
             console.log(`title:change:${value}`);
             this.saveTimerConfig();
         });
-        
+
         events.subscribe('enable:change', (checked: boolean) => {
             console.log(`enable:change:${checked}`);
             this.saveTimerConfig();
@@ -94,12 +94,12 @@ export class TimerConfigPage {
 
         events.subscribe('hoursRadio:change', () => {
             console.log(`hoursRadio:change:${this.durationHours}-${this.durationMinutes}`);
-            this.saveTimerConfig(); 
+            this.saveTimerConfig();
         });
 
         events.subscribe('minutesRadio:change', () => {
             console.log(`minutesRadio:change:${this.durationHours}-${this.durationMinutes}`);
-            this.saveTimerConfig(); 
+            this.saveTimerConfig();
         });
 
         events.subscribe('wd_day0:change', (checked: boolean) => {
@@ -134,6 +134,10 @@ export class TimerConfigPage {
         console.log('TimerConfigPage ... loaded!');
     }
 
+
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad Timer-config');
+    }
     saveTimerConfig() {
         this.timerConfig.weekdays = __convertWeekDaysToNumber(this.wd_day0, this.wd_day1, this.wd_day2, this.wd_day3, this.wd_day4, this.wd_day5, this.wd_day6);
         this.timerConfig.durationMilliSecond = __convertToMillisecond((this.durationHours), this.durationMinutes);
@@ -142,27 +146,27 @@ export class TimerConfigPage {
     }
 
     Delete() {
-    let prompt = this.alerCtrl.create({
-      title: 'Delete',
-      message: `Are you sure to delete this timer:\n${this.timerConfig.title}`,
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            // console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Delete',
-          handler: data => {
-            this.timerConfigService.delete(this.timerConfig.guid);
-            this.navCtrl.pop();
-          }
-        }
-      ]
-    });
-    prompt.present();
-  }
+        let prompt = this.alerCtrl.create({
+            title: 'Delete',
+            message: `Are you sure to delete this timer:\n${this.timerConfig.title}`,
+            buttons: [
+                {
+                    text: 'Cancel',
+                    handler: data => {
+                        // console.log('Cancel clicked');
+                    }
+                },
+                {
+                    text: 'Delete',
+                    handler: data => {
+                        this.timerConfigService.delete(this.timerConfig.guid);
+                        this.navCtrl.pop();
+                    }
+                }
+            ]
+        });
+        prompt.present();
+    }
 }
 
 function __formatToDurationHumanized(durationHours: number, durationMinutes: number): string {
@@ -172,7 +176,7 @@ function __formatToDurationHumanized(durationHours: number, durationMinutes: num
 function __convertToMillisecond(durationHours: number, durationMinutes: number): number {
     return moment.duration(parseInt(durationHours.toString()), 'hour').add(parseInt(durationMinutes.toString()), 'minute').asMilliseconds();
     // return  
-}    
+}
 
 function __convertMillisecondToHoursAndMinutes(durationMilliSecond: number): [number, number] {
     let duration = moment.duration(durationMilliSecond);
@@ -191,11 +195,11 @@ function __convertNumberToWeekDays(weekDaysEncoded: number): [boolean, boolean, 
     ];
 }
 function __convertWeekDaysToNumber(day0: boolean, day1: boolean, day2: boolean, day3: boolean, day4: boolean, day5: boolean, day6: boolean): number {
-    return ( (day0 ? 1 : 0 )  * 2)
-         + ( ( day1 ? 1 : 0) * 4 )
-         + ( ( day2 ? 1 : 0) * 8)
-         + ( ( day3 ? 1 : 0) * 16)
-         + ( ( day4 ? 1 : 0) * 32)
-         + ( ( day5 ? 1 : 0) * 64)
-         + ( ( day6 ? 1 : 0) * 128);
+    return ((day0 ? 1 : 0) * 2)
+        + ((day1 ? 1 : 0) * 4)
+        + ((day2 ? 1 : 0) * 8)
+        + ((day3 ? 1 : 0) * 16)
+        + ((day4 ? 1 : 0) * 32)
+        + ((day5 ? 1 : 0) * 64)
+        + ((day6 ? 1 : 0) * 128);
 }

@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>timers configuration</ion-title>
+        <ion-buttons end>
+            <button royal [navPush]="timerConfigPage" [navParams]="{id: -1}" >
+                <ion-icon name="add" (click)="add()"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-item ion-item *ngFor="let timerConfig of timersConfig">
+            <ion-avatar item-left>
+                <img [src]="timerConfig.picture">
+            </ion-avatar>
+            <h3>{{timerConfig.title}}- {{timerConfig.enable}}</h3>
+            <h1>{{timerConfig.durationHumanized}}</h1>
+            <button secondary [navPush]="timerConfigPage" [navParams]="{id: timerConfig.guid}" item-right outline large>
+                <ion-icon name="md-create" outline large></ion-icon>
+            </button>
+        </ion-item>
+    </ion-list>
+</ion-content>
