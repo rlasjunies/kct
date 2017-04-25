@@ -1,14 +1,16 @@
 {
-  "name": "ionic-hello-world",
-  "version": "0.0.0",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "kctimer",
+  "description": "kct: an application helping you to manage video and gaming usage duration for your kids",
+  "version": "0.5.0",
+  "author": "Richard Lasjunies",
+  "homepage": "http://cpairelasjunies.com/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
+    "ionic:serve": "ionic-app-scripts serve",
+    "test": "karma start karma.conf.js"
   },
   "dependencies": {
     "@angular/common": "4.0.0",
@@ -41,6 +43,5 @@
     "cordova-plugin-splashscreen",
     "ionic-plugin-keyboard"
   ],
-  "cordovaPlatforms": [],
-  "description": "kct3: An Ionic project"
+  "cordovaPlatforms": []
 }
