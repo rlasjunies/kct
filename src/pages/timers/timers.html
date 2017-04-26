@@ -1,9 +1,9 @@
 <ion-header>
     <ion-navbar>
-        <button menuToggle>
+        <button menuToggle ion-button icon-only>
             <ion-icon name="menu"></ion-icon>
+            <ion-title>timers</ion-title>
         </button>
-        <ion-title>timers</ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -16,16 +16,16 @@
                     <h1>{{timer.durationLeftString}}</h1>
                     <h2>{{timer.title}}</h2>
 
-                    <button secondary [hidden]="!timer.ready" (click)="Command(timer.guid)" item-right large>
+                    <button ion-button color="secondary" icon-only [hidden]="!timer.ready" (click)="Command(timer.guid)" item-right large>
                         <ion-icon name="play"></ion-icon>
                     </button>
-                    <button primary [hidden]="!timer.hold" (click)="Command(timer.guid)" item-right  large>
+                    <button ion-button color="primary" icon-only [hidden]="!timer.hold" (click)="Command(timer.guid)" item-right  large>
                         <ion-icon name="play"></ion-icon>
                     </button>
-                    <button danger [hidden]="!timer.running" (click)="Command(timer.guid)" item-right  large>
+                    <button ion-button color="danger" icon-only [hidden]="!timer.running" (click)="Command(timer.guid)" item-right  large>
                         <ion-icon name="pause"></ion-icon>
                     </button>
-                    <button dark [hidden]="!timer.over" (click)="Command(timer.guid)" item-right large>
+                    <button ion-button color="dark" icon-only [hidden]="!timer.over" (click)="Command(timer.guid)" item-right large>
                         <ion-icon name="close"></ion-icon>
                     </button>
         </ion-item>
