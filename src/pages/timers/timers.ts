@@ -66,7 +66,7 @@ export class TimersPage {
                 // timer found, initialize the timer array
                 var uiTimer: UITimer = {
                     guid: (<model.TimerConfig> (<any> timerConfig)).guid,
-                    picture: 'build/assets/images/rlas.png',
+                    picture: 'assets/images/rlas.png',
                     // picture: 'url(../../assets/images/rlas.png)',
                     title: timerValue.title,
                     durationLeft: moment.duration(timerValue.durationLeft_MilliSecond),
