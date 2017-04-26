@@ -1,22 +1,22 @@
 import * as moment from 'moment';
 
 import { Component } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { FORM_DIRECTIVES, FormBuilder, FormGroup, Validators, FormControl, NgControl, ControlValueAccessor } from '@angular/forms';
+// import { Subscription } from 'rxjs/Subscription';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { IonicPage, NavController, NavParams, Events, AlertController } from 'ionic-angular';
 
 import * as model from 'models/timer';
-import * as misc from '../../misc/misc';
-import * as constant from '../../constant';
+import * as misc from 'misc/misc';
+// import * as constant from 'app/constant';
 
-import { TimerService } from '../../providers/timer-service/timer-service';
-import { TimerConfigService } from '../../providers/timer-config-service/timer-config-service';
+// import { TimerService } from 'providers/timer-service/timer-service';
+import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 
 
 @IonicPage()
 @Component({
-    templateUrl: 'build/pages/timer-config/timer-config.page.html',
-    directives: [FORM_DIRECTIVES],
+    templateUrl: 'timer-config.html',
+    //directives: [FORM_DIRECTIVES],
     providers: [
         {
             provide: Storage, useFactory: () => {

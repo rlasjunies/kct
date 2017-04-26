@@ -2,9 +2,9 @@ import * as moment from 'moment';
 import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 
-import * as constant from '../../constant';
-import * as model from '../../models/timer';
-import * as misc from '../../misc/misc';
+import * as constant from 'app/constant';
+import * as model from 'models/timer';
+import * as misc from 'misc/misc';
 
 @Injectable()
 export class TimerConfigService {

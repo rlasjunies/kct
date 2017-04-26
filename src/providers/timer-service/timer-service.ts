@@ -1,10 +1,10 @@
 import * as moment from 'moment';
-import * as constant from '../../constant';
+import * as constant from 'app/constant';
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject'; 
 
-import {IConfig, TimerValue, enumTimerStatus, TimerChangeNotification} from '../../models/timer';
+import { TimerValue, enumTimerStatus, TimerChangeNotification} from 'models/timer';
 
 @Injectable()
 export class TimerService {

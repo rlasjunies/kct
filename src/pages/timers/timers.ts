@@ -3,12 +3,12 @@ import { Component } from '@angular/core';
 import { NavController, IonicPage, } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
-import * as model from '../../models/timer';
-import * as misc  from '../../misc/misc';
-import * as constant from '../../constant';
+import * as model from 'models/timer';
+import * as misc  from 'misc/misc';
+import * as constant from 'app/constant';
 
-import {TimerService} from '../../providers/timer-service/timer-service';
-import {TimerConfigService} from '../../providers/timer-config-service/timer-config-service';
+import {TimerService} from 'providers/timer-service/timer-service';
+import {TimerConfigService} from 'providers/timer-config-service/timer-config-service';
 
 interface UITimer {
     durationLeft: moment.Duration;
@@ -32,7 +32,7 @@ export interface DictionaryMedia extends misc.Dictionary<any> { }
 
 @IonicPage()
 @Component({
-    templateUrl: 'build/pages/timers/timers.page.html',
+    templateUrl: 'timers.html',
     providers: [
         {
             provide: Storage, useFactory: () => {

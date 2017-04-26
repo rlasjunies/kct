@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, Events } from 'ionic-angular';
 
-import * as model from '../../models/timer';
-import { TimerConfigService } from '../../providers/timer-config-service/timer-config-service';
-import { TimerConfigPage } from '../timer-config/timer-config.page';
+import * as model from 'models/timer';
+import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
+import { TimerConfigPage } from 'pages/timer-config/timer-config';
 
 @IonicPage()
 @Component({
-    templateUrl: 'build/pages/timers-config/timers-config.page.html',
+    templateUrl: 'timers-config.html',
     providers: [
         {
             provide: Storage, useFactory: () => {
