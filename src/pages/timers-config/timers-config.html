@@ -1,11 +1,15 @@
 <ion-header>
     <ion-navbar>
-        <button menuToggle>
+        <!--<button menuToggle>
             <ion-icon name="menu"></ion-icon>
+        </button>-->
+        <button menuToggle ion-button icon-only>
+            <ion-icon name="menu"></ion-icon>
+            <ion-title>timers</ion-title>
         </button>
         <ion-title>timers configuration</ion-title>
         <ion-buttons end>
-            <button royal [navPush]="timerConfigPage" [navParams]="{id: -1}" >
+            <button ion-button color="royal" [navPush]="timerConfigPage" [navParams]="{id: -1}">
                 <ion-icon name="add" (click)="add()"></ion-icon>
             </button>
         </ion-buttons>
@@ -20,7 +24,7 @@
             </ion-avatar>
             <h3>{{timerConfig.title}}- {{timerConfig.enable}}</h3>
             <h1>{{timerConfig.durationHumanized}}</h1>
-            <button secondary [navPush]="timerConfigPage" [navParams]="{id: timerConfig.guid}" item-right outline large>
+            <button ion-button color="secondary" [navPush]="timerConfigPage" [navParams]="{id: timerConfig.guid}" item-right outline large>
                 <ion-icon name="md-create" outline large></ion-icon>
             </button>
         </ion-item>
