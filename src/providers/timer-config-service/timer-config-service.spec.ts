@@ -1,6 +1,8 @@
-// import { describe, beforeEach, addProviders, inject, expect, it} from '@angular/core/testing';
+// import 'zone.js/dist/zone-node';
+// import { TestBed, inject, getTestBed } from '@angular/core/testing';
+// import { AsyncTest, SetupFixture, Expect, Test, TestCase, TestFixture } from "alsatian";
 
-// import * as mock from '../../misc/mocks';
+// import * as mock from '../../misc/storageMock';
 // import { Events } from 'ionic-angular';
 // import { TimerConfigService } from './timer-config-service';
 
@@ -43,37 +45,50 @@
 //     }
 // }
 
-// describe('TimerConfigService =>', () => {
-//     beforeEach(() => {
-//         addProviders([
-//             {
-//                 provide: Storage, useFactory: () => {
-//                     // console.log('Dans factory');
-//                     return storage4Tests;
+// @TestFixture("provides\timer-config-service")
+// export class timerConfigServiceTest {
+//     @SetupFixture
+//     injectDependies() {
+//         TestBed.configureTestingModule({
+//             providers: [
+//                 {
+//                     provide: Storage, useFactory: () => {
+//                         // console.log('Dans factory');
+//                         return storage4Tests;
+//                     },
 //                 },
-//             },
-//             // KO { provide: Storage, useExisting: storage4Tests },
-//             // OK { provide: Storage, useClass: mock.StorageMock },
-//             { provide: TimerConfigService, useClass: TimerConfigService },
-//             { provide: Events, useClass: EventsMock }
-//         ]);
-//     });
+//                 // KO { provide: Storage, useExisting: storage4Tests },
+//                 // OK { provide: Storage, useClass: mock.StorageMock },
+//                 { provide: TimerConfigService, useClass: TimerConfigService },
+//                 { provide: Events, useClass: EventsMock }
+//             ]
+//         });
+//     }
 
-//     it('check getTimersConfig', inject([TimerConfigService], (service: TimerConfigService) => {
-//         // console.log("**********", JSON.stringify(defaultTimersConfig),"**************");
-//         // console.log("----------", JSON.stringify(service.getAll()),"-----------------");
-//         expect(service.getAll()).toEqual(defaultTimersConfig);
-//     }));
+//     @AsyncTest()
+//     async shouldGetAll() {
+//         inject([TimerConfigService], (service: TimerConfigService) => {
+//             // console.log("**********", JSON.stringify(defaultTimersConfig),"**************");
+//             // console.log("----------", JSON.stringify(service.getAll()),"-----------------");
+//             Expect(service.getAll()).toEqual(defaultTimersConfig);
+//         })
+//     }
 
-//     it('check getTimerConfig', inject([TimerConfigService], (service: TimerConfigService) => {
-//         expect(service.get('569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3')).toEqual(defaultTimer1);
-//         expect(service.get('17913ab4-b7b2-4aba-af9f-01e6019844b3')).toEqual(defaultTimer3);
-//         expect(service.get('4d555d07-341c-40aa-aabe-9799577ba2a6')).toEqual(defaultTimer5);
-//     }));
+//     @Test()
+//     shouldGetHaveSomePredefinedValues() {
+//         inject([TimerConfigService], (service: TimerConfigService) => {
+//             Expect(service.get('569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3')).toEqual(defaultTimer1);
+//             Expect(service.get('17913ab4-b7b2-4aba-af9f-01e6019844b3')).toEqual(defaultTimer3);
+//             Expect(service.get('4d555d07-341c-40aa-aabe-9799577ba2a6')).toEqual(defaultTimer5);
+//         })
+//     }
 
-//     it('check newTimerConfig', inject([TimerConfigService], (service: TimerConfigService) => {
-//         let tmp = service.new_();
-//         delete tmp.guid;
-//         expect(tmp).toEqual(newTimerConfig);
-//     }));
-// });
+//     @Test()
+//     checkNewTimerConfig() {
+//         inject([TimerConfigService], (service: TimerConfigService) => {
+//             let tmp = service.new_();
+//             delete tmp.guid;
+//             Expect(tmp).toEqual(newTimerConfig);
+//         })
+//     }
+// }

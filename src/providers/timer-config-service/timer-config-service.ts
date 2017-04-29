@@ -120,20 +120,6 @@ export class TimerConfigService {
         this.events.publish('timer-config:change');
     }
 
-    // /*
-    //  * add the timerConfig in the instance array
-    //  * store the instance array
-    //  * store the timerConfig in timerValue
-    //  */
-    // public createTimerConfig(timerConf: model.ITimerConfig): void {
-    //     // add the timerConfig in the array and store it
-    //     this._config.timersConfig[timerConf.guid] = timerConf;
-    //     this._storeConfig();
-
-    //     // prepare and store the timerValue
-    //     this._storeTimerValue(timerConf);
-    // }
-
     /*
      * initialize a timerConfig object
      * does not store it
