@@ -1,9 +1,16 @@
+☐ Sélectionner parmis plusieurs icones
 ☐ prise de photo
+☐ modifier le selecteur de jours / durée pour tenir sur une seule ligne
+☐ améliorer le responsive
+    il faut définir le nombre de card par ligne en fonction de la taille de l'écran
 ☐ Problème pour revenir à la page home
 ☐ replace storage by a persistant one
 ☐ rework the form builder, come back on course?
 ☐ remettre le simulateur android en place
 ☐ Faire marcher en tache de fond les timers ( quand l'application n'est pas au 1er plan)
+☐ Credit page
+    https://www.shareicon.net/
+
 
 ✔ enlever enable/disable timer => simplification @done (01/05/2017 à 20:28:18)
 ✔ unit test alsatian @done (01/05/2017 à 20:22:47)

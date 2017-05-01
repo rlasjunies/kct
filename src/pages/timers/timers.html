@@ -1,9 +1,9 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar color="primary">
         <button menuToggle ion-button icon-only>
             <ion-icon name="menu"></ion-icon>
-            <ion-title>timers</ion-title>
         </button>
+        <ion-title>Kid's coaching - Timers</ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -40,10 +40,10 @@
                             <h1>{{timer.durationLeftString}}</h1>
                             <h2>{{timer.title}}</h2>
                         </ion-card-title>
-                        <button ion-button clear color="secondary" icon-only [hidden]="!timer.ready" (click)="start(timer.guid)" >
+                        <button ion-button clear block color="secondary" icon-only [hidden]="!timer.ready" (click)="start(timer.guid)" >
                             <ion-icon name="play"></ion-icon>
                         </button>
-                        <button ion-button clear color="primary" icon-only [hidden]="!timer.hold" (click)="start(timer.guid)" >
+                        <button ion-button clear block color="primary" icon-only [hidden]="!timer.hold" (click)="start(timer.guid)" >
                             <ion-icon name="play"></ion-icon>
                         </button>
                         <button ion-button clear color="danger" icon-only [hidden]="!timer.running" (click)="hold(timer.guid)" >

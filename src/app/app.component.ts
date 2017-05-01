@@ -29,12 +29,7 @@ export class MyApp {
             console.log('initilizeApp - platform ... ready!');
         });
     }
-
-    openTimersPage() {
-        this.nav.push(pages.ID_timers);
-        // this.nav.popToRoot();
-    }
-    openTimersConfigPage() {
-        // this.nav.push("timers-config");
+    openCreditPage() {
+        this.nav.push(pages.ID_credits);
     }
 }
