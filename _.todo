@@ -4,8 +4,8 @@
 ☐ rework the form builder, come back on course?
 ☐ remettre le simulateur android en place
 ☐ Faire marcher en tache de fond les timers ( quand l'application n'est pas au 1er plan)
-☐ enlever enable/disable timer => simplification
 
+✔ enlever enable/disable timer => simplification @done (01/05/2017 à 20:28:18)
 ✔ unit test alsatian @done (01/05/2017 à 20:22:47)
     alsatian tourne dans node pas dans le browser contrairement à angular
     il faut "simuler" un browser ou browserify certainement méthode d'angular

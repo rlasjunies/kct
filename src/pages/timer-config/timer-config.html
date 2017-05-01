@@ -20,10 +20,10 @@
                     <ion-input #title type="text" formControlName="timerTitle" [value]="timerConfig.title" placeholder="ex.: Louis - videos"
                         [(ngModel)]="timerConfig.title" (change)="events.publish('title:change',title.value)"></ion-input>
                 </ion-item>
-                <ion-item>
+                <!--<ion-item>
                     <ion-label>enable</ion-label>
                     <ion-toggle #enable formControlName="enableCtl" [(ngModel)]="timerConfig.enable" checked={{timerConfig.enable}} (ionChange)="events.publish('enable:change',enable.checked)"></ion-toggle>
-                </ion-item>
+                </ion-item>-->
             </ion-list>
 
             <ion-item-divider>
