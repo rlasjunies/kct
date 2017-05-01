@@ -1,7 +1,6 @@
 import * as moment from 'moment';
 
 import { Component } from '@angular/core';
-// import { Subscription } from 'rxjs/Subscription';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { IonicPage, NavController, NavParams, Events, AlertController } from 'ionic-angular';
 
@@ -12,8 +11,11 @@ import * as misc from 'misc/misc';
 // import { TimerService } from 'providers/timer-service/timer-service';
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 
-
-@IonicPage()
+export const ID_timerConfig = "timer-config";
+@IonicPage({
+    name: "timer-config",
+    segment: "timer-config"
+})
 @Component({
     templateUrl: 'timer-config.html',
     //directives: [FORM_DIRECTIVES],
@@ -26,6 +28,7 @@ import { TimerConfigService } from 'providers/timer-config-service/timer-config-
         TimerConfigService]
 })
 export class TimerConfigPage {
+    static ID_timerConfig = "timer-config";
     private timerConfig: model.TimerConfig;
     public durationMinutes: number;
     public durationHours: number;
@@ -49,6 +52,7 @@ export class TimerConfigPage {
     private wd_day6ctl = new FormControl('');
     private enableCtl = new FormControl('');
 
+    /* tslint:disable-next-line:no-unused-variable */
     private timerForm = new FormGroup({
         'timerTitle': this.timerTitle,
         'hoursradio': this.hoursradio,
@@ -63,7 +67,7 @@ export class TimerConfigPage {
         'enableCtl': this.enableCtl,
     });
 
-    constructor(private navCtrl: NavController, private navParam: NavParams, private formBuilder: FormBuilder, private timerConfigService: TimerConfigService, private events: Events, public alerCtrl: AlertController) {
+    constructor(public navCtrl: NavController, public navParam: NavParams, private formBuilder: FormBuilder, private timerConfigService: TimerConfigService, private events: Events, public alerCtrl: AlertController) {
         let id: string | number = navParam.get('id');
 
         if (!id) {

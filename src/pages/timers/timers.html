@@ -8,28 +8,62 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-list>
-        <ion-item ion-item *ngFor="let timer of timers">
-            <ion-avatar item-left>
-                <img [src]="timer.picture">
-            </ion-avatar>
-                    <h1>{{timer.durationLeftString}}</h1>
-                    <h2>{{timer.title}}</h2>
+    <ion-grid class="card-background-page">
+        <ion-row>
+            <!--<ion-col>-->
+            <!--<ion-item ion-item *ngFor="let timer of timers">
+                <ion-avatar item-left>
+                    <img [src]="timer.picture">
+                </ion-avatar>
+                        <h1>{{timer.durationLeftString}}</h1>
+                        <h2>{{timer.title}}</h2>
 
-                    <button ion-button color="secondary" icon-only [hidden]="!timer.ready" (click)="Command(timer.guid)" item-right large>
-                        <ion-icon name="play"></ion-icon>
-                    </button>
-                    <button ion-button color="primary" icon-only [hidden]="!timer.hold" (click)="Command(timer.guid)" item-right  large>
-                        <ion-icon name="play"></ion-icon>
-                    </button>
-                    <button ion-button color="danger" icon-only [hidden]="!timer.running" (click)="Command(timer.guid)" item-right  large>
-                        <ion-icon name="pause"></ion-icon>
-                    </button>
-                    <button ion-button color="dark" icon-only [hidden]="!timer.over" (click)="Command(timer.guid)" item-right large>
-                        <ion-icon name="close"></ion-icon>
-                    </button>
-        </ion-item>
-    </ion-list>
+                        <button ion-button color="secondary" icon-only [hidden]="!timer.ready" (click)="Command(timer.guid)" item-right large>
+                            <ion-icon name="play"></ion-icon>
+                        </button>
+                        <button ion-button color="primary" icon-only [hidden]="!timer.hold" (click)="Command(timer.guid)" item-right  large>
+                            <ion-icon name="play"></ion-icon>
+                        </button>
+                        <button ion-button color="danger" icon-only [hidden]="!timer.running" (click)="Command(timer.guid)" item-right  large>
+                            <ion-icon name="pause"></ion-icon>
+                        </button>
+                        <button ion-button color="dark" icon-only [hidden]="!timer.over" (click)="Command(timer.guid)" item-right large>
+                            <ion-icon name="close"></ion-icon>
+                        </button>
+            </ion-item>-->
 
-    
+            <ion-col *ngFor="let timer of timers">
+                <ion-card>
+                    <img [src]="timer.picture" (click)="configure(timer.guid)">
+                    <ion-card-content>
+                        <ion-card-title (click)="configure(timer.guid)">
+                            <h1>{{timer.durationLeftString}}</h1>
+                            <h2>{{timer.title}}</h2>
+                        </ion-card-title>
+                        <button ion-button clear color="secondary" icon-only [hidden]="!timer.ready" (click)="start(timer.guid)" >
+                            <ion-icon name="play"></ion-icon>
+                        </button>
+                        <button ion-button clear color="primary" icon-only [hidden]="!timer.hold" (click)="start(timer.guid)" >
+                            <ion-icon name="play"></ion-icon>
+                        </button>
+                        <button ion-button clear color="danger" icon-only [hidden]="!timer.running" (click)="hold(timer.guid)" >
+                            <ion-icon name="pause"></ion-icon>
+                        </button>
+                        <button ion-button clear color="dark" icon-only [hidden]="!timer.over" (click)="acknowledge(timer.guid)" >
+                            <ion-icon name="close"></ion-icon>
+                        </button>
+                        <!--<button ion-button outline color="primary" icon-only (click)="acknowledge(timer.guid)">
+                            <ion-icon name="settings"></ion-icon>
+                        </button>                        
+                        <button ion-button outline color="primary" icon-only (click)="acknowledge(timer.guid)">
+                            <ion-icon name="sync"></ion-icon>
+                        </button>-->
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+            <!--</ion-col>-->
+        </ion-row>
+    </ion-grid>
+
+
 </ion-content>

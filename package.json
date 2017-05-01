@@ -35,12 +35,9 @@
     "config": {
         "ionic_bundler": "webpack",
         "ionic_webpack": "./webpack.config.js"
-    },
-    "devDependencies": {
+    },    "devDependencies": {
         "@ionic/app-scripts": "1.3.0",
-        "alsatian": "^1.3.1",
-        "typescript": "~2.2.1",
-        "@angular/platform-server": "^4.1.0"
+        "typescript": "~2.2.1"
     },
     "cordovaPlugins": [
         "cordova-plugin-whitelist",

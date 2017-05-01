@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 
-import * as pages from "pages";
+import * as providers from "providers";
 
 @NgModule({
   declarations: [
@@ -14,9 +14,6 @@ import * as pages from "pages";
   ],
   imports: [
     BrowserModule,
-    pages.TimersModule,
-    pages.TimerConfigModule,
-    pages.TimersConfigModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -26,6 +23,8 @@ import * as pages from "pages";
   providers: [
     StatusBar,
     SplashScreen,
+    providers.TimerService,
+    providers.TimerConfigService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
