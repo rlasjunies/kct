@@ -1,0 +1,35 @@
+<div class="days-selector">
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <input type="checkbox" id="day1" [checked]="day1" (change)="calculate(1)">
+                <label for="day1">{{day1Text}}</label>
+            </ion-col>
+            <ion-col>
+                <input type="checkbox" id="day2" [checked]="day2" (change)="calculate(2)">
+                <label for="day2">{{day2Text}}</label>
+            </ion-col>
+            <ion-col>
+                <input type="checkbox" id="day3" [checked]="day3" (change)="calculate(4)">
+                <label for="day3">{{day3Text}}</label>
+            </ion-col>
+            <ion-col>
+                <input type="checkbox" id="day4" [checked]="day4" (change)="calculate(8)">
+                <label for="day4">{{day4Text}}</label>
+            </ion-col>
+            <ion-col>
+                <input type="checkbox" id="day5" [checked]="day5" (change)="calculate(16)">
+                <label for="day5">{{day5Text}}</label>
+            </ion-col>
+            <ion-col>
+                <input type="checkbox" id="day6" [checked]="day6" (change)="calculate(32)">
+                <label for="day6">{{day6Text}}</label>
+            </ion-col>
+            <ion-col>
+                <input type="checkbox" id="day7" [checked]="day7" (change)="calculate(64)">
+                <label for="day7">{{day7Text}}</label>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</div>
+

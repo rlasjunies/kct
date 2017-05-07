@@ -6,9 +6,7 @@ import { IonicPage, NavController, NavParams, Events, AlertController } from 'io
 
 import * as model from 'models/timer';
 import * as misc from 'misc/misc';
-// import * as constant from 'app/constant';
-
-// import { TimerService } from 'providers/timer-service/timer-service';
+// import { DaysSelectorHelper } from "components";
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 
 export const ID_timerConfig = "timer-config";
@@ -32,24 +30,24 @@ export class TimerConfigPage {
     private timerConfig: model.TimerConfig;
     public durationMinutes: number;
     public durationHours: number;
-    public wd_day0: boolean;
-    public wd_day1: boolean;
-    public wd_day2: boolean;
-    public wd_day3: boolean;
-    public wd_day4: boolean;
-    public wd_day5: boolean;
-    public wd_day6: boolean;
+    // public wd_day0: boolean;
+    // public wd_day1: boolean;
+    // public wd_day2: boolean;
+    // public wd_day3: boolean;
+    // public wd_day4: boolean;
+    // public wd_day5: boolean;
+    // public wd_day6: boolean;
 
     private timerTitle = new FormControl('');
     private hoursradio = new FormControl('');
     private minutesradio = new FormControl('');
-    private wd_day0ctl = new FormControl('');
-    private wd_day1ctl = new FormControl('');
-    private wd_day2ctl = new FormControl('');
-    private wd_day3ctl = new FormControl('');
-    private wd_day4ctl = new FormControl('');
-    private wd_day5ctl = new FormControl('');
-    private wd_day6ctl = new FormControl('');
+    // private wd_day0ctl = new FormControl('');
+    // private wd_day1ctl = new FormControl('');
+    // private wd_day2ctl = new FormControl('');
+    // private wd_day3ctl = new FormControl('');
+    // private wd_day4ctl = new FormControl('');
+    // private wd_day5ctl = new FormControl('');
+    // private wd_day6ctl = new FormControl('');
     private enableCtl = new FormControl('');
 
     /* tslint:disable-next-line:no-unused-variable */
@@ -57,17 +55,25 @@ export class TimerConfigPage {
         'timerTitle': this.timerTitle,
         'hoursradio': this.hoursradio,
         'minutesradio': this.minutesradio,
-        'wd_day0ctl': this.wd_day0ctl,
-        'wd_day1ctl': this.wd_day1ctl,
-        'wd_day2ctl': this.wd_day2ctl,
-        'wd_day3ctl': this.wd_day3ctl,
-        'wd_day4ctl': this.wd_day4ctl,
-        'wd_day5ctl': this.wd_day5ctl,
-        'wd_day6ctl': this.wd_day6ctl,
+        // 'wd_day0ctl': this.wd_day0ctl,
+        // 'wd_day1ctl': this.wd_day1ctl,
+        // 'wd_day2ctl': this.wd_day2ctl,
+        // 'wd_day3ctl': this.wd_day3ctl,
+        // 'wd_day4ctl': this.wd_day4ctl,
+        // 'wd_day5ctl': this.wd_day5ctl,
+        // 'wd_day6ctl': this.wd_day6ctl,
         'enableCtl': this.enableCtl,
     });
 
-    constructor(public navCtrl: NavController, public navParam: NavParams, private formBuilder: FormBuilder, private timerConfigService: TimerConfigService, private events: Events, public alerCtrl: AlertController) {
+    constructor(
+        public navCtrl: NavController, 
+        public navParam: NavParams, 
+        private formBuilder: FormBuilder, 
+        private timerConfigService: TimerConfigService, 
+        private events: Events, 
+        public alerCtrl: AlertController,
+        // private daysSelectorHelper: DaysSelectorHelper
+        ) {
         let id: string | number = navParam.get('id');
 
         if (!id) {
@@ -84,7 +90,7 @@ export class TimerConfigPage {
         this.timerConfig.durationHumanized = __formatToDurationHumanized(this.durationHours, this.durationMinutes);
 
         // Days
-        [this.wd_day0, this.wd_day1, this.wd_day2, this.wd_day3, this.wd_day4, this.wd_day5, this.wd_day6] = __convertNumberToWeekDays(this.timerConfig.weekdays);
+        // [this.wd_day0, this.wd_day1, this.wd_day2, this.wd_day3, this.wd_day4, this.wd_day5, this.wd_day6] = daysSelectorHelper.__convertNumberToWeekDays(this.timerConfig.weekdays);
 
         events.subscribe('title:change', (value: string) => {
             console.log(`title:change:${value}`);
@@ -138,12 +144,17 @@ export class TimerConfigPage {
         console.log('TimerConfigPage ... loaded!');
     }
 
+    daysSelectionChanged(days:number){
+        console.log("Days changed:",days);
+        this.timerConfig.weekdays = days;
+        this.saveTimerConfig();
+    }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad Timer-config');
     }
     saveTimerConfig() {
-        this.timerConfig.weekdays = __convertWeekDaysToNumber(this.wd_day0, this.wd_day1, this.wd_day2, this.wd_day3, this.wd_day4, this.wd_day5, this.wd_day6);
+        // this.timerConfig.weekdays = this.daysSelectorHelper.__convertWeekDaysToNumber(this.wd_day0, this.wd_day1, this.wd_day2, this.wd_day3, this.wd_day4, this.wd_day5, this.wd_day6);
         this.timerConfig.durationMilliSecond = __convertToMillisecond((this.durationHours), this.durationMinutes);
         this.timerConfig.durationHumanized = __formatToDurationHumanized(this.durationHours, this.durationMinutes);
         this.timerConfigService.update(this.timerConfig);
@@ -185,25 +196,4 @@ function __convertToMillisecond(durationHours: number, durationMinutes: number):
 function __convertMillisecondToHoursAndMinutes(durationMilliSecond: number): [number, number] {
     let duration = moment.duration(durationMilliSecond);
     return [duration.hours(), duration.minutes()];
-}
-
-function __convertNumberToWeekDays(weekDaysEncoded: number): [boolean, boolean, boolean, boolean, boolean, boolean, boolean] {
-    return [
-        (weekDaysEncoded & 2) === 2 ? true : false,
-        (weekDaysEncoded & 4) === 4 ? true : false,
-        (weekDaysEncoded & 8) === 8 ? true : false,
-        (weekDaysEncoded & 16) === 16 ? true : false,
-        (weekDaysEncoded & 32) === 32 ? true : false,
-        (weekDaysEncoded & 64) === 64 ? true : false,
-        (weekDaysEncoded & 128) === 128 ? true : false
-    ];
-}
-function __convertWeekDaysToNumber(day0: boolean, day1: boolean, day2: boolean, day3: boolean, day4: boolean, day5: boolean, day6: boolean): number {
-    return ((day0 ? 1 : 0) * 2)
-        + ((day1 ? 1 : 0) * 4)
-        + ((day2 ? 1 : 0) * 8)
-        + ((day3 ? 1 : 0) * 16)
-        + ((day4 ? 1 : 0) * 32)
-        + ((day5 ? 1 : 0) * 64)
-        + ((day6 ? 1 : 0) * 128);
 }

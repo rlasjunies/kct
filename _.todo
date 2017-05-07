@@ -1,6 +1,8 @@
 ☐ Sélectionner parmis plusieurs icones
 ☐ prise de photo
-☐ modifier le selecteur de jours / durée pour tenir sur une seule ligne
+☐ add timer pastille en bas à droite
+✔ créer un composant selecteur de jourstenant sur une seule ligne @done (07/05/2017 à 18:58:25)
+☐  créer un composant sélecteur de durée tenant sur une seule ligne
 ☐ améliorer le responsive
     il faut définir le nombre de card par ligne en fonction de la taille de l'écran
 ☐ Problème pour revenir à la page home

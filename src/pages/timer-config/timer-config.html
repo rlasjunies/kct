@@ -10,6 +10,7 @@
 </ion-header>
 
 <ion-content padding>
+
     <form [formGroup]="timerForm" (ngSubmit)="onSubmit(timerForm.value)">
         <ion-list>
             <ion-item-divider>
@@ -29,32 +30,44 @@
             <ion-item-divider>
                 <b>Hours</b>
             </ion-item-divider>
-            <ion-list #hoursRadio radio-group formControlName="hoursradio" [(ngModel)]="durationHours" (ionChange)="events.publish('hoursRadio:change',hoursRadio)">
-                <ion-item>
-                    <ion-label>0 hour</ion-label>
-                    <ion-radio name="hoursradio" value="0"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>1 hours</ion-label>
-                    <ion-radio name="hoursradio" value="1"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>2 hours</ion-label>
-                    <ion-radio name="hoursradio" value="2"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>3 hours</ion-label>
-                    <ion-radio name="hoursradio" value="3"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>4 hours</ion-label>
-                    <ion-radio name="hoursradio" value="4"></ion-radio>
-                </ion-item>
-            </ion-list>
+            <!--<ion-segment color="primary">
+                <ion-segment-button value="0">
+                    0 hour
+                </ion-segment-button>
+                <ion-segment-button value="1">
+                    1 hour
+                </ion-segment-button>
+                <ion-segment-button value="2">
+                    2 hours
+                </ion-segment-button>
+                <ion-segment-button value="3">
+                    3 hours
+                </ion-segment-button>
+                <ion-segment-button value="4">
+                    4 hours
+                </ion-segment-button>
+            </ion-segment>-->
+            <br/>
             <ion-item-divider>
                 <b>Minutes</b>
             </ion-item-divider>
-            <ion-list #minutesRadio radio-group formControlName="minutesradio" [(ngModel)]="durationMinutes" (ionChange)="events.publish('minutesRadio:change',minutesRadio)">
+            <!--<ion-segment color="primary">
+                <ion-segment-button value="0">
+                    0 minutes
+                </ion-segment-button>
+                <ion-segment-button value="15">
+                    15 minutes
+                </ion-segment-button>
+                <ion-segment-button value="30">
+                    30 minutes
+                </ion-segment-button>
+                <ion-segment-button value="45">
+                    45 minutes
+                </ion-segment-button>
+            </ion-segment>-->
+            <br/>
+
+            <!--<ion-list #minutesRadio radio-group formControlName="minutesradio" [(ngModel)]="durationMinutes" (ionChange)="events.publish('minutesRadio:change',minutesRadio)">
                 <ion-item>
                     <ion-label>00 minutes</ion-label>
                     <ion-radio name="minutesradio" value="0"></ion-radio>
@@ -71,49 +84,15 @@
                     <ion-label>45 minutes</ion-label>
                     <ion-radio name="minutesradio" value="45"></ion-radio>
                 </ion-item>
-            </ion-list>
+            </ion-list>-->
 
             <ion-item-divider>
                 <b>Weekdays</b>
             </ion-item-divider>
-
-            <ion-list>
-                <ion-item>
-                    <ion-label>Lundi</ion-label>
-                    <ion-toggle #wdday0 formControlName="wd_day0ctl" [(ngModel)]="wd_day0" checked={{wd_day0}} (ionChange)="events.publish('wd_day0:change',wdday0.checked)"></ion-toggle>
-                </ion-item>
-
-                <ion-item>
-                    <ion-label>Mardi</ion-label>
-                    <ion-toggle #wdday1 formControlName="wd_day1ctl" [(ngModel)]="wd_day1" checked={{wd_day1}} (ionChange)="events.publish('wd_day1:change',wdday1.checked)"></ion-toggle>
-                </ion-item>
-
-                <ion-item>
-                    <ion-label>Mercredi</ion-label>
-                    <ion-toggle #wdday2 formControlName="wd_day2ctl" [(ngModel)]="wd_day2" checked={{wd_day2}} (ionChange)="events.publish('wd_day2:change',wdday2.checked)"></ion-toggle>
-                </ion-item>
-
-                <ion-item>
-                    <ion-label>Jeudi</ion-label>
-                    <ion-toggle #wdday3 formControlName="wd_day3ctl" [(ngModel)]="wd_day3" checked={{wd_day3}} (ionChange)="events.publish('wd_day3:change',wdday3.checked)"></ion-toggle>
-                </ion-item>
-                <ion-item>
-                    <ion-label>Vendredi</ion-label>
-                    <ion-toggle #wdday4 formControlName="wd_day4ctl" [(ngModel)]="wd_day4" checked={{wd_day4}} (ionChange)="events.publish('wd_day4:change',wdday4.checked)"></ion-toggle>
-                </ion-item>
-
-                <ion-item>
-                    <ion-label>Samedi</ion-label>
-                    <ion-toggle #wdday5 formControlName="wd_day5ctl" [(ngModel)]="wd_day5" checked={{wd_day5}} (ionChange)="events.publish('wd_day5:change',wdday5.checked)"></ion-toggle>
-                </ion-item>
-
-                <ion-item>
-                    <ion-label>Sunday</ion-label>
-                    <ion-toggle #wdday6 formControlName="wd_day6ctl" [(ngModel)]="wd_day6" checked={{wd_day6}} (ionChange)="events.publish('wd_day6:change',wdday6.checked)"></ion-toggle>
-                </ion-item>
-            </ion-list>
+            <days-selector days="{{timerConfig.weekdays}}" (daysSelectedChanged)="daysSelectionChanged($event)"></days-selector>
+            <br/>
         </ion-list>
     </form>
-    <!--{{ timerForm.value | json }}-->
-    <!--{{ timerTitle.value | json }}-->
+    {{ timerForm.value | json }} {{ timerTitle.value | json }}
+    {{ timerConfig.weekdays}}
 </ion-content>
