@@ -1,0 +1,25 @@
+<ion-grid id="minutes">
+    <ion-row>
+        <ion-col>
+            <input id="minute1" type="radio" name="minutes" value="0" [(ngModel)]="minutes" (change)="radioClicked($event)">
+            <label for="minute1">0 min.</label>
+        </ion-col>
+        <ion-col>
+
+            <input id="minute2" type="radio" name="minutes" value="15" [(ngModel)]="minutes" (change)="radioClicked($event)">
+            <label for="minute2">15 min.</label>
+        </ion-col>
+        <ion-col>
+
+            <input id="minute3" type="radio" name="minutes" value="30" [(ngModel)]="minutes" (change)="radioClicked($event)">
+            <label
+                for="minute3">
+                30 min</label>
+        </ion-col>
+        <ion-col>
+
+            <input id="minute4" type="radio" name="minutes" value="45" [(ngModel)]="minutes" (change)="radioClicked($event)">
+            <label for="minute4">45 min</label>
+        </ion-col>
+    </ion-row>
+</ion-grid>

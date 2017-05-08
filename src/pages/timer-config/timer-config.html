@@ -11,88 +11,28 @@
 
 <ion-content padding>
 
-    <form [formGroup]="timerForm" (ngSubmit)="onSubmit(timerForm.value)">
-        <ion-list>
-            <ion-item-divider>
-                <b>Timer</b>
-            </ion-item-divider>
-            <ion-list>
-                <ion-item>
-                    <ion-input #title type="text" formControlName="timerTitle" [value]="timerConfig.title" placeholder="ex.: Louis - videos"
-                        [(ngModel)]="timerConfig.title" (change)="events.publish('title:change',title.value)"></ion-input>
-                </ion-item>
-                <!--<ion-item>
-                    <ion-label>enable</ion-label>
-                    <ion-toggle #enable formControlName="enableCtl" [(ngModel)]="timerConfig.enable" checked={{timerConfig.enable}} (ionChange)="events.publish('enable:change',enable.checked)"></ion-toggle>
-                </ion-item>-->
-            </ion-list>
+    <h6>
+        <u>Timer name:</u>
+    </h6>
+    <h1>
+        <ion-input #title type="text" [value]="timerConfig.title" placeholder="a name for the timer ie: Louis - videos" [(ngModel)]="timerConfig.title"
+            (change)="events.publish('title:change',title.value)">
+        </ion-input>
+    </h1>
 
-            <ion-item-divider>
-                <b>Hours</b>
-            </ion-item-divider>
-            <!--<ion-segment color="primary">
-                <ion-segment-button value="0">
-                    0 hour
-                </ion-segment-button>
-                <ion-segment-button value="1">
-                    1 hour
-                </ion-segment-button>
-                <ion-segment-button value="2">
-                    2 hours
-                </ion-segment-button>
-                <ion-segment-button value="3">
-                    3 hours
-                </ion-segment-button>
-                <ion-segment-button value="4">
-                    4 hours
-                </ion-segment-button>
-            </ion-segment>-->
-            <br/>
-            <ion-item-divider>
-                <b>Minutes</b>
-            </ion-item-divider>
-            <!--<ion-segment color="primary">
-                <ion-segment-button value="0">
-                    0 minutes
-                </ion-segment-button>
-                <ion-segment-button value="15">
-                    15 minutes
-                </ion-segment-button>
-                <ion-segment-button value="30">
-                    30 minutes
-                </ion-segment-button>
-                <ion-segment-button value="45">
-                    45 minutes
-                </ion-segment-button>
-            </ion-segment>-->
-            <br/>
+    <h6>
+        <u>Duration of the timer:</u>
+    </h6>
+    <hours-selector hours="{{durationHours}}" (hoursChange)="hoursSelectionchanged($event)"></hours-selector>
+    <br/>
+    <minutes-selector minutes="{{durationMinutes}}" (minutesChange)="minutesSelectionChanged($event)"></minutes-selector>
 
-            <!--<ion-list #minutesRadio radio-group formControlName="minutesradio" [(ngModel)]="durationMinutes" (ionChange)="events.publish('minutesRadio:change',minutesRadio)">
-                <ion-item>
-                    <ion-label>00 minutes</ion-label>
-                    <ion-radio name="minutesradio" value="0"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>15 minutes</ion-label>
-                    <ion-radio name="minutesradio" value="15"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>30 minutes</ion-label>
-                    <ion-radio name="minutesradio" value="30"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>45 minutes</ion-label>
-                    <ion-radio name="minutesradio" value="45"></ion-radio>
-                </ion-item>
-            </ion-list>-->
+    <h6>
+        <u>The timer will be availbale every:</u>
+    </h6>
+    <days-selector days="{{timerConfig.weekdays}}" (daysSelectedChanged)="daysSelectionChanged($event)"></days-selector>
 
-            <ion-item-divider>
-                <b>Weekdays</b>
-            </ion-item-divider>
-            <days-selector days="{{timerConfig.weekdays}}" (daysSelectedChanged)="daysSelectionChanged($event)"></days-selector>
-            <br/>
-        </ion-list>
-    </form>
-    {{ timerForm.value | json }} {{ timerTitle.value | json }}
-    {{ timerConfig.weekdays}}
+    <!--{{ timerConfig.weekdays}}
+    <br> Hour:{{ durationHours }} : Minutes:{{ durationMinutes}}
+    <br>>{{ timerConfig.durationHumanized }}<-->
 </ion-content>

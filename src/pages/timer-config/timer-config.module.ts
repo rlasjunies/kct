@@ -8,7 +8,9 @@ import * as components from "components";
   ],
   imports: [
     IonicPageModule.forChild(TimerConfigPage),
-    components.DaysSelectorModule
+    components.DaysSelectorModule,
+    components.HoursSelectorModule,
+    components.MinutesSelectorModule,
   ],
   exports: [
     TimerConfigPage
