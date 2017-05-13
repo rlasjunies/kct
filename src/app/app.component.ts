@@ -32,4 +32,7 @@ export class MyApp {
     openCreditPage() {
         this.nav.push(pages.ID_credits);
     }
+    openTimersConfigPage() {
+        this.nav.push(pages.ID_timersConfig);
+    }
 }
