@@ -1,6 +1,16 @@
 ☐ Sélectionner parmis plusieurs icones
 ☐ prise de photo
 ☐ add timer pastille en bas à droite
+☐ Update timer list when timer config changed
+    * if timer already available, ask question do you want change the current timer?
+        If yes -> save config and recalculate current timer
+    * if timer is already running, can not configure need to stop / cancel the timer
+☐ Change the view of the timer
+    Big 'Play' icon when avaialble
+    Big 'Stop/Pause' icon when needed
+
+    
+
 ✔ créer un composant selecteur de jourstenant sur une seule ligne @done (07/05/2017 à 18:58:25)
 ✔ créer un composant sélecteur de durée tenant sur une seule ligne @done (08/05/2017 à 17:01:07)
 ☐ améliorer le responsive

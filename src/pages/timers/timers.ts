@@ -1,16 +1,15 @@
 import * as moment from 'moment';
 import { Component } from '@angular/core';
-import { NavController, IonicPage, } from 'ionic-angular';
+import { NavController, IonicPage, Events } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 import * as model from 'models/timer';
-import * as misc  from 'misc/misc';
+import * as misc from 'misc/misc';
 import * as constant from 'app/constant';
 import * as pages from "pages";
-// import {ID_timerConfig} from "pages/timer-config/timer-config";
 
-import {TimerService} from 'providers/timer-service/timer-service';
-import {TimerConfigService} from 'providers/timer-config-service/timer-config-service';
+import { TimerService } from 'providers/timer-service/timer-service';
+import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 
 interface UITimer {
     durationLeft: moment.Duration;
@@ -55,25 +54,59 @@ export class TimersPage {
 
     private _timerSubscription: Subscription;
 
-    constructor(private navCtrl: NavController, private timerService: TimerService, private timerConfigService: TimerConfigService) {
+    constructor(
+        private navCtrl: NavController,
+        private timerService: TimerService,
+        private timerConfigService: TimerConfigService,
 
+        private events: Events) {
+
+        this.loadTimers();
+        this.events.subscribe(pages.eventsTimersconfigChanged, () =>{
+            console.log("Timers config has been changed should reload");
+            this.loadTimers();
+        })
+
+       console.log('TimersComponent ... loaded!');
+    }
+
+    // ionViewDidLoad() {
+    //     console.log('ionViewDidLoad Timers');
+    // }
+
+    // ionViewWillEnter(){
+    //     console.log("I could reload here all the time");
+    // }
+
+    ngOnInit() {
+        this._timerSubscription = this.timerService.notification$.subscribe(this.manageTimerNotification);
+    }
+
+    ngOnDestroy() {
+        // prevent memory leak when component is destroyed
+        this._timerSubscription.unsubscribe();
+    }
+
+
+    loadTimers(){
         // retrieve kids config
-        let timersConfig: model.TimerConfig[] = timerConfigService.getAll();
+        let timersConfig: model.TimerConfig[] = this.timerConfigService.getAll();
+        this.timers = [];
 
         // retrieve kids timer
         // for (let timerConfig in timersConfig) {
         for (let timerConfig of timersConfig) {
 
             // retrieve the kid configuration and value
-            var timerValue = timerService.getTimerValue(timerConfig.guid);
+            var timerValue = this.timerService.getTimerValue(timerConfig.guid);
 
             if (!timerValue) {
                 // nothing to do 
             } else {
                 // timer found, initialize the timer array
                 var uiTimer: UITimer = {
-                    guid: (<model.TimerConfig> (<any> timerConfig)).guid,
-                    picture: 'assets/images/rlas.png',
+                    guid: (<model.TimerConfig>(<any>timerConfig)).guid,
+                    picture: 'assets/images/tv.png',
                     // picture: 'url(../../assets/images/rlas.png)',
                     title: timerValue.title,
                     durationLeft: moment.duration(timerValue.durationLeft_MilliSecond),
@@ -89,20 +122,7 @@ export class TimersPage {
                 this.timers.push(uiTimer);
             }
         }
-        console.log('TimersComponent ... loaded!');
-    }
-
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad Timers');
-    }
-
-    ngOnInit() {
-        this._timerSubscription = this.timerService.notification$.subscribe(this.manageTimerNotification);
-    }
-    
-    ngOnDestroy() {
-        // prevent memory leak when component is destroyed
-        this._timerSubscription.unsubscribe();
+ 
     }
 
     // Command = (guid: string) => {
@@ -130,13 +150,13 @@ export class TimersPage {
     //     }
     // }
 
-    configure(guid: string){
+    configure(guid: string) {
         //alert("configure the timer!");
         // this.navCtrl.push( "timer-config", {id: guid});
         // console.log(`should navigate to config timer:${ID_timerConfig}`);
         console.log(`should navigate to config timer`);
         // this.navCtrl.push(ID_timerConfig, {id: guid});
-        this.navCtrl.push(pages.ID_timerConfig, {id: guid})
+        this.navCtrl.push(pages.ID_timerConfig, { id: guid })
         // this.navCtrl.push( pages.TimerConfigPage.ID_timerConfig, {id: guid});
         // this.start(guid);
         //  console.log("pages:",pages.ID_timers);
@@ -144,7 +164,7 @@ export class TimersPage {
         //console.log("should navigate to config timer");
     }
 
-    start(guid: string){
+    start(guid: string) {
         this.timerService.startTimer(guid);
     }
 
@@ -152,7 +172,7 @@ export class TimersPage {
         this.timerService.stopTimer(guid);
     }
 
-    whenIsNext(guid: string){
+    whenIsNext(guid: string) {
         console.log('When is next clicked!');
     }
 
@@ -163,7 +183,7 @@ export class TimersPage {
             audio.pause();
             // this._media[guid].release();
             this._media[guid] = null;
-            
+
         } else {
             console.log('audio not found');
         }
@@ -171,11 +191,11 @@ export class TimersPage {
         this.hold(guid);
     }
 
-    private _durationStringFormat (d: moment.Duration): string {
+    private _durationStringFormat(d: moment.Duration): string {
         return misc.ZeroPadding(d.hours(), 2) + ':' + misc.ZeroPadding(d.minutes(), 2) + ':' + misc.ZeroPadding(d.seconds(), 2);
     }
 
-    private _statusCalcultation(timer: UITimer): void{
+    private _statusCalcultation(timer: UITimer): void {
         switch (timer.status) {
             case model.enumTimerStatus.READY:
                 timer.ready = true;
@@ -221,13 +241,13 @@ export class TimersPage {
         }
     }
 
-    private helperRetrieveTimerFromGuid(guid: string): UITimer{
+    private helperRetrieveTimerFromGuid(guid: string): UITimer {
         return this.timers.find((value: UITimer) => {
             return value.guid === guid;
         });
     }
 
-    private timerStarted (timerValue: model.TimerValue, timerUI: UITimer)  {
+    private timerStarted(timerValue: model.TimerValue, timerUI: UITimer) {
         // this.scope.$on(timerValue.guid + kct.constant.TIMER_STARTED_EVENT, (evt: ng.IAngularEvent, timerValue: model.ITimerValue) => {
         console.log('timer:' + timerValue.title + '_started received');
 
@@ -238,7 +258,7 @@ export class TimersPage {
         this._statusCalcultation(timerUI);
     };
 
-    private timerTicked (timerValue: model.TimerValue, timerUI: UITimer) {
+    private timerTicked(timerValue: model.TimerValue, timerUI: UITimer) {
         // this.scope.$on(timerValue.guid + kct.constant.TIMER_TICK_EVENT, (evt: ng.IAngularEvent, timerValue: model.ITimerValue) => {
         console.log('timer:' + timerValue.title + '_tick received');
 
@@ -250,7 +270,7 @@ export class TimersPage {
         this._statusCalcultation(timerUI);
     };
 
-    private timerOvered (timerValue: model.TimerValue, timerUI: UITimer) {
+    private timerOvered(timerValue: model.TimerValue, timerUI: UITimer) {
         console.log('timer:' + timerValue.title + '_over received ...:' + JSON.stringify(timerValue));
 
         // Update controller datas
@@ -259,7 +279,7 @@ export class TimersPage {
         this._statusCalcultation(timerUI);
 
         // Play the alert (if not already playing)
-        if ( !this._media[timerUI.guid] ) {
+        if (!this._media[timerUI.guid]) {
 
             this._media[timerUI.guid] = new Audio(constant.SOUND_OVERTIME_ALERT);
             this._media[timerUI.guid].load();
@@ -267,7 +287,7 @@ export class TimersPage {
 
         }
     };
-    private timerStopped (timerValue: model.TimerValue, timerUI: UITimer) {
+    private timerStopped(timerValue: model.TimerValue, timerUI: UITimer) {
         console.log('timer:' + timerValue.title + '_stopped received ...:' + JSON.stringify(timerValue));
 
         timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
@@ -276,7 +296,7 @@ export class TimersPage {
         this._statusCalcultation(timerUI);
     }
 
-    private timerHeld (timerValue: model.TimerValue, timerUI: UITimer) {
+    private timerHeld(timerValue: model.TimerValue, timerUI: UITimer) {
         console.log('timer:' + timerValue.title + '_stopped received ...:' + JSON.stringify(timerValue));
 
         timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
@@ -285,7 +305,7 @@ export class TimersPage {
         this._statusCalcultation(timerUI);
     }
 
-    private manageTimerNotification (timerNotification: model.TimerChangeNotification) {
+    private manageTimerNotification(timerNotification: model.TimerChangeNotification) {
         if (timerNotification) {
             let timerUI = this.helperRetrieveTimerFromGuid(timerNotification.value.guid);
 
