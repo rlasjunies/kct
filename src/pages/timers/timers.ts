@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NavController, IonicPage, Events } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
-import * as model from 'models/timer';
+import * as model from 'models';
 import * as misc from 'misc/misc';
 import * as constant from 'app/constant';
 import * as pages from "pages";

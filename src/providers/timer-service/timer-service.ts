@@ -4,7 +4,7 @@ import * as constant from 'app/constant';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'; 
 
-import { TimerValue, enumTimerStatus, TimerChangeNotification} from 'models/timer';
+import { TimerValue, enumTimerStatus, TimerChangeNotification} from 'models';
 
 @Injectable()
 export class TimerService {

@@ -3,7 +3,7 @@ import * as moment from 'moment';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, AlertController } from 'ionic-angular';
 
-import * as model from 'models/timer';
+import * as model from 'models';
 import * as misc from 'misc/misc';
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 import * as pages from "pages";
