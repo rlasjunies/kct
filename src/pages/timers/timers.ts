@@ -3,30 +3,19 @@ import { Component } from '@angular/core';
 import { NavController, IonicPage, Events } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
-import * as model from 'models';
+import * as models from 'models';
 import * as misc from 'misc/misc';
 import * as constant from 'app/constant';
 import * as pages from "pages";
+import * as timerMisc from "misc/timer.misc";
 
 import { TimerService } from 'providers/timer-service/timer-service';
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 
-interface UITimer {
-    durationLeft: moment.Duration;
-    durationLeftString: string;
-    guid: string;
-    picture: string;
-    title: string;
-    status: model.enumTimerStatus;
-    ready: boolean;
-    hold: boolean;
-    running: boolean;
-    over: boolean;
-    done: boolean;
-}
-
-export interface DictionaryUITimer {
-    [index: string]: UITimer;
+export interface DictionaryUITimer
+ {
+    [index: string]: models.UITimer
+    ;
 }
 
 export interface DictionaryMedia extends misc.Dictionary<any> { }
@@ -50,7 +39,7 @@ export const ID_timers = "timers";
 })
 export class TimersPage {
     private _media: DictionaryMedia = {};
-    public timers: UITimer[] = [];
+    public timers: models.UITimer[] = [];
 
     private _timerSubscription: Subscription;
 
@@ -90,7 +79,7 @@ export class TimersPage {
 
     loadTimers(){
         // retrieve kids config
-        let timersConfig: model.TimerConfig[] = this.timerConfigService.getAll();
+        let timersConfig: models.TimerConfig[] = this.timerConfigService.getAll();
         this.timers = [];
 
         // retrieve kids timer
@@ -104,13 +93,14 @@ export class TimersPage {
                 // nothing to do 
             } else {
                 // timer found, initialize the timer array
-                var uiTimer: UITimer = {
-                    guid: (<model.TimerConfig>(<any>timerConfig)).guid,
+                var UITimer : models.UITimer
+                 = {
+                    guid: (<models.TimerConfig>(<any>timerConfig)).guid,
                     picture: 'assets/images/tv.png',
                     // picture: 'url(../../assets/images/rlas.png)',
                     title: timerValue.title,
                     durationLeft: moment.duration(timerValue.durationLeft_MilliSecond),
-                    durationLeftString: this._durationStringFormat(moment.duration(timerValue.durationLeft_MilliSecond)),
+                    durationLeftString: timerMisc.durationStringFormat(moment.duration(timerValue.durationLeft_MilliSecond)),
                     status: timerValue.status,
                     ready: false,
                     hold: false,
@@ -118,8 +108,10 @@ export class TimersPage {
                     over: false,
                     done: false
                 };
-                this._statusCalcultation(uiTimer);
-                this.timers.push(uiTimer);
+                timerMisc.statusCalcultation(UITimer
+                );
+                this.timers.push(UITimer
+                );
             }
         }
  
@@ -191,92 +183,48 @@ export class TimersPage {
         this.hold(guid);
     }
 
-    private _durationStringFormat(d: moment.Duration): string {
-        return misc.ZeroPadding(d.hours(), 2) + ':' + misc.ZeroPadding(d.minutes(), 2) + ':' + misc.ZeroPadding(d.seconds(), 2);
-    }
 
-    private _statusCalcultation(timer: UITimer): void {
-        switch (timer.status) {
-            case model.enumTimerStatus.READY:
-                timer.ready = true;
-                timer.hold = false;
-                timer.running = false;
-                timer.over = false;
-                timer.done = false;
-                break;
-            case model.enumTimerStatus.HOLD:
-                timer.ready = false;
-                timer.hold = true;
-                timer.running = false;
-                timer.over = false;
-                timer.done = false;
-                break;
-            case model.enumTimerStatus.RUNNING:
-                timer.ready = false;
-                timer.hold = false;
-                timer.running = true;
-                timer.over = false;
-                timer.done = false;
-                break;
-            case model.enumTimerStatus.OVER:
-                timer.ready = false;
-                timer.hold = false;
-                timer.running = false;
-                timer.over = true;
-                timer.done = false;
-                break;
-            case model.enumTimerStatus.DONE:
-                timer.ready = false;
-                timer.hold = false;
-                timer.running = false;
-                timer.over = false;
-                timer.done = true;
-                break;
-            default:
-                timer.ready = false;
-                timer.hold = false;
-                timer.running = false;
-                timer.over = false;
-                timer.done = true;
-        }
-    }
-
-    private helperRetrieveTimerFromGuid(guid: string): UITimer {
-        return this.timers.find((value: UITimer) => {
+    private helperRetrieveTimerFromGuid(guid: string): models.UITimer
+     {
+        return this.timers.find((value: models.UITimer
+        ) => {
             return value.guid === guid;
         });
     }
 
-    private timerStarted(timerValue: model.TimerValue, timerUI: UITimer) {
+    private timerStarted(timerValue: models.TimerValue, timerUI: models.UITimer
+    ) {
         // this.scope.$on(timerValue.guid + kct.constant.TIMER_STARTED_EVENT, (evt: ng.IAngularEvent, timerValue: model.ITimerValue) => {
         console.log('timer:' + timerValue.title + '_started received');
 
         // Update controller datas
         timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
-        timerUI.durationLeftString = this._durationStringFormat(timerUI.durationLeft);
-        timerUI.status = model.enumTimerStatus.RUNNING; // timerValue.status;
-        this._statusCalcultation(timerUI);
+        timerUI.durationLeftString = timerMisc.durationStringFormat(timerUI.durationLeft);
+        timerUI.status = models.enumTimerStatus.RUNNING; // timerValue.status;
+        timerMisc.statusCalcultation(timerUI);
     };
 
-    private timerTicked(timerValue: model.TimerValue, timerUI: UITimer) {
+    private timerTicked(timerValue: models.TimerValue, timerUI: models.UITimer
+    ) {
         // this.scope.$on(timerValue.guid + kct.constant.TIMER_TICK_EVENT, (evt: ng.IAngularEvent, timerValue: model.ITimerValue) => {
         console.log('timer:' + timerValue.title + '_tick received');
 
         // Update controller datas
 
         timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
-        timerUI.durationLeftString = this._durationStringFormat(timerUI.durationLeft);
+        timerUI.durationLeftString = timerMisc.durationStringFormat(timerUI.durationLeft);
         timerUI.status = timerValue.status;
-        this._statusCalcultation(timerUI);
+        timerMisc.statusCalcultation(timerUI);
     };
 
-    private timerOvered(timerValue: model.TimerValue, timerUI: UITimer) {
+    private timerOvered(timerValue: models.TimerValue, timerUI: models.UITimer
+    ) {
         console.log('timer:' + timerValue.title + '_over received ...:' + JSON.stringify(timerValue));
 
         // Update controller datas
-        timerUI.durationLeftString = this._durationStringFormat(timerUI.durationLeft);
+        timerUI.durationLeftString = timerMisc.durationStringFormat(timerUI.durationLeft);
         timerUI.status = timerValue.status;
-        this._statusCalcultation(timerUI);
+        timerMisc.statusCalcultation(timerUI);
 
         // Play the alert (if not already playing)
         if (!this._media[timerUI.guid]) {
@@ -287,46 +235,48 @@ export class TimersPage {
 
         }
     };
-    private timerStopped(timerValue: model.TimerValue, timerUI: UITimer) {
+    private timerStopped(timerValue: models.TimerValue, timerUI: models.UITimer
+    ) {
         console.log('timer:' + timerValue.title + '_stopped received ...:' + JSON.stringify(timerValue));
 
         timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
-        timerUI.durationLeftString = this._durationStringFormat(timerUI.durationLeft);
-        timerUI.status = model.enumTimerStatus.DONE;  // timerValue.status;
-        this._statusCalcultation(timerUI);
+        timerUI.durationLeftString = timerMisc.durationStringFormat(timerUI.durationLeft);
+        timerUI.status = models.enumTimerStatus.DONE;  // timerValue.status;
+        timerMisc.statusCalcultation(timerUI);
     }
 
-    private timerHeld(timerValue: model.TimerValue, timerUI: UITimer) {
+    private timerHeld(timerValue: models.TimerValue, timerUI: models.UITimer
+    ) {
         console.log('timer:' + timerValue.title + '_stopped received ...:' + JSON.stringify(timerValue));
 
         timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
-        timerUI.durationLeftString = this._durationStringFormat(timerUI.durationLeft);
-        timerUI.status = model.enumTimerStatus.HOLD; // timerValue.status;
-        this._statusCalcultation(timerUI);
+        timerUI.durationLeftString = timerMisc.durationStringFormat(timerUI.durationLeft);
+        timerUI.status = models.enumTimerStatus.HOLD; // timerValue.status;
+        timerMisc.statusCalcultation(timerUI);
     }
 
-    private manageTimerNotification(timerNotification: model.TimerChangeNotification) {
+    private manageTimerNotification(timerNotification: models.TimerChangeNotification) {
         if (timerNotification) {
             let timerUI = this.helperRetrieveTimerFromGuid(timerNotification.value.guid);
 
             switch (timerNotification.value.status) {
-                case model.enumTimerStatus.STARTED:
+                case models.enumTimerStatus.STARTED:
                     this.timerStarted(timerNotification.value, timerUI);
                     break;
 
-                case model.enumTimerStatus.HOLD:
+                case models.enumTimerStatus.HOLD:
                     this.timerHeld(timerNotification.value, timerUI);
                     break;
 
-                case model.enumTimerStatus.RUNNING:
+                case models.enumTimerStatus.RUNNING:
                     this.timerTicked(timerNotification.value, timerUI);
                     break;
 
-                case model.enumTimerStatus.OVER:
+                case models.enumTimerStatus.OVER:
                     this.timerOvered(timerNotification.value, timerUI);
 
                     break;
-                case model.enumTimerStatus.DONE:
+                case models.enumTimerStatus.DONE:
                     // this.WhenIsNext(timerNotification.guid);
                     this.timerStopped(timerNotification.value, timerUI);
                     break;
