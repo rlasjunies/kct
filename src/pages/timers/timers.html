@@ -8,31 +8,9 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-grid class="card-background-page">
-        <ion-row>
-            <!--<ion-col>-->
-            <!--<ion-item ion-item *ngFor="let timer of timers">
-                <ion-avatar item-left>
-                    <img [src]="timer.picture">
-                </ion-avatar>
-                        <h1>{{timer.durationLeftString}}</h1>
-                        <h2>{{timer.title}}</h2>
-
-                        <button ion-button color="secondary" icon-only [hidden]="!timer.ready" (click)="Command(timer.guid)" item-right large>
-                            <ion-icon name="play"></ion-icon>
-                        </button>
-                        <button ion-button color="primary" icon-only [hidden]="!timer.hold" (click)="Command(timer.guid)" item-right  large>
-                            <ion-icon name="play"></ion-icon>
-                        </button>
-                        <button ion-button color="danger" icon-only [hidden]="!timer.running" (click)="Command(timer.guid)" item-right  large>
-                            <ion-icon name="pause"></ion-icon>
-                        </button>
-                        <button ion-button color="dark" icon-only [hidden]="!timer.over" (click)="Command(timer.guid)" item-right large>
-                            <ion-icon name="close"></ion-icon>
-                        </button>
-            </ion-item>-->
-
-            <ion-col *ngFor="let timer of timers">
+    <ion-grid >
+        <ion-row >
+            <ion-col *ngFor="let timer of timers" col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 >
                 <ion-card>
                     <img [src]="timer.picture" (click)="configure(timer.guid)">
                     <ion-card-content>
