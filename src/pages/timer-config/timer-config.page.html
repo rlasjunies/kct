@@ -15,13 +15,13 @@
         <u>Timer name:</u>
     </h6>-->
     <h1>
-        <ion-input #title type="text" [value]="timerConfig.title" placeholder="Timer title" [(ngModel)]="timerConfig.title"
+        <ion-input #title type="text" [value]="timerConfig.title" placeholder="enter a timer title" [(ngModel)]="timerConfig.title"
             (change)="titleChange(title.value)">
         </ion-input>
     </h1>
 
     <h6>
-        <u>Duration of the timer:</u>
+        <u>Duration of the timer:</u> {{ timerConfig.durationHumanized }} hour(s)
     </h6>
     <hours-selector hours="{{durationHours}}" (hoursChange)="hoursSelectionchanged($event)"></hours-selector>
     <br/>
