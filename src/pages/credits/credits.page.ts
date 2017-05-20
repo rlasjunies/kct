@@ -8,7 +8,7 @@ export const ID_credits = "credits";
 })
 @Component({
   selector: 'page-credits',
-  templateUrl: 'credits.html',
+  templateUrl: 'credits.page.html',
 })
 export class Credits {
 

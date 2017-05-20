@@ -6,7 +6,6 @@ import { IonicPage, NavController, NavParams, Events, AlertController } from 'io
 import * as model from 'models';
 import * as misc from 'misc/misc';
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
-import * as pages from "pages";
 
 export const ID_timerConfig = "timer-config";
 @IonicPage({
@@ -14,7 +13,7 @@ export const ID_timerConfig = "timer-config";
     segment: "timer-config"
 })
 @Component({
-    templateUrl: 'timer-config.html',
+    templateUrl: 'timer-config.page.html',
     providers: [
         {
             provide: Storage, useFactory: () => {
@@ -50,13 +49,6 @@ export class TimerConfigPage {
         // Hours and minutes
         [this.durationHours, this.durationMinutes] = __convertMillisecondToHoursAndMinutes(this.timerConfig.durationMilliSecond);
         this.timerConfig.durationHumanized = __formatToDurationHumanized(this.durationHours, this.durationMinutes);
-
-        events.subscribe(pages.eventsTimersconfigTitleChanged, (value: string) => {
-            console.log(`title:change:${value}`);
-            this.saveTimerConfig();
-        });
-
-        // console.log('TimerConfigPage ... loaded!');
     }
 
     minutesSelectionChanged(minutes: number) {
@@ -64,6 +56,9 @@ export class TimerConfigPage {
         this.saveTimerConfig();
     }
 
+    titleChange(value:string){
+        this.saveTimerConfig();
+    }
     hoursSelectionchanged(hours: number) {
         this.durationHours = hours;
         this.saveTimerConfig();
@@ -79,7 +74,6 @@ export class TimerConfigPage {
         this.timerConfig.durationMilliSecond = __convertToMillisecond((this.durationHours), this.durationMinutes);
         this.timerConfig.durationHumanized = __formatToDurationHumanized(this.durationHours, this.durationMinutes);
         this.timerConfigService.update(this.timerConfig);
-        this.events.publish(pages.eventsTimersconfigChanged); 
     }
 
     Delete() {

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { Credits } from './credits';
+import { Credits } from './credits.page';
 
 @NgModule({
   declarations: [

@@ -12,8 +12,7 @@ import * as timerMisc from "misc/timer.misc";
 import { TimerService } from 'providers/timer-service/timer-service';
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 
-export interface DictionaryUITimer
- {
+export interface DictionaryUITimer {
     [index: string]: models.UITimer
     ;
 }
@@ -27,7 +26,7 @@ export const ID_timers = "timers";
     }
 )
 @Component({
-    templateUrl: 'timers.html',
+    templateUrl: 'timers.page.html',
     providers: [
         {
             provide: Storage, useFactory: () => {
@@ -50,22 +49,13 @@ export class TimersPage {
 
         private events: Events) {
 
+
         this.loadTimers();
-        this.events.subscribe(pages.eventsTimersconfigChanged, () =>{
-            console.log("Timers config has been changed should reload");
-            this.loadTimers();
-        })
+        this.events.subscribe(timerConfigService.eventsTimersconfigChanged, this.refreshListWhenTimerConfigChanged)
+        this.events.subscribe(timerConfigService.eventsTimersconfigDeleted, this.refreshListWhenTimerConfigDeleted)
 
-       console.log('TimersComponent ... loaded!');
+        console.log('TimersComponent ... loaded!');
     }
-
-    // ionViewDidLoad() {
-    //     console.log('ionViewDidLoad Timers');
-    // }
-
-    // ionViewWillEnter(){
-    //     console.log("I could reload here all the time");
-    // }
 
     ngOnInit() {
         this._timerSubscription = this.timerService.notification$.subscribe(this.manageTimerNotification);
@@ -76,45 +66,54 @@ export class TimersPage {
         this._timerSubscription.unsubscribe();
     }
 
+    refreshListWhenTimerConfigChanged = () => {
+        console.log("Timers config has been changed should reload");
+        this.loadTimers();
+    }
+    refreshListWhenTimerConfigDeleted = (timerGuid:string) => {
+        console.log("Timers config has been deleted remove the record from the list");
+        this.timers = this.timers.filter( (timer) => { return timer.guid !== timerGuid }) ;
+    }
 
-    loadTimers(){
+    loadTimers() {
         // retrieve kids config
         let timersConfig: models.TimerConfig[] = this.timerConfigService.getAll();
         this.timers = [];
 
         // retrieve kids timer
-        // for (let timerConfig in timersConfig) {
         for (let timerConfig of timersConfig) {
 
             // retrieve the kid configuration and value
-            var timerValue = this.timerService.getTimerValue(timerConfig.guid);
 
-            if (!timerValue) {
-                // nothing to do 
-            } else {
-                // timer found, initialize the timer array
-                var UITimer : models.UITimer
-                 = {
+            // check if a timer is available, init UI information in consequence if needed
+            let timerValue = this.timerService.getTimerValue(timerConfig.guid);
+            let durationLeft: moment.Duration = moment.duration();
+            let durationLeftString: string = "";
+            let timerStatus: number = 0;
+            if (timerValue) {
+                durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
+                durationLeftString = timerMisc.durationStringFormat(moment.duration(timerValue.durationLeft_MilliSecond));
+                timerStatus = timerValue.status;
+            }
+
+            // Initiatilise the UITimer poco
+            let UITimer: models.UITimer
+                = {
                     guid: (<models.TimerConfig>(<any>timerConfig)).guid,
-                    picture: 'assets/images/tv.png',
-                    // picture: 'url(../../assets/images/rlas.png)',
-                    title: timerValue.title,
-                    durationLeft: moment.duration(timerValue.durationLeft_MilliSecond),
-                    durationLeftString: timerMisc.durationStringFormat(moment.duration(timerValue.durationLeft_MilliSecond)),
-                    status: timerValue.status,
+                    picture: timerConfig.picture,
+                    title: timerConfig.title,
+                    durationLeft: durationLeft,
+                    durationLeftString: durationLeftString,
+                    status: timerStatus,
                     ready: false,
                     hold: false,
                     running: false,
                     over: false,
                     done: false
                 };
-                timerMisc.statusCalcultation(UITimer
-                );
-                this.timers.push(UITimer
-                );
-            }
+            timerMisc.statusCalcultation(UITimer);
+            this.timers.push(UITimer);
         }
- 
     }
 
     // Command = (guid: string) => {
@@ -143,17 +142,7 @@ export class TimersPage {
     // }
 
     configure(guid: string) {
-        //alert("configure the timer!");
-        // this.navCtrl.push( "timer-config", {id: guid});
-        // console.log(`should navigate to config timer:${ID_timerConfig}`);
-        console.log(`should navigate to config timer`);
-        // this.navCtrl.push(ID_timerConfig, {id: guid});
         this.navCtrl.push(pages.ID_timerConfig, { id: guid })
-        // this.navCtrl.push( pages.TimerConfigPage.ID_timerConfig, {id: guid});
-        // this.start(guid);
-        //  console.log("pages:",pages.ID_timers);
-        // console.log("should navigate to config timer", pages.ID_timerConfig);
-        //console.log("should navigate to config timer");
     }
 
     start(guid: string) {
@@ -184,8 +173,7 @@ export class TimersPage {
     }
 
 
-    private helperRetrieveTimerFromGuid(guid: string): models.UITimer
-     {
+    private helperRetrieveTimerFromGuid(guid: string): models.UITimer {
         return this.timers.find((value: models.UITimer
         ) => {
             return value.guid === guid;
@@ -287,5 +275,10 @@ export class TimersPage {
         } else {
             console.log('timerNotification value null');
         }
+    }
+
+    addNewTimer() {
+        console.log("Add new timer called!");
+        this.navCtrl.push(pages.ID_timerConfig, { id: -1 })
     }
 }

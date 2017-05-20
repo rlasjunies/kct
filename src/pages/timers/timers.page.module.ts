@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { TimersPage } from './timers';
+import { TimersPage } from './timers.page';
 
 @NgModule({
   declarations: [

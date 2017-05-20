@@ -16,7 +16,7 @@
     </h6>-->
     <h1>
         <ion-input #title type="text" [value]="timerConfig.title" placeholder="Timer title" [(ngModel)]="timerConfig.title"
-            (change)="events.publish('title:change',title.value)">
+            (change)="titleChange(title.value)">
         </ion-input>
     </h1>
 
