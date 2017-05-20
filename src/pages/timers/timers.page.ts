@@ -53,8 +53,6 @@ export class TimersPage {
         this.loadTimers();
         this.events.subscribe(timerConfigService.eventsTimersconfigChanged, this.refreshListWhenTimerConfigChanged)
         this.events.subscribe(timerConfigService.eventsTimersconfigDeleted, this.refreshListWhenTimerConfigDeleted)
-
-        console.log('TimersComponent ... loaded!');
     }
 
     ngOnInit() {
@@ -67,11 +65,9 @@ export class TimersPage {
     }
 
     refreshListWhenTimerConfigChanged = () => {
-        console.log("Timers config has been changed should reload");
         this.loadTimers();
     }
     refreshListWhenTimerConfigDeleted = (timerGuid:string) => {
-        console.log("Timers config has been deleted remove the record from the list");
         this.timers = this.timers.filter( (timer) => { return timer.guid !== timerGuid }) ;
     }
 
@@ -115,31 +111,6 @@ export class TimersPage {
             this.timers.push(UITimer);
         }
     }
-
-    // Command = (guid: string) => {
-
-    //     let timer = this.helperRetrieveTimerFromGuid(guid);
-
-    //     switch (timer.status) {
-    //         case model.enumTimerStatus.READY:
-    //             this.start(guid);
-    //             break;
-    //         case model.enumTimerStatus.HOLD:
-    //             this.start(guid);
-    //             break;
-    //         case model.enumTimerStatus.RUNNING:
-    //             this.hold(guid);
-    //             break;
-    //         case model.enumTimerStatus.OVER:
-    //             this.acknowledge(guid);
-    //             break;
-    //         case model.enumTimerStatus.DONE:
-    //             this.whenIsNext(guid);
-    //             break;
-    //         default:
-    //             console.log('WRONG TIMER STATUS VALUE');
-    //     }
-    // }
 
     configure(guid: string) {
         this.navCtrl.push(pages.ID_timerConfig, { id: guid })
@@ -278,7 +249,6 @@ export class TimersPage {
     }
 
     addNewTimer() {
-        console.log("Add new timer called!");
         this.navCtrl.push(pages.ID_timerConfig, { id: -1 })
     }
 }

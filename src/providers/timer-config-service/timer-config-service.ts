@@ -3,17 +3,26 @@ import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 
 import * as constant from 'app/constant';
-import * as model from 'models';
+import * as models from 'models';
 import * as misc from 'misc/misc';
+
+import { TimerService } from "providers/timer-service/timer-service";
+
+// export const eventsTimersconfigTitleChanged = "title:change";
 
 @Injectable()
 export class TimerConfigService {
+    public eventsTimersconfigChanged = "timersConfig:changed";
+    public eventsTimersconfigDeleted = "timersConfig:deleted";
 
-    constructor(public storage: Storage, private events: Events) {
+    constructor(
+        public storage: Storage,
+        private events: Events,
+        private timerService: TimerService) {
         console.log('TimerConfigService ... loaded!');
     }
 
-    private _config: model.IConfig;
+    private _config: models.IConfig;
 
     public reinitializeAll() {
         for (var guid in this._config) {
@@ -23,7 +32,7 @@ export class TimerConfigService {
         this.getAll();
     }
 
-    public getAll(): model.TimerConfig[] {
+    public getAll(): models.TimerConfig[] {
         this._config = JSON.parse(this.storage.getItem(constant.STORAGEKEY_TIMERS));
 
         // check first time in the application
@@ -31,7 +40,7 @@ export class TimerConfigService {
             // 1st time in the application
             // TODO navigate to init wizard
 
-            var config: model.IConfig = {
+            var config: models.IConfig = {
                 dayOfLastTimersCalculation: '2016-08-10',
                 timersConfig: [
                     { guid: '569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3', weekdays: 62, title: 'Paul - game', durationMilliSecond: 5400000, durationHumanized: '01:30', picture: 'assets/images/gamepad.png', enable: true },
@@ -79,7 +88,7 @@ export class TimerConfigService {
         var todayDay: number = moment(Date.now()).weekday() + 1;
 
         for (var t in this._config.timersConfig) {
-            var config: model.TimerConfig = this._config.timersConfig[t];
+            var config: models.TimerConfig = this._config.timersConfig[t];
 
             // remove the persisted timer
             this.storage.removeItem(constant.STORAGEKEY_PREFIX + config.guid);
@@ -100,32 +109,51 @@ export class TimerConfigService {
         this._storeConfig();
     }
 
-    public get(guid: string): model.TimerConfig {
-        if (!this._config) { this.getAll(); };
+    public get(guid: string): models.TimerConfig {
+        this.checkConfigIsLoadedOrLoadIt();
         return this._config.timersConfig.find(timerConfig => {
             return timerConfig.guid === guid;
         });
     }
 
-    /*
-     * replace the timerConfig by the one passed as parameter
-     * store the timersConfig
-     *
-     * DOES NOT UPDATE THE TIMER VALUE
-     */
-    public update(timerConf: model.TimerConfig): void {
-        if (!this._config) { this.getAll(); };
-        this._config.timersConfig[timerConf.guid] = timerConf;
-        this._storeConfig();
-        this.events.publish('timer-config:change');
+    public canBeConfigured(guid: string): boolean {
+        let canBeConfigured = false;
+        // cannot configure when a timer is runnning
+        let timerValue = this.timerService.getTimerValue(guid)
+        if (timerValue) {
+            if (timerValue.status === models.enumTimerStatus.READY) {
+                canBeConfigured = true;
+            } else {
+                canBeConfigured = false;
+            }
+        } else {
+            canBeConfigured = true;
+        }
+
+        return canBeConfigured;
+    }
+
+    public update(timerConf: models.TimerConfig): boolean {
+        this.checkConfigIsLoadedOrLoadIt();
+
+        if (this.canBeConfigured(timerConf.guid)) {
+            this._config.timersConfig[timerConf.guid] = timerConf;
+            this._storeConfig();
+            this.events.publish(this.eventsTimersconfigChanged, timerConf);
+
+            return true;
+        } else {
+            return false
+        }
+
     }
 
     /*
      * initialize a timerConfig object
      * does not store it
      */
-    public new_(): model.TimerConfig {
-        if (!this._config) { this.getAll(); };
+    public new_(): models.TimerConfig {
+        this.checkConfigIsLoadedOrLoadIt()
         let newConfig = {
             guid: misc.GUID_new(),
             title: '',
@@ -146,19 +174,24 @@ export class TimerConfigService {
      *
      * delete the timerValue persited either
      */
-    public delete(guid: string): void {
-        // remove the timerConfig in memory and persist
-        // delete this._config.timersConfig[guid];
-        let index = this._config.timersConfig.findIndex((timer) => {
-            return timer.guid === guid;
-        });
-        this._config.timersConfig.splice(index, 1);
-        this._storeConfig();
+    public delete(guid: string): boolean {
+        this.checkConfigIsLoadedOrLoadIt();
+        if (this.canBeConfigured(guid)) {
+            // remove the timerConfig in memory and persist
+            // delete this._config.timersConfig[guid];
+            let index = this._config.timersConfig.findIndex((timer) => {
+                return timer.guid === guid;
+            });
+            this._config.timersConfig.splice(index, 1);
+            this._storeConfig();
 
-        // remove the timerValue persisted key
-        this.storage.removeItem(constant.STORAGEKEY_PREFIX + guid);
-        this.events.publish('timer-config:change');
-    
+            // remove the timerValue persisted key
+            this.storage.removeItem(constant.STORAGEKEY_PREFIX + guid);
+            this.events.publish(this.eventsTimersconfigDeleted,guid);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /*
@@ -172,14 +205,19 @@ export class TimerConfigService {
      * Convert the timerConf in timerValue and store it
      * usefull for creating a new timerConfig???
      */
-    private _storeTimerValue(timerConf: model.TimerConfig) {
-        var timerValue: model.TimerValue = {
+    private _storeTimerValue(timerConf: models.TimerConfig) {
+        var timerValue: models.TimerValue = {
             guid: timerConf.guid,
             title: timerConf.title,
             durationLeft_MilliSecond: timerConf.durationMilliSecond,
             status: 10
         };
         this.storage.setItem(constant.STORAGEKEY_PREFIX + timerConf.guid, JSON.stringify(timerValue));
+    }
+
+
+    private checkConfigIsLoadedOrLoadIt() {
+        if (!this._config) { this.getAll(); };
     }
 }
 

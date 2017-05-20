@@ -1,6 +1,5 @@
 
 ☐ prise de photo
-☐ add timer pastille en bas à droite
 ☐ Update timer list when timer config changed
     * if timer already available, ask question do you want change the current timer?
         If yes -> save config and recalculate current timer
@@ -13,14 +12,25 @@
     ☐ order by avaialble then can be configured
     ☐ shows next occurence date
 
+☐ timer-service
+    remove the events from the ui, should be emitted from the service
 ☐ timer-config
-    ☐ review place holder for the name of the timer current text is too Big
+    ✔ review place holder for the name of the timer current text is too Big @done (20/05/2017 à 15:53:47)
+    ☐ re-initiate the calculation starting today
     
+☐ timer execution
+    ☐ trace the timer execution
+        purpose is to not propose timer twice the same day
+    ☐ allows time extension / reward for today or next occurence
+
 ☐ Faire marcher en tache de fond les timers ( quand l'application n'est pas au 1er plan)
     il faut définir le nombre de card par ligne en fonction de la taille de l'écran
     ne marche pas dans le simulateur
 ☐ Problème pour revenir à la page home
 ☐ replace storage by a persistant one
+
+☐ Add application trace
+    purpose is to trace the configuration changes
 
 ✔ améliorer le responsive @done (17/05/2017 à 22:08:13)
 ✔ créer un composant selecteur de jourstenant sur une seule ligne @done (07/05/2017 à 18:58:25)
