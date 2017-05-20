@@ -11,11 +11,11 @@
 
 <ion-content padding>
 
-    <h6>
+    <!--<h6>
         <u>Timer name:</u>
-    </h6>
+    </h6>-->
     <h1>
-        <ion-input #title type="text" [value]="timerConfig.title" placeholder="a name for the timer ie: Louis - videos" [(ngModel)]="timerConfig.title"
+        <ion-input #title type="text" [value]="timerConfig.title" placeholder="Timer title" [(ngModel)]="timerConfig.title"
             (change)="events.publish('title:change',title.value)">
         </ion-input>
     </h1>
