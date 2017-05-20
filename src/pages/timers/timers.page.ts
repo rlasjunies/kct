@@ -144,7 +144,7 @@ export class TimersPage {
     }
 
 
-    private helperRetrieveTimerFromGuid(guid: string): models.UITimer {
+    private helperRetrieveTimerFromGuid = (guid: string): models.UITimer => {
         return this.timers.find((value: models.UITimer
         ) => {
             return value.guid === guid;
@@ -214,7 +214,7 @@ export class TimersPage {
         timerMisc.statusCalcultation(timerUI);
     }
 
-    private manageTimerNotification(timerNotification: models.TimerChangeNotification) {
+    private manageTimerNotification = (timerNotification: models.TimerChangeNotification) => {
         if (timerNotification) {
             let timerUI = this.helperRetrieveTimerFromGuid(timerNotification.value.guid);
 

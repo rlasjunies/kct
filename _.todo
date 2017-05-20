@@ -1,4 +1,5 @@
 
+
 ☐ prise de photo
 ☐ Update timer list when timer config changed
     * if timer already available, ask question do you want change the current timer?
@@ -32,6 +33,8 @@
 ☐ Add application trace
     purpose is to trace the configuration changes
 
+✔ bug: timer start error when click from ui @done (20/05/2017 à 17:44:46)
+    thishelperRetrieveTimerFroGuid is not a function
 ✔ améliorer le responsive @done (17/05/2017 à 22:08:13)
 ✔ créer un composant selecteur de jourstenant sur une seule ligne @done (07/05/2017 à 18:58:25)
 ✔ créer un composant sélecteur de durée tenant sur une seule ligne @done (08/05/2017 à 17:01:07)
