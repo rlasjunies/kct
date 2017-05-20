@@ -6,19 +6,23 @@
         If yes -> save config and recalculate current timer
     * if timer is already running, can not configure need to stop / cancel the timer
 ☐ Change the view of the timer
+    ☐ add a fab button
     ☐ Big 'Play' icon when avaialble
     ☐ Big 'Stop/Pause' icon when needed
     ☐ list all timers config
     ☐ order by avaialble then can be configured
     ☐ shows next occurence date
 
+☐ timer-config
+    ☐ review place holder for the name of the timer current text is too Big
+    
 ☐ Faire marcher en tache de fond les timers ( quand l'application n'est pas au 1er plan)
-☐ améliorer le responsive
     il faut définir le nombre de card par ligne en fonction de la taille de l'écran
     ne marche pas dans le simulateur
 ☐ Problème pour revenir à la page home
 ☐ replace storage by a persistant one
 
+✔ améliorer le responsive @done (17/05/2017 à 22:08:13)
 ✔ créer un composant selecteur de jourstenant sur une seule ligne @done (07/05/2017 à 18:58:25)
 ✔ créer un composant sélecteur de durée tenant sur une seule ligne @done (08/05/2017 à 17:01:07)
 ✔ rework the form builder, come back on course? @done (08/05/2017 à 17:01:21)
