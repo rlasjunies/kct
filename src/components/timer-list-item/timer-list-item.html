@@ -1,0 +1,55 @@
+<ion-card>
+	<ion-item>
+		<ion-avatar item-left>
+			<img [src]="_timer.picture">
+		</ion-avatar>
+		<h2>{{_timer.title}}</h2>
+		<ion-note>Run every saturday and sunday, 1hour</ion-note>
+	</ion-item>
+	<ion-card-content>
+		<ion-grid>
+			<ion-row>
+				<ion-col col-7>
+					<h1>{{_timer.durationLeftString}}</h1>
+					<h2>Next occurence in 2 days and 2 hours</h2>
+				</ion-col>
+				<ion-col col-5 style="display:flex;justify-content:center">
+					<!--<button ion-button clear block color="secondary" icon-only [hidden]="!timer.ready" (click)="start(timer.guid)">
+                                    <ion-icon name="play"></ion-icon>
+                                </button>
+                                <button ion-button clear block color="primary" icon-only [hidden]="!timer.hold" (click)="start(timer.guid)">
+                                    <ion-icon name="play"></ion-icon>
+                                </button>
+                                <button ion-button clear color="danger" icon-only [hidden]="!timer.running" (click)="hold(timer.guid)">
+                                    <ion-icon name="pause"></ion-icon>
+                                </button>
+                                <button ion-button clear color="dark" icon-only [hidden]="!timer.over" (click)="acknowledge(timer.guid)">
+                                    <ion-icon name="close"></ion-icon>
+                                </button>-->
+					<gauge-radial></gauge-radial>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-card-content>
+
+	<ion-row>
+		<ion-col>
+			<button ion-button icon-left clear small (click)="showRewardSelection()">
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>Reward</div>
+            </button>
+		</ion-col>
+		<ion-col>
+			<button ion-button icon-left clear small (click)="raiseSetting()">
+				<ion-icon name="settings"></ion-icon>
+				<div>Setting</div>
+				</button>
+		</ion-col>
+		<ion-col>
+			<button ion-button icon-left clear small (click)="showPenaltySelection()">
+				<ion-icon name="thumbs-down"></ion-icon>
+				<div>penalty</div>
+				</button>
+		</ion-col>
+	</ion-row>
+</ion-card>

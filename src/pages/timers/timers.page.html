@@ -7,50 +7,28 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-    <ion-grid >
-        <ion-row >
-            <ion-col *ngFor="let timer of timers" col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 >
-                <ion-card>
-                    <img [src]="timer.picture" (click)="configure(timer.guid)">
-                    <ion-card-content>
-                        <ion-card-title (click)="configure(timer.guid)">
-                            <h1>{{timer.durationLeftString}}</h1>
-                            <h2>{{timer.title}}</h2>
-                        </ion-card-title>
-                        <button ion-button clear block color="secondary" icon-only [hidden]="!timer.ready" (click)="start(timer.guid)" >
-                            <ion-icon name="play"></ion-icon>
-                        </button>
-                        <button ion-button clear block color="primary" icon-only [hidden]="!timer.hold" (click)="start(timer.guid)" >
-                            <ion-icon name="play"></ion-icon>
-                        </button>
-                        <button ion-button clear color="danger" icon-only [hidden]="!timer.running" (click)="hold(timer.guid)" >
-                            <ion-icon name="pause"></ion-icon>
-                        </button>
-                        <button ion-button clear color="dark" icon-only [hidden]="!timer.over" (click)="acknowledge(timer.guid)" >
-                            <ion-icon name="close"></ion-icon>
-                        </button>
-                        <!--<button ion-button outline color="primary" icon-only (click)="acknowledge(timer.guid)">
-                            <ion-icon name="settings"></ion-icon>
-                        </button>                        
-                        <button ion-button outline color="primary" icon-only (click)="acknowledge(timer.guid)">
-                            <ion-icon name="sync"></ion-icon>
-                        </button>-->
-                    </ion-card-content>
-                </ion-card>
-            </ion-col>
-            <!--</ion-col>-->
-        </ion-row>
-    </ion-grid>
- <ion-fab bottom right>
-    <button ion-fab (click)="addNewTimer()"><ion-icon name="add"></ion-icon></button>
-    <!--<ion-fab-list>
+<ion-content>
+	<ion-grid>
+		<ion-row>
+			<ion-col *ngFor="let timer of timers" col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3>
+				<timer-list-item 
+					[timer]="timer"
+					(settingClicked)="configure($event)"
+					(rewardClicked)="reward(timer, $event)"
+					(penaltyClicked)="penalty(timer, $event)">
+				</timer-list-item>
+			</ion-col>
+			</ion-row>
+	</ion-grid>
+    <ion-fab bottom right>
+        <button ion-fab (click)="addNewTimer()"><ion-icon name="add"></ion-icon></button>
+        <!--<ion-fab-list>
       <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
       <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
       <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
       <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
     </ion-fab-list>-->
-  </ion-fab>
+    </ion-fab>
 
 
 </ion-content>
