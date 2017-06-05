@@ -1,23 +1,21 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'gauge-radial',
-  templateUrl: 'gauge-radial.html'
+    selector: 'gauge-radial',
+    templateUrl: 'gauge-radial.html'
 })
 export class GaugeRadial {
-
     _progress: number = 0;
-  @Input() 
-  set progress(value:number) {
-      this._progress = value % 101;
-  }
+    @Input() iconName:string = "pause";
 
-  constructor() {
-  }
 
-  forward(){
-      this.progress = this._progress + 10;
-      console.log("forward:",this._progress)
-  }
+    @Input()
+    set progress(value: number) {
+        value = value < 0 ? 0 : value;
+        value = value > 100 ? 100 : value;
+        this._progress = value;
+    }
 
+
+    constructor() {}
 }

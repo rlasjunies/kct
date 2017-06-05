@@ -3,22 +3,24 @@
 .radial-progress {
 	$circle-size: 90px;
 	$circle-inset-size: $circle-size - 40px ;
-	$circle-background: #d6dadc;
-	$circle-color: #97a71d;
+	// $circle-background: #d6dadc;
+	// $circle-background: lightgray;
+	$circle-background: #efefef;
+	$circle-color: #97a71d; 
 	$inset-color: #fbfbfb;
 	$transition-length: 1s;
 	$shadow: 6px 6px 10px rgba(0,0,0,0.2);
 	$percentage-color: #97a71d;
-	$percentage-font-size: 22px;
+	$percentage-font-size: 22px; 
 	$percentage-text-width: 57px;
 
-	margin: 50px;
+	// margin: 50px;
 	width:  $circle-size;
 	height: $circle-size;
 
 	background-color: $circle-background;
 	border-radius: 50%;
-	.circle {
+	.circle { 
 		.mask, .fill, .shadow {
 			width:    $circle-size;
 			height:   $circle-size;
@@ -32,15 +34,15 @@
 			-webkit-backface-visibility: hidden;
 			transition: -webkit-transform $transition-length;
 			transition: -ms-transform $transition-length;
-			transition: transform $transition-length;
+			transition: transform $transition-length; 
 			border-radius: 50%;
 		}
-		.mask {
+		.mask { 
 			clip: rect(0px, $circle-size, $circle-size, $circle-size/2);
 			.fill {
 				clip: rect(0px, $circle-size/2, $circle-size, 0px);
 				background-color: $circle-color;
-			}
+            }
 		}
 	}
 	.inset {
@@ -49,7 +51,7 @@
 		position:    absolute;
 		margin-left: ($circle-size - $circle-inset-size)/2;
 		margin-top:  ($circle-size - $circle-inset-size)/2;
-
+ 
 		background-color: $inset-color;
 		border-radius: 50%;
 		// box-shadow: $shadow;
@@ -79,7 +81,7 @@
 			}
 		}
 	}
-
+ 
 	$i: 0;
 	$increment: 180deg / 100;
     @while $i <= 100 {
@@ -101,5 +103,16 @@
                 }
             }
         $i: $i + 1;
-    } 
+    }
+
+    .aligner{
+        width: $circle-size;
+        height: $circle-size;
+        margin-top: -20px;
+        margin-left: -20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2em;
+    }
 }
