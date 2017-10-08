@@ -5,6 +5,7 @@
 *.sw[mnpcod]
 *.log
 *.tmp
+*.map
 *.tmp.*
 log.txt
 *.sublime-project
@@ -20,6 +21,8 @@ coverage/
 dist/
 tests/
 node_modules/
+node_modules.old/
+node_modules.old2/
 tmp/
 temp/
 hooks/
