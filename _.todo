@@ -1,5 +1,10 @@
 
-
+☐ rework splashscreen / picture and text
+☐ rework events from timers
+    should be observable
+☐ Notification
+    ☐ notification when timer start / end
+        indicate time of the start / pause ... clean if notification already exists
 ☐ prise de photo
 ☐ Update timer list when timer config changed
     * if timer already available, ask question do you want change the current timer?
@@ -12,9 +17,17 @@
     ☐ list all timers config
     ☐ order by avaialble then can be configured
     ☐ shows next occurence date
+    ☐ When a timer has been added, we need to scroll a bit to seen the new taille. We need to select, see, the tile just added without the need to scroll
+        Take care of the case, where a timer is added and deleted before to navigate back in the timers list
+☐ list of reward
+    ☐ selector of reward on the timer card
+    ☐ manage reward
+        ☐ list of name + duration
+        ☐ list of icons
+    ☐ trail the reward
+        ☐ delete a reward ... no
+    ☐ select a subset of reward per timer
 
-☐ timer-service
-    remove the events from the ui, should be emitted from the service
 ☐ timer-config
     ✔ review place holder for the name of the timer current text is too Big @done (20/05/2017 à 15:53:47)
     ☐ re-initiate the calculation starting today
@@ -27,12 +40,14 @@
 ☐ Faire marcher en tache de fond les timers ( quand l'application n'est pas au 1er plan)
     il faut définir le nombre de card par ligne en fonction de la taille de l'écran
     ne marche pas dans le simulateur
-☐ Problème pour revenir à la page home
 ☐ replace storage by a persistant one
 
 ☐ Add application trace
     purpose is to trace the configuration changes
 
+✔ Problème pour revenir à la page home @done (20/05/2017 à 18:03:04)
+✔ timer-service @done (20/05/2017 à 18:02:45)
+    remove the events from the ui, should be emitted from the service
 ✔ bug: timer start error when click from ui @done (20/05/2017 à 17:44:46)
     thishelperRetrieveTimerFroGuid is not a function
 ✔ améliorer le responsive @done (17/05/2017 à 22:08:13)
@@ -62,6 +77,3 @@
     liste des timers
     config
 ✔ conversion en card @done (01/05/2017 à 20:22:38)
-
-
-
