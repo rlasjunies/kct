@@ -29,8 +29,8 @@ export class TimerService {
     public startTimer = (guid: string): void => {
         var timerValue: TimerValue = this.getTimerValue(guid);
         console.log('timer-service:', guid);
-        if (timerValue.status === enumTimerStatus.RUNNING ||
-            timerValue.status === enumTimerStatus.DONE ||
+		// RL 20170506 - remove the control enumTimerStatus.RUNNING
+        if ( timerValue.status === enumTimerStatus.DONE ||
             timerValue.status === enumTimerStatus.OVER) {
             console.log('Could not start timer status is not good');
         } else {

@@ -20,7 +20,8 @@ export enum enumTimerStatus {
     RUNNING = 30, // : yellow,
     OVER = 40, // : orange,
     DONE = 50, // : grey
-    STARTED = 60
+    STARTED = 60,
+    ALERT = 70 //
 }
 
 export function enumTimerStatus_String(val: enumTimerStatus): string {
@@ -35,6 +36,8 @@ export function enumTimerStatus_String(val: enumTimerStatus): string {
             return 'OVER';
         case enumTimerStatus.DONE:
             return 'DONE';
+        case enumTimerStatus.ALERT:
+            return 'ALERT';
         default:
             return 'WRONG TIMER STATUS VALUE';
     }
@@ -43,6 +46,7 @@ export function enumTimerStatus_String(val: enumTimerStatus): string {
 export interface TimerValue {
     guid: string;
     durationLeft_MilliSecond: number;
+	duration: number;
     title: string;
     status: enumTimerStatus;
 }

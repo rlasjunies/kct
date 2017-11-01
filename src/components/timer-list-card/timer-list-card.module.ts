@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { TimerListItem } from './timer-list-item';
+import { TimerListCard } from './timer-list-card';
 import * as components from "components";
 
 @NgModule({
   declarations: [
-    TimerListItem,
+    TimerListCard,
   ],
   imports: [
-    IonicPageModule.forChild(TimerListItem),
-      components.GaugeRadialModule,
+    IonicPageModule.forChild(TimerListCard),
+	components.GaugeRadialModule,
   ],
   exports: [
-    TimerListItem
+    TimerListCard
   ]
 })
 export class TimerListItemModule {}

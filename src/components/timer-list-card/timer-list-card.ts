@@ -5,11 +5,11 @@ import * as models from 'models';
 // import * as timerMisc from "misc/timer.misc";
 
 @Component({
-	selector: 'timer-list-item',
-	templateUrl: 'timer-list-item.html'
+	selector: 'timer-list-card',
+	templateUrl: 'timer-list-card.html'
 })
 
-export class TimerListItem {
+export class TimerListCard {
 
 	_timer: models.UITimer;
 	@Input()
@@ -17,17 +17,24 @@ export class TimerListItem {
 		this._timer = value;
 	}
 
+	percentage: number = 30;
+	pause: boolean = false;
+
 	@Output() rewardClicked: EventEmitter<number> = new EventEmitter()
 	@Output() settingClicked: EventEmitter<models.UITimer> = new EventEmitter()
 	@Output() penaltyClicked: EventEmitter<number> = new EventEmitter()
+	@Output() clicked: EventEmitter<models.UITimer> = new EventEmitter()
 	constructor(
 		private actionsList: ActionSheetController,
 	) { }
 
 	raiseSetting() {
-		this.settingClicked.emit(this._timer)
+		this.settingClicked.emit(this._timer);
 	}
 
+	raiseClick(){
+		this.clicked.emit(this._timer);
+	}
 	raiseReward(value: number) {
 		this.rewardClicked.emit(value);
 	}
@@ -103,4 +110,5 @@ export class TimerListItem {
 		});
 		actionSheet.present();
 	}
+	
 }

@@ -11,24 +11,20 @@
 	<ion-grid>
 		<ion-row>
 			<ion-col *ngFor="let timer of timers" col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3>
-				<timer-list-item 
+				<timer-list-card
 					[timer]="timer"
-					(settingClicked)="configure($event)"
-					(rewardClicked)="reward(timer, $event)"
-					(penaltyClicked)="penalty(timer, $event)">
-				</timer-list-item>
+					(settingClicked)="settingClicked(timer, $event)"
+					(rewardClicked)="rewardClicked(timer, $event)"
+					(penaltyClicked)="penaltyClicked(timer, $event)"
+					(clicked)="timerClicked(timer)"
+					>
+				</timer-list-card>
 			</ion-col>
 			</ion-row>
 	</ion-grid>
     <ion-fab bottom right>
-        <button ion-fab (click)="addNewTimer()"><ion-icon name="add"></ion-icon></button>
-        <!--<ion-fab-list>
-      <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
-      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
-      <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
-      <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
-    </ion-fab-list>-->
+        <button ion-fab (click)="addNewTimer()">
+			<ion-icon name="add"></ion-icon>
+		</button>
     </ion-fab>
-
-
 </ion-content>

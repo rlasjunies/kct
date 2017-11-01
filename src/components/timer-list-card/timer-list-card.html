@@ -1,0 +1,49 @@
+<ion-card>
+	<ion-item (click)="raiseClick()">
+		<ion-avatar item-left>
+			<img [src]="_timer.picture">
+		</ion-avatar>
+		<h2>{{_timer.title}}</h2>
+		<ion-note>Every Monday, Tuesday, Wednesday, Thursday, Friday, Saturday</ion-note>
+	</ion-item>
+	<ion-card-content (click)="raiseClick()">
+		<ion-grid>
+			<ion-row>
+				<ion-col col-7 style="display:flex;align-items:center">
+					<div *ngIf="!(_timer.status === 50)">
+						<h1>{{_timer.durationLeftString}}</h1>
+					</div>
+					<div *ngIf="(_timer.status === 50)">
+						<h1>Next occurence in {{_timer.durationLeftString}}</h1>
+					</div>
+				</ion-col>
+				<ion-col col-5 style="display:flex;justify-content:center">
+					<gauge-radial 
+					[percentage]="_timer.percentageDone" 
+					[state]="_timer.status" ></gauge-radial>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-card-content>
+
+	<ion-row>
+		<ion-col>
+			<button ion-button icon-left clear small (click)="showRewardSelection()">
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>Reward</div>
+            </button>
+		</ion-col>
+		<ion-col>
+			<button ion-button icon-left clear small (click)="raiseSetting()">
+				<ion-icon name="settings"></ion-icon>
+				<div>Setting</div>
+				</button>
+		</ion-col>
+		<ion-col>
+			<button ion-button icon-left clear small (click)="showPenaltySelection()">
+				<ion-icon name="thumbs-down"></ion-icon>
+				<div>penalty</div>
+				</button>
+		</ion-col>
+	</ion-row>
+</ion-card>
