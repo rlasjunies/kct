@@ -5,10 +5,10 @@ import { Subscription } from 'rxjs/Subscription';
 // import { LocalNotifications } from '@ionic-native/local-notifications';
 
 import * as models from 'models';
-import * as misc from 'misc/misc';
+import * as misc from 'misc';
 import * as constant from 'app/constant';
 import * as pages from "pages";
-import * as timerMisc from "misc/timer.misc";
+// import * as misc from "misc/timer.misc";
  
 import { TimerService } from 'providers/timer-service/timer-service';
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
@@ -95,7 +95,7 @@ export class TimersPage {
 			if (timerValue) {
 				percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration);
 				durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
-				durationLeftString = timerMisc.durationStringFormat(moment.duration(timerValue.durationLeft_MilliSecond));
+				durationLeftString = misc.durationStringFormat(moment.duration(timerValue.durationLeft_MilliSecond));
 				timerStatus = timerValue.status;
 			}
 
@@ -107,6 +107,7 @@ export class TimersPage {
 					title: timerConfig.title,
 					durationLeft: durationLeft,
 					durationLeftString: durationLeftString,
+					weekDaysHumanized: misc.weekDaysHumanizedFromNumber(timerConfig.weekdays), 
 					percentageDone: percentageDone, 
 					status: timerStatus,
 					ready: false,
@@ -117,7 +118,7 @@ export class TimersPage {
 					alert: false,
 
 				};
-			timerMisc.statusCalcultation(UITimer);
+			misc.statusCalcultation(UITimer);
 			this.timers.push(UITimer);
 
 			this.orderTimers();
@@ -216,9 +217,9 @@ export class TimersPage {
 		// Update controller datas
 		timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
 		timerUI.percentageDone = this.calculPercentage ( timerValue.durationLeft_MilliSecond, timerValue.duration);
-		timerUI.durationLeftString = timerMisc.durationStringFormat(timerUI.durationLeft);
+		timerUI.durationLeftString = misc.durationStringFormat(timerUI.durationLeft);
 		timerUI.status = models.enumTimerStatus.RUNNING; // timerValue.status;
-		timerMisc.statusCalcultation(timerUI);
+		misc.statusCalcultation(timerUI);
 	};
 
 	private timerTicked(timerValue: models.TimerValue, timerUI: models.UITimer) {
@@ -227,9 +228,9 @@ export class TimersPage {
 		// Update controller datas
 		timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
 		timerUI.percentageDone = this.calculPercentage ( timerValue.durationLeft_MilliSecond, timerValue.duration);
-		timerUI.durationLeftString = timerMisc.durationStringFormat(timerUI.durationLeft);
+		timerUI.durationLeftString = misc.durationStringFormat(timerUI.durationLeft);
 		timerUI.status = timerValue.status;
-		timerMisc.statusCalcultation(timerUI);
+		misc.statusCalcultation(timerUI);
 	};
 
 	private timerOvered(timerValue: models.TimerValue, timerUI: models.UITimer) {
@@ -237,9 +238,9 @@ export class TimersPage {
 
 		// Update controller datas
 		timerUI.percentageDone = 100;
-		timerUI.durationLeftString = timerMisc.durationStringFormat(timerUI.durationLeft);
+		timerUI.durationLeftString = misc.durationStringFormat(timerUI.durationLeft);
 		timerUI.status = timerValue.status;
-		timerMisc.statusCalcultation(timerUI);
+		misc.statusCalcultation(timerUI); 
 
 		// Play the alert (if not already playing)
 		if (!this._media[timerUI.guid]) {
@@ -254,18 +255,18 @@ export class TimersPage {
 		console.log('timer:' + timerValue.title + '_stopped received ...:' + JSON.stringify(timerValue));
 
 		timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
-		timerUI.percentageDone = this.calculPercentage ( timerValue.durationLeft_MilliSecond, timerValue.duration); timerUI.durationLeftString = timerMisc.durationStringFormat(timerUI.durationLeft);
+		timerUI.percentageDone = this.calculPercentage ( timerValue.durationLeft_MilliSecond, timerValue.duration); timerUI.durationLeftString = misc.durationStringFormat(timerUI.durationLeft);
 		timerUI.status = models.enumTimerStatus.DONE;  // timerValue.status;
-		timerMisc.statusCalcultation(timerUI);
+		misc.statusCalcultation(timerUI);
 	}
 
 	private timerHeld(timerValue: models.TimerValue, timerUI: models.UITimer) {
 		console.log('timer:' + timerValue.title + '_stopped received ...:' + JSON.stringify(timerValue));
 
 		timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
-		timerUI.percentageDone = this.calculPercentage ( timerValue.durationLeft_MilliSecond, timerValue.duration); timerUI.durationLeftString = timerMisc.durationStringFormat(timerUI.durationLeft);
+		timerUI.percentageDone = this.calculPercentage ( timerValue.durationLeft_MilliSecond, timerValue.duration); timerUI.durationLeftString = misc.durationStringFormat(timerUI.durationLeft);
 		timerUI.status = models.enumTimerStatus.HOLD; // timerValue.status;
-		timerMisc.statusCalcultation(timerUI);
+		misc.statusCalcultation(timerUI);
 	}
 
 	calculPercentage(left:number, total:number){

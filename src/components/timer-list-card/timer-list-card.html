@@ -4,7 +4,8 @@
 			<img [src]="_timer.picture">
 		</ion-avatar>
 		<h2>{{_timer.title}}</h2>
-		<ion-note>Every Monday, Tuesday, Wednesday, Thursday, Friday, Saturday</ion-note>
+		<ion-note>Every:</ion-note>
+		<ion-note *ngFor="let days of _timer.weekDaysHumanized">{{days}}</ion-note>
 	</ion-item>
 	<ion-card-content (click)="raiseClick()">
 		<ion-grid>

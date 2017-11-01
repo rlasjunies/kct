@@ -10,7 +10,7 @@ export interface TimerConfig {
     durationHumanized: string;
     title: string;
     picture: string;
-    weekdays: number;
+	weekdays: number;
     enable: boolean;
 }
 

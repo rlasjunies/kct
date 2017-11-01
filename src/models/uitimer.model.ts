@@ -3,7 +3,8 @@ import * as model from "./index";
 export interface UITimer {
     durationLeft: moment.Duration;
 	percentageDone: number;
-    durationLeftString: string;
+	durationLeftString: string;
+	weekDaysHumanized: string[];
     guid: string;
     picture: string;
     title: string;
