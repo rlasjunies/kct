@@ -9,7 +9,7 @@ import * as components from "components";
   ],
   imports: [
     IonicPageModule.forChild(TimersPage),
-    components.TimerListItemModule
+    components.TimerListCardModule
   ],
   exports: [
     TimersPage

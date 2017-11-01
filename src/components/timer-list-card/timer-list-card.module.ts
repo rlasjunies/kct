@@ -15,4 +15,4 @@ import * as components from "components";
     TimerListCard
   ]
 })
-export class TimerListItemModule {}
+export class TimerListCardModule {}
