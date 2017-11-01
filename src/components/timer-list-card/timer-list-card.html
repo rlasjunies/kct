@@ -11,7 +11,7 @@
 			<ion-row>
 				<ion-col col-7 style="display:flex;align-items:center">
 					<div *ngIf="!(_timer.status === 50)">
-						<h1>{{_timer.durationLeftString}}</h1>
+						<h1 class="remainingDuration">{{_timer.durationLeftString}}</h1>
 					</div>
 					<div *ngIf="(_timer.status === 50)">
 						<h1>Next occurence in {{_timer.durationLeftString}}</h1>
