@@ -43,11 +43,11 @@ export class DaysSelector {
         this._mql.addListener(this.calcultateSmallLargeScreenAndDefineDaysText);
         this.calcultateSmallLargeScreenAndDefineDaysText(this._mql);
 
-        console.log("constructor");
+        console.log("days-seclector constructor");
     }
 
     calcultateSmallLargeScreenAndDefineDaysText = (mql: MediaQueryList) => {
-        console.log("in calcultateSmallLargeScreenAndDefineDaysText")
+        // console.log("in calcultateSmallLargeScreenAndDefineDaysText")
         if (mql.matches) {
             this.day1Text = moment.weekdays(1);
             this.day2Text = moment.weekdays(2);
