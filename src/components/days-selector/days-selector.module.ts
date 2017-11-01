@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { DaysSelector } from './days-selector';
-// import { DaysSelectorHelper } from "./days-selector.service";
+
 @NgModule({
   declarations: [
     DaysSelector,
@@ -14,7 +14,6 @@ import { DaysSelector } from './days-selector';
 
   ],
   providers: [
-      // DaysSelectorHelper
   ]
 })
 export class DaysSelectorModule {}

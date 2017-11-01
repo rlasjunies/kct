@@ -3,29 +3,37 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
+import { LocalNotifications } from '@ionic-native/local-notifications';
 import { MyApp } from './app.component';
 
 import * as providers from "providers";
 
 @NgModule({
   declarations: [
-    MyApp,
+	MyApp,
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+	IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+	MyApp,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     providers.TimerService,
-    providers.TimerConfigService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+	providers.TimerConfigService,
+	{ provide: Storage, useFactory: returnWindowLocalStorage() },
+    { provide: ErrorHandler, useClass: IonicErrorHandler},
+    LocalNotifications
   ]
 })
 export class AppModule {}
+
+function returnWindowLocalStorage(): Function {
+    return () => {
+        return window.localStorage;
+    };
+}
