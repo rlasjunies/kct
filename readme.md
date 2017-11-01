@@ -4,7 +4,7 @@ adb devices
 `ionic serve`
 
 # cannot find module "pages"
-1. update the @ionic/config/webpack.conf.js
+1. update the @ionic/app-config/config/webpack.conf.js
 2. in dev_conf, prod_conf
 `
 ...  
@@ -24,3 +24,23 @@ adb devices
 	module: {  
 		loaders: [  
 `  
+# lesson learned
+if we want to use tabs
+
+* create another folder tabs
+	* create folder for each tab
+	* modify the tabs resolve in webpack.conf.js as shown above to not have relative import access
+* the tab1/tab1.module must imported in the app.module
+```javascript
+...
+import * as tabs from "tabs";
+...
+imports: [
+    BrowserModule,
+	IonicModule.forRoot(MyApp),
+	tabs.Tab1Module,
+	tabs.Tab2Module
+  ],
+  bootstrap: [IonicApp],
+...
+```

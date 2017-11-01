@@ -1,4 +1,6 @@
 
+☐ finalize setting refactoring
+	sevral "cards" or "tab" dedicated controls 
 ☐ rework splashscreen / picture and text
 ☐ rework events from timers
     should be observable
@@ -20,7 +22,7 @@
     ☐ When a timer has been added, we need to scroll a bit to seen the new taille. We need to select, see, the tile just added without the need to scroll
         Take care of the case, where a timer is added and deleted before to navigate back in the timers list
 ☐ list of reward
-    ☐ selector of reward on the timer card
+    ✔ selector of reward on the timer card @done (2017-11-1 16:14:41)
     ☐ manage reward
         ☐ list of name + duration
         ☐ list of icons
