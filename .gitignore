@@ -33,6 +33,9 @@ plugins/ios.json
 www/
 $RECYCLE.BIN/
 
+npm
+yarn.lock
+
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
