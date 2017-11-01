@@ -60,11 +60,11 @@ export function weekDaysHumanizedFromNumber(weekDays:number):string[]{
 	// this._days = Number(days) || 0;
 	if(1 & weekDays) { weekDaysHumanized.push(moment.weekdaysShort(1)) }
 	if(2 & weekDays) { weekDaysHumanized.push(moment.weekdaysShort(2)) }
-	if(4 & weekDays) { weekDaysHumanized.push(moment.weekdaysShort(4)) }
-	if(8 & weekDays) { weekDaysHumanized.push(moment.weekdaysShort(8)) }
-	if(16 & weekDays) { weekDaysHumanized.push(moment.weekdaysShort(16)) }
-	if(32 & weekDays) { weekDaysHumanized.push(moment.weekdaysShort(32)) }
-	if(64 & weekDays) { weekDaysHumanized.push(moment.weekdaysShort(64)) }
+	if(4 & weekDays) { weekDaysHumanized.push(moment.weekdaysShort(3)) }
+	if(8 & weekDays) { weekDaysHumanized.push(moment.weekdaysShort(4)) }
+	if(16 & weekDays) { weekDaysHumanized.push(moment.weekdaysShort(5)) }
+	if(32 & weekDays) { weekDaysHumanized.push(moment.weekdaysShort(6)) }
+	if(64 & weekDays) { weekDaysHumanized.push(moment.weekdaysShort(7)) }
 
 	return weekDaysHumanized;
 }
