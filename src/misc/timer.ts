@@ -2,8 +2,12 @@ import * as models from "models";
 import * as moment from "moment";
 import * as misc from "misc"; 
 
-export function durationStringFormat(d: moment.Duration): string {
+export function durationHourMinSecondFormat(d: moment.Duration): string {
     return misc.ZeroPadding(d.hours(), 2) + ':' + misc.ZeroPadding(d.minutes(), 2) + ':' + misc.ZeroPadding(d.seconds(), 2);
+}
+
+export function durationHumanized(d: moment.Duration): string {
+    return d.hours() + ' hour(s) and ' + d.minutes() + ' min(s).';
 }
 export function statusCalcultation(timer: models.UITimer): void {
     switch (timer.status) {
@@ -50,7 +54,6 @@ export function statusCalcultation(timer: models.UITimer): void {
             timer.done = true;
     }
 }
-
 export function weekDaysHumanizedFromNumber(weekDays:number):string[]{
 	let weekDaysHumanized:string[] = [];
 

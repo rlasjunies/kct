@@ -3,10 +3,8 @@
 		<ion-avatar item-left>
 			<img [src]="_timer.picture">
 		</ion-avatar>
-		<h2>{{_timer.title}}</h2>
-		<ion-note>Every:</ion-note>
-		<ion-note *ngFor="let days of _timer.weekDaysHumanized">{{days}}</ion-note>
-	</ion-item>
+		<h1>{{_timer.title}}</h1>
+		</ion-item>
 	<ion-card-content (click)="raiseClick()">
 		<ion-grid>
 			<ion-row>
@@ -47,4 +45,11 @@
 				</button>
 		</ion-col>
 	</ion-row>
+	<ion-row>
+		<ion-col>
+			<ion-note>{{_timer.durationHumanized}}</ion-note>
+			<ion-note>Every:</ion-note>
+			<ion-note *ngFor="let days of _timer.weekDaysHumanized">{{days}} </ion-note>
+		</ion-col>
+	</ion-row>	
 </ion-card>

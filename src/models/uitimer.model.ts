@@ -1,7 +1,8 @@
 import * as moment from "moment";
 import * as model from "./index";
 export interface UITimer {
-    durationLeft: moment.Duration;
+	durationHumanized: string;
+	durationLeft: moment.Duration;
 	percentageDone: number;
 	durationLeftString: string;
 	weekDaysHumanized: string[];

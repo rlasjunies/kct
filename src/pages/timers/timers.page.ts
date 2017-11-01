@@ -95,7 +95,7 @@ export class TimersPage {
 			if (timerValue) {
 				percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration);
 				durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
-				durationLeftString = misc.durationStringFormat(moment.duration(timerValue.durationLeft_MilliSecond));
+				durationLeftString = misc.durationHourMinSecondFormat(moment.duration(timerValue.durationLeft_MilliSecond));
 				timerStatus = timerValue.status;
 			}
 
@@ -105,6 +105,7 @@ export class TimersPage {
 					guid: (<models.TimerConfig>(<any>timerConfig)).guid,
 					picture: timerConfig.picture,
 					title: timerConfig.title,
+					durationHumanized: misc.durationHumanized(moment.duration(timerConfig.durationMilliSecond)),
 					durationLeft: durationLeft,
 					durationLeftString: durationLeftString,
 					weekDaysHumanized: misc.weekDaysHumanizedFromNumber(timerConfig.weekdays), 
@@ -217,7 +218,7 @@ export class TimersPage {
 		// Update controller datas
 		timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
 		timerUI.percentageDone = this.calculPercentage ( timerValue.durationLeft_MilliSecond, timerValue.duration);
-		timerUI.durationLeftString = misc.durationStringFormat(timerUI.durationLeft);
+		timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
 		timerUI.status = models.enumTimerStatus.RUNNING; // timerValue.status;
 		misc.statusCalcultation(timerUI);
 	};
@@ -228,7 +229,7 @@ export class TimersPage {
 		// Update controller datas
 		timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
 		timerUI.percentageDone = this.calculPercentage ( timerValue.durationLeft_MilliSecond, timerValue.duration);
-		timerUI.durationLeftString = misc.durationStringFormat(timerUI.durationLeft);
+		timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
 		timerUI.status = timerValue.status;
 		misc.statusCalcultation(timerUI);
 	};
@@ -238,7 +239,7 @@ export class TimersPage {
 
 		// Update controller datas
 		timerUI.percentageDone = 100;
-		timerUI.durationLeftString = misc.durationStringFormat(timerUI.durationLeft);
+		timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
 		timerUI.status = timerValue.status;
 		misc.statusCalcultation(timerUI); 
 
@@ -255,7 +256,7 @@ export class TimersPage {
 		console.log('timer:' + timerValue.title + '_stopped received ...:' + JSON.stringify(timerValue));
 
 		timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
-		timerUI.percentageDone = this.calculPercentage ( timerValue.durationLeft_MilliSecond, timerValue.duration); timerUI.durationLeftString = misc.durationStringFormat(timerUI.durationLeft);
+		timerUI.percentageDone = this.calculPercentage ( timerValue.durationLeft_MilliSecond, timerValue.duration); timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
 		timerUI.status = models.enumTimerStatus.DONE;  // timerValue.status;
 		misc.statusCalcultation(timerUI);
 	}
@@ -264,7 +265,7 @@ export class TimersPage {
 		console.log('timer:' + timerValue.title + '_stopped received ...:' + JSON.stringify(timerValue));
 
 		timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
-		timerUI.percentageDone = this.calculPercentage ( timerValue.durationLeft_MilliSecond, timerValue.duration); timerUI.durationLeftString = misc.durationStringFormat(timerUI.durationLeft);
+		timerUI.percentageDone = this.calculPercentage ( timerValue.durationLeft_MilliSecond, timerValue.duration); timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
 		timerUI.status = models.enumTimerStatus.HOLD; // timerValue.status;
 		misc.statusCalcultation(timerUI);
 	}
