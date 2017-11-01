@@ -66,8 +66,6 @@ export class TimersPage {
 	ngOnDestroy() {
 		// prevent memory leak when component is destroyed
 		this._timerSubscription.unsubscribe();
-		this.events.unsubscribe(this.timerConfigService.eventsTimersconfigChanged)
-		this.events.unsubscribe(this.timerConfigService.eventsTimersconfigDeleted)
 	}
 
 	refreshListWhenTimerConfigChanged = () => {
