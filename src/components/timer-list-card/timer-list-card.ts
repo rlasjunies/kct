@@ -1,8 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ActionSheetController } from "ionic-angular";
 import * as models from 'models';
-// import * as misc from 'misc/misc';
-// import * as timerMisc from "misc/timer.misc";
 
 @Component({
 	selector: 'timer-list-card',
