@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, App } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LocalNotifications } from '@ionic-native/local-notifications';
@@ -17,7 +17,9 @@ export class MyApp {
         public platform: Platform,
         public statusBar: StatusBar,
         public splashScreen: SplashScreen,
-        private localNotifications: LocalNotifications
+		private localNotifications: LocalNotifications,
+		
+		private app: App
         
     ) {
         this.initializeApp();
@@ -27,8 +29,11 @@ export class MyApp {
         this.platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
-            this.statusBar.styleDefault();
-            this.splashScreen.hide();
+			this.statusBar.styleDefault();
+			let nav = this.app.getRootNav(); 
+			nav.setRoot(pages.ID_timers);
+			nav.goToRoot();
+			this.splashScreen.hide();
             console.log('initilizeApp - platform ... ready!');
         });
 
