@@ -62,15 +62,18 @@ export class TimersPage {
 		this._timerSubscription = this.timerService.notification$.subscribe(this.manageTimerNotification);
 	}
 
+
 	ngOnDestroy() {
 		// prevent memory leak when component is destroyed
 		this._timerSubscription.unsubscribe();
+		this.events.unsubscribe(this.timerConfigService.eventsTimersconfigChanged)
+		this.events.unsubscribe(this.timerConfigService.eventsTimersconfigDeleted)
 	}
 
-	refreshListWhenTimerConfigChanged() {
+	refreshListWhenTimerConfigChanged = () => {
 		this.loadTimers();
 	}
-	refreshListWhenTimerConfigDeleted(timerGuid: string) {
+	refreshListWhenTimerConfigDeleted = (timerGuid: string) => {
 		this.timers = this.timers.filter((timer) => { return timer.guid !== timerGuid });
 	}
 
@@ -182,7 +185,7 @@ export class TimersPage {
 		this.hold(guid);
 	}
 
-	private helperRetrieveTimerFromGuid (guid: string): models.UITimer {
+	private helperRetrieveTimerFromGuid = (guid: string): models.UITimer => {
 		return this.timers.find((value: models.UITimer
 		) => {
 			return value.guid === guid;
@@ -270,7 +273,7 @@ export class TimersPage {
 	calculPercentage(left:number, total:number){
 		return Math.round( 100*(total-left)/total)
 	}
-	private manageTimerNotification (timerNotification: models.TimerChangeNotification) {
+	private manageTimerNotification = (timerNotification: models.TimerChangeNotification) => {
 		if (timerNotification) {
 			let timerUI = this.helperRetrieveTimerFromGuid(timerNotification.value.guid);
 

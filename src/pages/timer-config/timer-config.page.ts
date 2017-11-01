@@ -15,12 +15,8 @@ export const ID_timerConfig = "timer-config";
 @Component({
     templateUrl: 'timer-config.page.html',
     providers: [
-        {
-            provide: Storage, useFactory: () => {
-                return window.localStorage;
-            }
-        },
-        TimerConfigService]
+		TimerConfigService
+	]
 })
 export class TimerConfigPage {
     static ID_timerConfig = "timer-config";
