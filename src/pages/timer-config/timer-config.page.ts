@@ -5,6 +5,8 @@ import { IonicPage, NavController, NavParams, Events, AlertController } from 'io
 
 import * as model from 'models';
 import * as misc from 'misc/misc';
+import * as pages from "pages";
+
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 
 export const ID_timerConfig = "timer-config";
@@ -15,12 +17,12 @@ export const ID_timerConfig = "timer-config";
 @Component({
     templateUrl: 'timer-config.page.html',
     providers: [
-		TimerConfigService
-	]
+        TimerConfigService
+    ]
 })
 export class TimerConfigPage {
     static ID_timerConfig = "timer-config";
-    private timerConfig: model.TimerConfig;
+    public timerConfig: model.TimerConfig;
     public durationMinutes: number;
     public durationHours: number;
 
@@ -35,6 +37,19 @@ export class TimerConfigPage {
 
         if (!id) {
             console.log('TimerConfigPage: ID param missing');
+            // error case
+            // trick to avoid errors from html 
+            // and there move back to
+            this.timerConfig = {
+                guid: misc.GUID_new(),
+                title: '',
+                durationMilliSecond: 5400000,
+                durationHumanized: '',
+                picture: 'file://assets/images/tv.png',
+                weekdays: 192,
+                enable: true
+            };
+            this.navCtrl.setRoot(pages.ID_timers);
         } else if (id === -1) {
             this.timerConfig = timerConfigService.new_();
         } else {
@@ -52,7 +67,7 @@ export class TimerConfigPage {
         this.saveTimerConfig();
     }
 
-    titleChange(value:string){
+    titleChange(value: string) {
         this.saveTimerConfig();
     }
     hoursSelectionchanged(hours: number) {

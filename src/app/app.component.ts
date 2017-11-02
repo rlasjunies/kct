@@ -30,12 +30,9 @@ export class MyApp {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
 			this.statusBar.styleDefault();
-			let nav = this.app.getRootNav(); 
-			nav.setRoot(pages.ID_timers);
-			nav.goToRoot();
 			this.splashScreen.hide();
             console.log('initilizeApp - platform ... ready!');
-        });
+        }); 
 
         this.platform.pause.subscribe( this.pausing ); 
         this.platform.resume.subscribe( this.resuming ); 
