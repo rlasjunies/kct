@@ -2,27 +2,22 @@
 <!-- TOC -->
 
 - [1. compile](#1-compile)
-- [2. android](#2-android)
 - [3. lesson learned](#3-lesson-learned)
-	- [3.1. cannot find module "pages"](#31-cannot-find-module-pages)
-	- [3.2. ionic tabs](#32-ionic-tabs)
-	- [3.3. Unit testing](#33-unit-testing)
-		- [3.3.1. installation](#331-installation)
-		- [3.3.2. run](#332-run)
+    - [3.1. cannot find module "pages"](#31-cannot-find-module-pages)
+    - [3.2. ionic tabs](#32-ionic-tabs)
+    - [3.3. Unit testing](#33-unit-testing)
+        - [3.3.1. installation](#331-installation)
+        - [3.3.2. run](#332-run)
 - [4. switch to yarn](#4-switch-to-yarn)
 
 <!-- /TOC -->
 
 # 1. compile
 
-- open a terminal
-- ionic serve -d
-- ionic run android
+- `ionic serve -d`
+- `ionic run android` // if a device is connected to the PC the apk generated will be deployed, if no device is connected the simulator should be run (if well installed ;-) 
 
-# 2. android
-
-adb devices
-
+> `adb devices` list the connected devices
 
 # 3. lesson learned
 
