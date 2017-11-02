@@ -1,6 +1,8 @@
 
-☐ finalize setting refactoring
-	sevral "cards" or "tab" dedicated controls 
+☐ Update timer list when timer config changed
+	* if timer already available, ask question do you want change the current timer?
+		If yes -> save config and recalculate current timer
+	* if timer is already running, can not configure need to stop / cancel the timer
 ☐ rework splashscreen / picture and text
 ☐ rework events from timers
     should be observable
@@ -8,10 +10,6 @@
     ☐ notification when timer start / end
         indicate time of the start / pause ... clean if notification already exists
 ☐ prise de photo
-☐ Update timer list when timer config changed
-    * if timer already available, ask question do you want change the current timer?
-        If yes -> save config and recalculate current timer
-    * if timer is already running, can not configure need to stop / cancel the timer
 ☐ Change the view of the timer
     ☐ add a fab button
     ☐ Big 'Play' icon when avaialble
