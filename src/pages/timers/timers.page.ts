@@ -103,7 +103,7 @@ export class TimersPage {
 			let UITimer: models.UITimer
 				= {
 					guid: (<models.TimerConfig>(<any>timerConfig)).guid,
-					picture: timerConfig.picture,
+					icon: timerConfig.icon,
 					title: timerConfig.title,
 					durationHumanized: misc.durationHumanized(moment.duration(timerConfig.durationMilliSecond)),
 					durationLeft: durationLeft,

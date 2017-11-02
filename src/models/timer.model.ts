@@ -9,7 +9,7 @@ export interface TimerConfig {
     durationMilliSecond: number;
     durationHumanized: string;
     title: string;
-    picture: string;
+    icon: string;
 	weekdays: number;
     enable: boolean;
 }

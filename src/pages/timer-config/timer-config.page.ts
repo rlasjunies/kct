@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 
 import * as model from 'models';
 import * as misc from 'misc/misc';
@@ -30,8 +30,8 @@ export class TimerConfigPage {
         public navCtrl: NavController,
         public navParam: NavParams,
         private timerConfigService: TimerConfigService,
-        private events: Events,
         public alerCtrl: AlertController,
+        public modalCtrl: ModalController
     ) {
         let id: string | number = navParam.get('id');
 
@@ -45,7 +45,7 @@ export class TimerConfigPage {
                 title: '',
                 durationMilliSecond: 5400000,
                 durationHumanized: '',
-                picture: 'file://assets/images/tv.png',
+                icon: 'game-controller-b',
                 weekdays: 192,
                 enable: true
             };
@@ -53,7 +53,6 @@ export class TimerConfigPage {
         } else if (id === -1) {
             this.timerConfig = timerConfigService.new_();
         } else {
-            // TODO should be passed to a control, the data Human interaction & persistance must be decoupled 
             this.timerConfig = timerConfigService.get(<string>id);
         }
 
@@ -67,6 +66,18 @@ export class TimerConfigPage {
         this.saveTimerConfig();
     }
 
+    avatarClicked() {
+        let modal = this.modalCtrl
+            .create(pages.ID_avatarSelection, {id: this.timerConfig.icon});
+
+        modal.onDidDismiss((iconSelected:string)=>{
+            if (iconSelected !== ""){
+                this.timerConfig.icon = iconSelected;
+                this.saveTimerConfig();
+            }
+        });
+        modal.present();
+    } 
     titleChange(value: string) {
         this.saveTimerConfig();
     }

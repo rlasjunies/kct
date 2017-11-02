@@ -7,7 +7,7 @@ export interface UITimer {
 	durationLeftString: string;
 	weekDaysHumanized: string[];
     guid: string;
-    picture: string;
+    icon: string;
     title: string;
     status: model.enumTimerStatus;
     ready: boolean;

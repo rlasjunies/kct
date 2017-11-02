@@ -1,38 +1,43 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>timer configuration</ion-title>
-        <ion-buttons end>
-            <button ion-button (click)="Delete()">
-                <ion-icon color="danger" name="trash"></ion-icon>
-            </button>
-        </ion-buttons>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-title>timer configuration</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="Delete()">
+        <ion-icon color="danger" name="trash"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
-    <!-- <h6> -->
-        <!-- <u>Timer name:</u> -->
-    <!-- </h6> -->
-    <h1>
-        <ion-input #title type="text" [value]="timerConfig.title" placeholder="enter a timer title" [(ngModel)]="timerConfig.title"
-            (change)="titleChange(title.value)">
+  <ion-row align-items-center align-items-middle>
+    <ion-col  col-3 col-sm-1>
+      <ion-avatar item-left (click)="avatarClicked()">
+        <ion-icon class="kct-avatar" [name]="timerConfig.icon"></ion-icon>
+      </ion-avatar>
+    </ion-col>
+    <ion-col col-9 col-sm-11>
+      <ion-item>
+        <ion-label floating>Timer name</ion-label>
+        <ion-input #title type="text" [value]="timerConfig.title" [(ngModel)]="timerConfig.title" (change)="titleChange(title.value)">
         </ion-input>
-    </h1>
+      </ion-item>
+    </ion-col>
+  </ion-row>
 
-    <h6>
-        <u>Duration of the timer:</u> {{ timerConfig.durationHumanized }} hour(s)
-    </h6>
-    <hours-selector hours="{{durationHours}}" (hoursChange)="hoursSelectionchanged($event)"></hours-selector>
-    <br/>
-    <minutes-selector minutes="{{durationMinutes}}" (minutesChange)="minutesSelectionChanged($event)"></minutes-selector>
+  <h6>
+    <u>Duration of the timer:</u> {{ timerConfig.durationHumanized }} hour(s)
+  </h6>
+  <hours-selector hours="{{durationHours}}" (hoursChange)="hoursSelectionchanged($event)"></hours-selector>
+  <br/>
+  <minutes-selector minutes="{{durationMinutes}}" (minutesChange)="minutesSelectionChanged($event)"></minutes-selector>
 
-    <h6>
-        <u>The timer will be availbale every:</u>
-    </h6>
-    <days-selector days="{{timerConfig.weekdays}}" (daysSelectedChanged)="daysSelectionChanged($event)"></days-selector>
+  <h6>
+    <u>The timer will be availbale every:</u>
+  </h6>
+  <days-selector days="{{timerConfig.weekdays}}" (daysSelectedChanged)="daysSelectionChanged($event)"></days-selector>
 
-    <!--{{ timerConfig.weekdays}}
+  <!--{{ timerConfig.weekdays}}
     <br> Hour:{{ durationHours }} : Minutes:{{ durationMinutes}}
     <br>>{{ timerConfig.durationHumanized }}<-->
 </ion-content>
