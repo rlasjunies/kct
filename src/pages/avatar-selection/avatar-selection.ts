@@ -32,7 +32,6 @@ export class AvatarSelection {
         "phone-portrait",
         "tablet-landscape",
         "tablet-portrait",
-        "tux",
         "pint",
         "call",
         "school",
