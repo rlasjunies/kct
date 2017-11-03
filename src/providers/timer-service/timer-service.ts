@@ -64,6 +64,7 @@ export class TimerService {
 
     public stopTimer = (guid: string): void => {
         // clear the timer
+        // console.log("before clearinterval", this._timers[guid] )
         clearInterval(this._timers[guid]);
         this._timers[guid] = null;
 
@@ -77,11 +78,22 @@ export class TimerService {
             this.raiseTimerChangeNotification(guid + constant.TIMER_HELD_EVENT, timerValue);
         }
         localStorage.setItem(constant.STORAGEKEY_PREFIX + guid, JSON.stringify(timerValue));
-
     }
 
     public getTimerValue = (guid: string): TimerValue => {
         return JSON.parse(localStorage.getItem(constant.STORAGEKEY_PREFIX + guid));
+    }
+
+    public isTimerActiveAndRunning = (guid:string) :boolean => {
+        const timerValue = this.getTimerValue(guid);
+        if ( timerValue === null ) {
+            return false;
+        } else if ( (timerValue.status === enumTimerStatus.RUNNING) 
+                    || ( timerValue.status === enumTimerStatus.STARTED) ) {
+            return true;
+        } else {
+            return false
+        }
     }
 }
 
