@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, App } from 'ionic-angular';
+import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LocalNotifications } from '@ionic-native/local-notifications';
@@ -18,9 +18,6 @@ export class MyApp {
         public statusBar: StatusBar,
         public splashScreen: SplashScreen,
 		private localNotifications: LocalNotifications,
-		
-		private app: App
-        
     ) {
         this.initializeApp();
     }
