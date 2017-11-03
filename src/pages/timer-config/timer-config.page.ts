@@ -47,7 +47,7 @@ export class TimerConfigPage {
                 durationMilliSecond: 5400000,
                 durationHumanized: '',
                 icon: 'game-controller-b',
-                weekdays: 192,
+                weekdays: 1,
                 enable: true
             };
             this.navCtrl.setRoot(pages.ID_timers);
@@ -62,33 +62,36 @@ export class TimerConfigPage {
         this.timerConfig.durationHumanized = __formatToDurationHumanized(this.durationHours, this.durationMinutes);
     }
 
-    minutesSelectionChanged(minutes: number) {
-        this.durationMinutes = minutes;
-        this.saveTimerConfig();
-    }
 
     avatarClicked() {
         let modal = this.modalCtrl
-            .create(pages.ID_avatarSelection, {id: this.timerConfig.icon});
+            .create(pages.ID_avatarSelection, { id: this.timerConfig.icon });
 
-        modal.onDidDismiss((iconSelected:string)=>{
-            if (iconSelected !== ""){
+        modal.onDidDismiss((iconSelected: string) => {
+            if (iconSelected !== "") {
                 this.timerConfig.icon = iconSelected;
                 this.saveTimerConfig();
             }
         });
         modal.present();
-    } 
+    }
     titleChange(value: string) {
+        console.log("Title changed:", value);
+        this.saveTimerConfig();
+    }
+    minutesSelectionChanged(minutes: number) {
+        console.log("Minutes changed:", minutes);        
+        this.durationMinutes = minutes;
         this.saveTimerConfig();
     }
     hoursSelectionchanged(hours: number) {
+        console.log("Hours changed:", hours);
         this.durationHours = hours;
         this.saveTimerConfig();
     }
 
     daysSelectionChanged(days: number) {
-        // console.log("Days changed:", days);
+        console.log("Days changed:", days);
         this.timerConfig.weekdays = days;
         this.saveTimerConfig();
     }
