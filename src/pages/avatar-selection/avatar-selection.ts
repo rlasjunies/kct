@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController, ViewController, NavParams } from 'ionic-angular';
-/**
- * Generated class for the AvatarSelection page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */ 
+
 export const ID_avatarSelection = "avatar-selection";
 @IonicPage({
     name: "avatar-selection",
@@ -48,7 +43,7 @@ export class AvatarSelection {
     ) { }
 
   ionViewDidLoad() {
-      let id: string | number = this.navParams.get('id');
+      // let id: string | number = this.navParams.get('id');
   }
 
   iconSelected(iconName: string){
