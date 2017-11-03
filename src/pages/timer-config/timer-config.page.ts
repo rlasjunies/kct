@@ -15,6 +15,7 @@ export const ID_timerConfig = "timer-config";
     segment: "timer-config"
 })
 @Component({
+    selector: 'page-timer-config',
     templateUrl: 'timer-config.page.html',
     providers: [
         TimerConfigService
@@ -123,7 +124,7 @@ export class TimerConfigPage {
 }
 
 function __formatToDurationHumanized(durationHours: number, durationMinutes: number): string {
-    return misc.ZeroPadding(durationHours, 2) + ':' + misc.ZeroPadding(durationMinutes, 2);
+    return misc.ZeroPadding(durationHours, 1) + ':' + misc.ZeroPadding(durationMinutes, 2);
 }
 
 function __convertToMillisecond(durationHours: number, durationMinutes: number): number {

@@ -1,55 +1,52 @@
 <ion-card>
-	<ion-item (click)="raiseClick()">
-		<ion-avatar item-left>
-            <ion-icon class="kct-avatar" [name]="_timer.icon"></ion-icon>
-		</ion-avatar>
-		<h1>{{_timer.title}}</h1>
-		</ion-item>
-	<ion-card-content (click)="raiseClick()">
-		<ion-grid>
-			<ion-row>
-				<ion-col col-7 style="display:flex;align-items:center">
-					<div *ngIf="!(_timer.status === 50)">
-						<h1 class="remainingDuration">{{_timer.durationLeftString}}</h1>
-					</div>
-					<div *ngIf="(_timer.status === 50)">
-						<h1>Next occurence in {{_timer.durationLeftString}}</h1>
-					</div>
-				</ion-col>
-				<ion-col col-5 style="display:flex;justify-content:center">
-					<gauge-radial 
-					[percentage]="_timer.percentageDone" 
-					[state]="_timer.status" ></gauge-radial>
-				</ion-col>
-			</ion-row>
-		</ion-grid>
-	</ion-card-content>
-
-	<ion-row>
-		<ion-col>
-			<button ion-button icon-left clear small (click)="showRewardSelection()">
-                <ion-icon name="thumbs-up"></ion-icon>
-                <div>Reward</div>
-            </button>
-		</ion-col>
-		<ion-col>
-			<button ion-button icon-left clear small (click)="raiseSetting()">
-				<ion-icon name="settings"></ion-icon>
-				<div>Setting</div>
-				</button>
-		</ion-col>
-		<ion-col>
-			<button ion-button icon-left clear small (click)="showPenaltySelection()">
-				<ion-icon name="thumbs-down"></ion-icon>
-				<div>penalty</div>
-				</button>
-		</ion-col>
-	</ion-row>
-	<ion-row>
-		<ion-col>
-			<ion-note>{{_timer.durationHumanized}}</ion-note>
-			<ion-note>Every:</ion-note>
-			<ion-note *ngFor="let days of _timer.weekDaysHumanized">{{days}} </ion-note>
-		</ion-col>
-	</ion-row>	
+  <ion-item (click)="raiseClick()" text-center>
+    <ion-avatar item-left>
+      <ion-icon class="kct-avatar" [name]="_timer.icon"></ion-icon>
+    </ion-avatar>
+    <h1 class="kct-timer-name">{{_timer.title}}</h1>
+  </ion-item>
+  <ion-card-content (click)="raiseClick()">
+    <ion-grid>
+      <ion-row justify-content-center text-center>
+        <ion-col col-7 align-self-center>
+          <div *ngIf="!(_timer.status === 50)">
+            <h1 class="kct-remainingDuration">{{_timer.durationLeftString}}</h1>
+          </div>
+          <div *ngIf="(_timer.status === 50)">
+            <h1>Next occurence in {{_timer.durationLeftString}}</h1>
+          </div>
+        </ion-col>
+        <ion-col col-5 style="display:flex;justify-content:center">
+          <gauge-radial [percentage]="_timer.percentageDone" [state]="_timer.status"></gauge-radial>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-left clear (click)="showRewardSelection()">
+        <ion-icon class="kct-action-button" name="thumbs-up"></ion-icon>
+        <div class="kct-action-label">Reward</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear (click)="raiseSetting()">
+        <ion-icon class="kct-action-button" name="settings"></ion-icon>
+        <div class="kct-action-label">Setting</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear (click)="showPenaltySelection()">
+        <ion-icon class="kct-action-button" name="thumbs-down"></ion-icon>
+        <div class="kct-action-label">penalty</div>
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-note>{{_timer.durationHumanized}}</ion-note>
+      <ion-note>Every:</ion-note>
+      <ion-note *ngFor="let days of _timer.weekDaysHumanized">{{days}} </ion-note>
+    </ion-col>
+  </ion-row>
 </ion-card>

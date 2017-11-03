@@ -3,7 +3,7 @@ import * as moment from "moment";
 import * as misc from "misc"; 
 
 export function durationHourMinSecondFormat(d: moment.Duration): string {
-    return misc.ZeroPadding(d.hours(), 2) + ':' + misc.ZeroPadding(d.minutes(), 2) + ':' + misc.ZeroPadding(d.seconds(), 2);
+    return misc.ZeroPadding(d.hours(), 1) + ':' + misc.ZeroPadding(d.minutes(), 2) + ':' + misc.ZeroPadding(d.seconds(), 2);
 }
 
 export function durationHumanized(d: moment.Duration): string {

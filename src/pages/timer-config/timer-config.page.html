@@ -11,15 +11,15 @@
 
 <ion-content padding>
   <ion-row align-items-center align-items-middle>
-    <ion-col  col-3 col-sm-1>
-      <ion-avatar item-left (click)="avatarClicked()">
+    <ion-col  col-4 col-sm-1>
+      <button ion-button round outline large color="dark" (click)="avatarClicked()">
         <ion-icon class="kct-avatar" [name]="timerConfig.icon"></ion-icon>
-      </ion-avatar>
+      </button>
     </ion-col>
-    <ion-col col-9 col-sm-11>
+    <ion-col col-8 col-sm-11>
       <ion-item>
         <ion-label floating>Timer name</ion-label>
-        <ion-input #title type="text" [value]="timerConfig.title" [(ngModel)]="timerConfig.title" (change)="titleChange(title.value)">
+        <ion-input #title class="kct-input-timer-name" type="text" [value]="timerConfig.title" [(ngModel)]="timerConfig.title" (change)="titleChange(title.value)">
         </ion-input>
       </ion-item>
     </ion-col>
