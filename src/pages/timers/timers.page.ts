@@ -1,6 +1,6 @@
 import * as moment from 'moment';
-import { Component } from '@angular/core';
-import { NavController, IonicPage, Events } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, IonicPage, Events, Content } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 import * as models from 'models';
@@ -18,8 +18,7 @@ export interface DictionaryUITimer {
 
 export interface DictionaryMedia extends misc.Dictionary<any> { }
 export const ID_timers = "timers";
-@IonicPage(
-    {
+@IonicPage({
         name: "timers",
         segment: "timers"
     }
@@ -28,6 +27,7 @@ export const ID_timers = "timers";
     templateUrl: 'timers.page.html',
 })
 export class TimersPage {
+    @ViewChild(Content) content: Content;
     private _media: DictionaryMedia = {};
     public timers: models.UITimer[] = [];
 
@@ -44,7 +44,10 @@ export class TimersPage {
         this.events.subscribe(timerConfigService.eventsTimersconfigChanged, this.refreshListWhenTimerConfigChanged)
         this.events.subscribe(timerConfigService.eventsTimersconfigDeleted, this.refreshListWhenTimerConfigDeleted)
     }
-
+    ionViewWillEnter(){
+        this.content.resize();
+    }
+    
     ngOnInit() {
         this._timerSubscription = this.timerService.notification$.subscribe(this.manageTimerNotification);
     }
@@ -58,7 +61,7 @@ export class TimersPage {
     refreshListWhenTimerConfigChanged = (timerConfig: models.TimerConfig) => {
         // console.log("timer config change", timerConfig);
         this.loadTimer(timerConfig);
-        this.orderTimers();
+        // this.orderTimers();
     }
     refreshListWhenTimerConfigDeleted = (timerGuid: string) => {
         this.timers = this.timers.filter((timer) => { return timer.guid !== timerGuid });
@@ -73,7 +76,7 @@ export class TimersPage {
         for (let timerConfig of timersConfig) {
             this.loadTimer(timerConfig);
         }
-        this.orderTimers();
+        // this.orderTimers();
     }
 
     loadTimer(timerConfig: models.TimerConfig) {
@@ -119,26 +122,26 @@ export class TimersPage {
         const numberToRemove = index === -1 ? 0 : 1;
         this.timers.splice(index, numberToRemove,newUITimer );
     }
-    orderTimers() {
-        let timersRunnings = this.timers.filter((value) => {
-            return value.status === models.enumTimerStatus.RUNNING;
-        })
-        let timersHold = this.timers.filter((value) => {
-            return value.status === models.enumTimerStatus.HOLD;
-        })
-        let timersReady = this.timers.filter((value) => {
-            return value.status === models.enumTimerStatus.READY;
-        })
+    // orderTimers() {
+    //     let timersRunnings = this.timers.filter((value) => {
+    //         return value.status === models.enumTimerStatus.RUNNING;
+    //     })
+    //     let timersHold = this.timers.filter((value) => {
+    //         return value.status === models.enumTimerStatus.HOLD;
+    //     })
+    //     let timersReady = this.timers.filter((value) => {
+    //         return value.status === models.enumTimerStatus.READY;
+    //     })
 
-        let timerOther = this.timers.filter((value) => {
-            return !(
-                (value.status === models.enumTimerStatus.RUNNING) ||
-                (value.status === models.enumTimerStatus.HOLD) ||
-                (value.status === models.enumTimerStatus.READY));
-        })
+    //     let timerOther = this.timers.filter((value) => {
+    //         return !(
+    //             (value.status === models.enumTimerStatus.RUNNING) ||
+    //             (value.status === models.enumTimerStatus.HOLD) ||
+    //             (value.status === models.enumTimerStatus.READY));
+    //     })
 
-        this.timers = timersRunnings.concat(timersHold).concat(timersReady).concat(timerOther);
-    }
+    //     this.timers = timersRunnings.concat(timersHold).concat(timersReady).concat(timerOther);
+    // }
 
     settingClicked(timer: models.UITimer) {
         console.log("Dans setting clicked", timer.guid);
