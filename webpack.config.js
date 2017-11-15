@@ -69,12 +69,12 @@ var devConfig = {
     extensions: ['.ts', '.js', '.json'],
 	modules: [path.resolve('node_modules')]
 	, alias: {
-		pages: path.resolve(__dirname, "../../../../src/pages")
-		,providers: path.resolve(__dirname, "../../../../src/providers")
-		,components: path.resolve(__dirname, "../../../../src/components")
-		,app: path.resolve(__dirname, "../../../../src/app")
-		,models: path.resolve(__dirname, "../../../../src/models")
-		,misc: path.resolve(__dirname, "../../../../src/misc")
+        pages: path.resolve(__dirname, "../../../../src/pages"),
+        providers: path.resolve(__dirname, "../../../../src/providers"),
+        components: path.resolve(__dirname, "../../../../src/components"),
+        app: path.resolve(__dirname, "../../../../src/app"),
+        models: path.resolve(__dirname, "../../../../src/models"),
+        misc: path.resolve(__dirname, "../../../../src/misc")
 	}
   },
 
