@@ -29,13 +29,13 @@ export class DaysSelector {
     @Input()
     set days(days: number) {
         this._days = Number(days) || 0;
-        this.day1 = (1 & this._days) === 1;
-        this.day2 = (2 & this._days) === 2;
-        this.day3 = (4 & this._days) === 4;
-        this.day4 = (8 & this._days) === 8;
-        this.day5 = (16 & this._days) === 16;
-        this.day6 = (32 & this._days) === 32;
-        this.day7 = (64 & this._days) === 64;
+        this.day1 = (1 & this._days) === 1; // 2^0
+        this.day2 = (2 & this._days) === 2; // 2^1
+        this.day3 = (4 & this._days) === 4; // 2^2
+        this.day4 = (8 & this._days) === 8; // 2^3
+        this.day5 = (16 & this._days) === 16; // 2^4
+        this.day6 = (32 & this._days) === 32; // 2^5
+        this.day7 = (64 & this._days) === 64; // 2^6
     }
     @Output() daysSelectedChanged: EventEmitter<number> = new EventEmitter();
     constructor() {

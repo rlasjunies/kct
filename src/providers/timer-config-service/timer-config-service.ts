@@ -92,7 +92,7 @@ export class TimerConfigService {
     }
 
     private _initializeTimer(timerConfig: models.TimerConfig) {
-        const todayDay: number = moment(Date.now()).weekday() - 1;
+        const todayDay: number = moment(Date.now()).isoWeekday() -1;
 
         // remove the persisted timer
         this.storage.removeItem(constant.STORAGEKEY_PREFIX + timerConfig.guid);
