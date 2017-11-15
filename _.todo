@@ -1,14 +1,14 @@
 ☐ support sound notification in background
-    ☐ create a smart audio provider
-    ☐ create a timer sound player service
-        * load 1 sound per timer
-        * subscribe to timer_end => play a sound
-        * suscribe to timer_acknoledge => stop playing sound
+    ✔ create a smart audio provider @done (2017-11-15 22:11:13)
+    ✔ create a timer sound player service @done (2017-11-15 22:11:20)
+        ☐ * load 1 sound per timer
+        ✔ * subscribe to timer_end => play a sound @done (2017-11-15 22:11:33)
+        ✔ * suscribe to timer_acknoledge => stop playing sound @done (2017-11-15 22:11:33)
     ☐ enable background mode
     ☐ create notification service
         * subscribe to timers
         * if ... is backGround ... notification
-        
+
 
 ☐ add password to change the timer configuration
     the goal is to control the modification of the configuration
