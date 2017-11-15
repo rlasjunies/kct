@@ -3,6 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import * as providers from "providers";
 
 import * as pages from "pages";
 
@@ -17,7 +18,9 @@ export class MyApp {
         public platform: Platform,
         public statusBar: StatusBar,
         public splashScreen: SplashScreen,
-		private localNotifications: LocalNotifications,
+        private localNotifications: LocalNotifications,
+        private timerService: providers.TimerService,
+        private timerSound: providers.TimerSoundProvider
     ) {
         this.initializeApp();
     }

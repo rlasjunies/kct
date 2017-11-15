@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { NativeAudio } from "@ionic-native/native-audio"
 import { MyApp } from './app.component';
 
 import * as providers from "providers";
@@ -27,7 +28,10 @@ import * as providers from "providers";
 	providers.TimerConfigService,
 	{ provide: Storage, useFactory: returnWindowLocalStorage() },
     { provide: ErrorHandler, useClass: IonicErrorHandler},
-    LocalNotifications
+    LocalNotifications,
+    NativeAudio,
+    providers.SmartAudioProvider,
+    providers.TimerSoundProvider
   ]
 })
 export class AppModule {}

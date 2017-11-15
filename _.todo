@@ -1,24 +1,32 @@
+☐ support sound notification in background
+    ☐ create a smart audio provider
+    ☐ create a timer sound player service
+        * load 1 sound per timer
+        * subscribe to timer_end => play a sound
+        * suscribe to timer_acknoledge => stop playing sound
+    ☐ enable background mode
+    ☐ create notification service
+        * subscribe to timers
+        * if ... is backGround ... notification
+        
 
-☐ Update timer list when timer config changed
-	* if timer already available, ask question do you want change the current timer?
-		If yes -> save config and recalculate current timer
-	* if timer is already running, can not configure need to stop / cancel the timer
+☐ add password to change the timer configuration
+    the goal is to control the modification of the configuration
+    especially as now it is reset while a timer is running
+
 ☐ rework splashscreen / picture and text
-☐ rework events from timers
-    should be observable
-☐ Notification
-    ☐ notification when timer start / end
-        indicate time of the start / pause ... clean if notification already exists
-☐ prise de photo
+  
 ☐ Change the view of the timer
-    ☐ add a fab button
-    ☐ Big 'Play' icon when avaialble
-    ☐ Big 'Stop/Pause' icon when needed
-    ☐ list all timers config
-    ☐ order by avaialble then can be configured
+    ✔ add a fab button @done (2017-11-2 16:25:40)
+    ✔ Big 'Play' icon when avaialble @done (2017-11-2 16:25:44)
+    ✔ Big 'Stop/Pause' icon when needed @done (2017-11-2 16:25:43)
+    ✔ list all timers config @done (2017-11-2 16:25:46)
+    ✔ order by avaialble then can be configured @done (2017-11-2 16:25:49)
     ☐ shows next occurence date
-    ☐ When a timer has been added, we need to scroll a bit to seen the new taille. We need to select, see, the tile just added without the need to scroll
+    ☐ When a timer has been added, we need to scroll a bit to see the new card. We need to select, see, the card just added without the need to scroll
         Take care of the case, where a timer is added and deleted before to navigate back in the timers list
+
+
 ☐ list of reward
     ✔ selector of reward on the timer card @done (2017-11-1 16:14:41)
     ☐ manage reward
@@ -30,7 +38,10 @@
 
 ☐ timer-config
     ✔ review place holder for the name of the timer current text is too Big @done (20/05/2017 à 15:53:47)
-    ☐ re-initiate the calculation starting today
+    ✔ re-initiate the calculation starting today @done (2017-11-3 18:03:08)
+
+    ☐ add a list of song
+    ☐ add a check to have vibration too
     
 ☐ timer execution
     ☐ trace the timer execution
@@ -40,10 +51,31 @@
 ☐ Faire marcher en tache de fond les timers ( quand l'application n'est pas au 1er plan)
     il faut définir le nombre de card par ligne en fonction de la taille de l'écran
     ne marche pas dans le simulateur
-☐ replace storage by a persistant one
-
-☐ Add application trace
+    
+    ☐ Add application trace
     purpose is to trace the configuration changes
+    
+☐ Technical
+    ☐ rework events from timers
+    should be observable
+    
+    ☐ replace storage by a persistant one
+
+✔ move the timer list to the last modified timer. @done (2017-11-3 18:02:44)
+This is due to the timer ordering, it is confuding to have timers moving around
+other solution is to remove ordering
+=> remove ordering
+
+✔ Update timer list when timer config changed @done (2017-11-3 18:01:27)
+* if timer already available, ask question do you want change the current timer?
+If yes -> save config and recalculate current timer
+* if timer is already running, can not configure need to stop / cancel the timer
+
+✔ * bug: when 1st addition of a timer, the card is under the header bar when back @done (2017-11-3 18:01:28)
+
+✔ ** * bug: when created a timer should be calculated / re evaluated ** @done (2017-11-3 18:01:29)
+
+✘ prise de photo @cancelled (2017-11-2 16:26:01)
 
 ✔ Problème pour revenir à la page home @done (20/05/2017 à 18:03:04)
 ✔ timer-service @done (20/05/2017 à 18:02:45)

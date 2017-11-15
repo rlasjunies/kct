@@ -2,9 +2,9 @@ import * as moment from 'moment';
 import * as constant from 'app/constant';
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject'; 
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { TimerValue, enumTimerStatus, TimerChangeNotification} from 'models';
+import { TimerValue, enumTimerStatus, TimerChangeNotification } from 'models';
 
 @Injectable()
 export class TimerService {
@@ -21,7 +21,7 @@ export class TimerService {
         console.log('TimerService ... loaded!');
     }
 
-    private raiseTimerChangeNotification= (guid: string, value: TimerValue) => {
+    private raiseTimerChangeNotification = (guid: string, value: TimerValue) => {
         console.log('raiseTimerChange:', guid);
         this._notification.next(new TimerChangeNotification(guid, value));
     }
@@ -29,8 +29,8 @@ export class TimerService {
     public startTimer = (guid: string): void => {
         var timerValue: TimerValue = this.getTimerValue(guid);
         console.log('timer-service:', guid);
-		// RL 20170506 - remove the control enumTimerStatus.RUNNING
-        if ( timerValue.status === enumTimerStatus.DONE ||
+        // RL 20170506 - remove the control enumTimerStatus.RUNNING
+        if (timerValue.status === enumTimerStatus.DONE ||
             timerValue.status === enumTimerStatus.OVER) {
             console.log('Could not start timer status is not good');
         } else {
@@ -84,12 +84,12 @@ export class TimerService {
         return JSON.parse(localStorage.getItem(constant.STORAGEKEY_PREFIX + guid));
     }
 
-    public isTimerActiveAndRunning = (guid:string) :boolean => {
+    public isTimerActiveAndRunning = (guid: string): boolean => {
         const timerValue = this.getTimerValue(guid);
-        if ( timerValue === null ) {
+        if (timerValue === null) {
             return false;
-        } else if ( (timerValue.status === enumTimerStatus.RUNNING) 
-                    || ( timerValue.status === enumTimerStatus.STARTED) ) {
+        } else if ((timerValue.status === enumTimerStatus.RUNNING)
+            || (timerValue.status === enumTimerStatus.STARTED)) {
             return true;
         } else {
             return false

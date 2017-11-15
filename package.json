@@ -22,7 +22,7 @@
     "@angular/platform-browser": "4.4.3",
     "@angular/platform-browser-dynamic": "4.4.3",
     "@ionic-native/core": "4.3.1",
-    "@ionic-native/native-audio": "^4.3.3",
+    "@ionic-native/native-audio": "^4.4.2",
     "@ionic-native/splash-screen": "4.3.1",
     "@ionic-native/status-bar": "4.3.1",
     "@ionic/storage": "2.0.1",

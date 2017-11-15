@@ -28,7 +28,7 @@ export const ID_timers = "timers";
 })
 export class TimersPage {
     @ViewChild(Content) content: Content;
-    private _media: DictionaryMedia = {};
+    // private _media: DictionaryMedia = {};
     public timers: models.UITimer[] = [];
 
     private _timerSubscription: Subscription;
@@ -168,15 +168,15 @@ export class TimersPage {
 
     acknowledge(guid: string) {
         console.log('Acknowledge ' + guid + ' clicked!');
-        let audio: HTMLAudioElement = this._media[guid];
-        if (audio) {
-            audio.pause();
-            // this._media[guid].release();
-            this._media[guid] = null;
+        // let audio: HTMLAudioElement = this._media[guid];
+        // if (audio) {
+        //     audio.pause();
+        //     // this._media[guid].release();
+        //     this._media[guid] = null;
 
-        } else {
-            console.log('audio not found');
-        }
+        // } else {
+        //     console.log('audio not found');
+        // }
 
         this.hold(guid);
     }
@@ -240,13 +240,12 @@ export class TimersPage {
         misc.statusCalcultation(timerUI);
 
         // Play the alert (if not already playing)
-        if (!this._media[timerUI.guid]) {
+        // if (!this._media[timerUI.guid]) {
 
-            this._media[timerUI.guid] = new Audio(constant.SOUND_OVERTIME_ALERT);
-            this._media[timerUI.guid].load();
-            this._media[timerUI.guid].play();
-
-        }
+        //     this._media[timerUI.guid] = new Audio(constant.SOUND_OVERTIME_ALERT);
+        //     this._media[timerUI.guid].load();
+        //     this._media[timerUI.guid].play();
+        // }
     };
     private timerStopped(timerValue: models.TimerValue, timerUI: models.UITimer) {
         console.log('timer:' + timerValue.title + '_stopped received ...:' + JSON.stringify(timerValue));
