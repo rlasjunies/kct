@@ -3,8 +3,8 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { BackgroundMode } from "@ionic-native/background-mode";
 import * as providers from "providers";
-
 import * as pages from "pages";
 
 @Component({
@@ -20,7 +20,8 @@ export class MyApp {
         public splashScreen: SplashScreen,
         private localNotifications: LocalNotifications,
         private timerService: providers.TimerService,
-        private timerSound: providers.TimerSoundProvider
+        private timerSound: providers.TimerSoundProvider,
+        private backgroundMode: BackgroundMode,
     ) {
         this.initializeApp();
     }
@@ -29,27 +30,16 @@ export class MyApp {
         this.platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
-			this.statusBar.styleDefault();
-			this.splashScreen.hide();
+            this.statusBar.styleDefault();
+            this.splashScreen.hide();
+            this.backgroundMode.enable();
             console.log('initilizeApp - platform ... ready!');
-        }); 
-
-        this.platform.pause.subscribe( this.pausing ); 
-        this.platform.resume.subscribe( this.resuming ); 
+        });
     }
+
     openCreditPage() {
         this.nav.push(pages.ID_credits);
     }
 
-    pausing = (evt:Event) => {
-        this.localNotifications.schedule({
-            text: 'Delayed local notification from pausing',
-            at: new Date(new Date().getTime() + 5000),
-            led: 'FF0000',
-            icon: "file://assets/images/tv.png"
-        });
-    }
-    resuming = (evt:Event) => {
 
-    }
 }

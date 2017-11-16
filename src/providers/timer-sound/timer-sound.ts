@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { SmartAudioProvider } from "providers/smart-audio/smart-audio"
 import { Subscription } from 'rxjs/Subscription';
 import { TimerService } from 'providers/timer-service/timer-service';
+import { BackgroundMode } from "@ionic-native/background-mode";
+
 import * as models from "models";
 
 @Injectable()
@@ -11,6 +13,7 @@ export class TimerSoundProvider {
     constructor(
         private smartAudio: SmartAudioProvider,
         private timerService: TimerService,
+        private backgroundMode: BackgroundMode,
     ) {
         this._timerSubscription = this.timerService.notification$.subscribe(this.manageTimerNotification);
 
@@ -26,6 +29,7 @@ export class TimerSoundProvider {
 
                 case models.enumTimerStatus.OVER:
                     this.smartAudio.play("sound");
+                    this.backgroundMode.moveToForeground();
                     break;
                 case models.enumTimerStatus.DONE:
                     this.smartAudio.stop("sound");

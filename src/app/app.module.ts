@@ -5,8 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { NativeAudio } from "@ionic-native/native-audio"
-import { MyApp } from './app.component';
+import { BackgroundMode } from "@ionic-native/background-mode"
 
+import { MyApp } from './app.component';
 import * as providers from "providers";
 
 @NgModule({
@@ -30,8 +31,9 @@ import * as providers from "providers";
     { provide: ErrorHandler, useClass: IonicErrorHandler},
     LocalNotifications,
     NativeAudio,
+    BackgroundMode,
     providers.SmartAudioProvider,
-    providers.TimerSoundProvider
+    providers.TimerSoundProvider,
   ]
 })
 export class AppModule {}
