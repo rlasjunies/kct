@@ -23,6 +23,9 @@ export class GaugeRadial {
 			case models.enumTimerStatus.HOLD:
 				this.iconName = "play"
 				break;
+			case models.enumTimerStatus.OVER_1ST_TIME:
+				this.iconName = "close"
+				break;
 			case models.enumTimerStatus.OVER:
 				this.iconName = "close"
 				break;

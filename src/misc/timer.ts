@@ -32,6 +32,13 @@ export function statusCalcultation(timer: models.UITimer): void {
             timer.over = false;
             timer.done = false;
             break;
+        case models.enumTimerStatus.OVER_1ST_TIME:
+            timer.ready = false;
+            timer.hold = false;
+            timer.running = false;
+            timer.over = true;
+            timer.done = false;
+            break;
         case models.enumTimerStatus.OVER:
             timer.ready = false;
             timer.hold = false;

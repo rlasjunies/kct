@@ -31,6 +31,7 @@ export class TimerService {
         console.log('timer-service:', guid);
         // RL 20170506 - remove the control enumTimerStatus.RUNNING
         if (timerValue.status === enumTimerStatus.DONE ||
+            timerValue.status === enumTimerStatus.OVER_1ST_TIME ||
             timerValue.status === enumTimerStatus.OVER) {
             console.log('Could not start timer status is not good');
         } else {
@@ -43,10 +44,17 @@ export class TimerService {
 
                 // overtime?
                 if (timerValue.durationLeft_MilliSecond <= 0) {
-                    // OVER Timer => raise event
-                    timerValue.status = enumTimerStatus.OVER;
-                    this.raiseTimerChangeNotification(guid + constant.TIMER_OVER_EVENT, timerValue);
-                    // TODO clear after 1 minute
+
+                    // 1st overtime?
+                    if (timerValue.status === enumTimerStatus.RUNNING) {
+                        // 1st time the timer is => raise event
+                        timerValue.status = enumTimerStatus.OVER_1ST_TIME;
+                        this.raiseTimerChangeNotification(guid + constant.TIMER_OVER_1ST_TIME_EVENT, timerValue);
+                    } else {
+                        // OVER Timer => raise event
+                        timerValue.status = enumTimerStatus.OVER;
+                        this.raiseTimerChangeNotification(guid + constant.TIMER_OVER_EVENT, timerValue);
+                    }
                 } else {
                     // Emit tick event
                     timerValue.status = enumTimerStatus.RUNNING;
@@ -70,7 +78,8 @@ export class TimerService {
 
         // clean the timer status
         var timerValue: TimerValue = this.getTimerValue(guid);
-        if (timerValue.status === enumTimerStatus.OVER) {
+        if (timerValue.status === enumTimerStatus.OVER_1ST_TIME ||
+            timerValue.status === enumTimerStatus.OVER) {
             timerValue.status = enumTimerStatus.DONE;
             this.raiseTimerChangeNotification(guid + constant.TIMER_STOPPED_EVENT, timerValue);
         } else {

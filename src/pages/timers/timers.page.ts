@@ -285,6 +285,10 @@ export class TimersPage {
                     this.timerTicked(timerNotification.value, timerUI);
                     break;
 
+                case models.enumTimerStatus.OVER_1ST_TIME:
+                    this.timerOvered(timerNotification.value, timerUI);
+
+                    break;
                 case models.enumTimerStatus.OVER:
                     this.timerOvered(timerNotification.value, timerUI);
 
@@ -312,6 +316,9 @@ export class TimersPage {
                 break;
             case models.enumTimerStatus.HOLD:
                 this.start(timer.guid);
+                break;
+            case models.enumTimerStatus.OVER_1ST_TIME:
+                this.acknowledge(timer.guid);
                 break;
             case models.enumTimerStatus.OVER:
                 this.acknowledge(timer.guid);

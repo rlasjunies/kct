@@ -27,7 +27,7 @@ export class TimerSoundProvider {
 
             switch (timerNotification.value.status) {
 
-                case models.enumTimerStatus.OVER:
+                case models.enumTimerStatus.OVER_1ST_TIME:
                     this.smartAudio.play("sound");
                     this.backgroundMode.moveToForeground();
                     break;

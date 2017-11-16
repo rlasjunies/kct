@@ -3,6 +3,7 @@
 
     export var TIMER_DURATION: number = 1000;
     export var TIMER_TICK_EVENT: string = '_tick';
+    export var TIMER_OVER_1ST_TIME_EVENT: string = '_over_1st_time';
     export var TIMER_OVER_EVENT: string = '_over';
     export var TIMER_STARTED_EVENT: string = '_started';
     export var TIMER_STOPPED_EVENT: string = '_stopped';
