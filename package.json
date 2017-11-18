@@ -21,12 +21,14 @@
     "@angular/http": "4.4.3",
     "@angular/platform-browser": "4.4.3",
     "@angular/platform-browser-dynamic": "4.4.3",
+    "@ionic-native/background-mode": "^4.4.2",
     "@ionic-native/core": "4.3.1",
     "@ionic-native/native-audio": "^4.4.2",
     "@ionic-native/splash-screen": "4.3.1",
     "@ionic-native/status-bar": "4.3.1",
     "@ionic/storage": "2.0.1",
     "cordova-android": "6.4.0",
+    "cordova-plugin-background-mode": "^0.7.2",
     "cordova-plugin-console": "1.1.0",
     "cordova-plugin-device": "1.1.7",
     "cordova-plugin-nativeaudio": "~3.0.9",
@@ -68,7 +70,8 @@
       "cordova-plugin-nativeaudio": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-console": {},
-      "cordova-plugin-device": {}
+      "cordova-plugin-device": {},
+      "cordova-plugin-background-mode": {}
     },
     "platforms": [
       "android"
