@@ -2,18 +2,15 @@ import { Injectable } from '@angular/core';
 import { SmartAudioProvider } from "providers/smart-audio/smart-audio"
 import { Subscription } from 'rxjs/Subscription';
 import { TimerService } from 'providers/timer-service/timer-service';
-import { BackgroundMode } from "@ionic-native/background-mode";
 
 import * as models from "models";
 
 @Injectable()
 export class TimerSoundProvider {
-
     private _timerSubscription: Subscription;
     constructor(
         private smartAudio: SmartAudioProvider,
         private timerService: TimerService,
-        private backgroundMode: BackgroundMode,
     ) {
         this._timerSubscription = this.timerService.notification$.subscribe(this.manageTimerNotification);
 
@@ -29,42 +26,15 @@ export class TimerSoundProvider {
 
                 case models.enumTimerStatus.OVER_1ST_TIME:
                     this.smartAudio.play("sound");
-                    this.backgroundMode.moveToForeground();
                     break;
                 case models.enumTimerStatus.DONE:
                     this.smartAudio.stop("sound");
                 default:
                     break;
             }
-                // let timerUI = this.helperRetrieveTimerFromGuid(timerNotification.value.guid);
-
-                // switch (timerNotification.value.status) {
-                //     case models.enumTimerStatus.STARTED:
-                //         this.timerStarted(timerNotification.value, timerUI);
-                //         break;
-
-                //     case models.enumTimerStatus.HOLD:
-                //         this.timerHeld(timerNotification.value, timerUI);
-                //         break;
-
-                //     case models.enumTimerStatus.RUNNING:
-                //         this.timerTicked(timerNotification.value, timerUI);
-                //         break;
-
-                //     case models.enumTimerStatus.OVER:
-                //         this.timerOvered(timerNotification.value, timerUI);
-
-                //         break;
-                //     case models.enumTimerStatus.DONE:
-                //         // this.WhenIsNext(timerNotification.guid);
-                //         this.timerStopped(timerNotification.value, timerUI);
-                //         break;
-
-                //     default:
-                //         console.log('WRONG TIMER STATUS VALUE');
-                // }
-            } else {
-                console.log('timerNotification value null');
-            }
+        }
+        else {
+            console.log('!!!!! timerNotification value null');
         }
     }
+}
