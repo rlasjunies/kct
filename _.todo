@@ -46,7 +46,8 @@
     ✔ re-initiate the calculation starting today @done (2017-11-3 18:03:08)
 
     ☐ add a list of song
-    ☐ add a check to have vibration too
+    ☐ add a toogle to have vibration too
+        ☐ create a vibration service and make it linked to the 
     
 ☐ timer execution
     ☐ trace the timer execution
