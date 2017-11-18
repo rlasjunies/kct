@@ -5,11 +5,13 @@
         ✔ * subscribe to timer_end => play a sound @done (2017-11-15 22:11:33)
         ✔ * suscribe to timer_acknoledge => stop playing sound @done (2017-11-15 22:11:33)
     ✔ enable background mode @done (2017-11-16 21:36:56)
-    ✘ create notification service @cancelled (2017-11-16 21:36:46)
+    ☐ create notification service
         * subscribe to timers
         * if ... is backGround ... notification
 
 ✔ bug on device: the sound is started every second. Command is called at every tick() @done (2017-11-16 21:54:25)
+
+☐ bug?: timer did not continue to run after reployment of the app. Is it a bug? pause /resuming app?
 
 ☐ need to create data for tests on the device. Currently minute 15min before to have sound
 
