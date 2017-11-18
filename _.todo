@@ -13,7 +13,11 @@
 
 ☐ bug?: timer did not continue to run after reployment of the app. Is it a bug? pause /resuming app?
 
-☐ need to create data for tests on the device. Currently minute 15min before to have sound
+✔ need to create data for tests on the device. Currently minute 15min before to have sound @done (2017-11-18 15:14:01)
+    ✔ add resetForTest function in timer-config-service @done (2017-11-18 15:12:56)
+    ✔ add a new page for advanced mode @done (2017-11-18 15:12:57)
+        call reset feature from advanced page
+
 
 ☐ add password to change the timer configuration
     the goal is to control the modification of the configuration

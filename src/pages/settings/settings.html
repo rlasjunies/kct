@@ -1,0 +1,27 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>settings</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="list-avatar-page">
+  <ion-list no-border>
+
+    <ion-list-header>
+      Advanced
+    </ion-list-header>
+
+    <ion-item>
+      <ion-icon name='flask' item-start></ion-icon>
+      <div>Reset timer data and populate with test data</div> 
+      <ion-note>
+        This will erase completely your data use it carefully
+      </ion-note>
+      <button ion-button color="danger" item-end (click)="resetData()" >Reset value</button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

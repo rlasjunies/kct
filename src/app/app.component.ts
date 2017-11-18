@@ -40,6 +40,9 @@ export class MyApp {
     openCreditPage() {
         this.nav.push(pages.ID_credits);
     }
+    openSettingPage() {
+        this.nav.push(pages.ID_settings);
+    }
 
 
 }
