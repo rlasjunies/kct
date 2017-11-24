@@ -21,9 +21,9 @@ export class TimerService {
         console.log('TimerService ... loaded!');
     }
 
-    private raiseTimerChangeNotification = (guid: string, value: TimerValue) => {
-        console.log('raiseTimerChange:', guid);
-        this._notification.next(new TimerChangeNotification(guid, value));
+    private raiseTimerChangeNotification = (guidEvent: string, value: TimerValue) => {
+        console.log('raiseTimerChange:', guidEvent);
+        this._notification.next(new TimerChangeNotification(guidEvent, value));
     }
 
     public startTimer = (guid: string): void => {

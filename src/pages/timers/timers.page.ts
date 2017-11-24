@@ -270,32 +270,32 @@ export class TimersPage {
     }
     private manageTimerNotification = (timerNotification: models.TimerChangeNotification) => {
         if (timerNotification) {
-            let timerUI = this.helperRetrieveTimerFromGuid(timerNotification.value.guid);
+            let timerUI = this.helperRetrieveTimerFromGuid(timerNotification.timerValue.guid);
 
-            switch (timerNotification.value.status) {
+            switch (timerNotification.timerValue.status) {
                 case models.enumTimerStatus.STARTED:
-                    this.timerStarted(timerNotification.value, timerUI);
+                    this.timerStarted(timerNotification.timerValue, timerUI);
                     break;
 
                 case models.enumTimerStatus.HOLD:
-                    this.timerHeld(timerNotification.value, timerUI);
+                    this.timerHeld(timerNotification.timerValue, timerUI);
                     break;
 
                 case models.enumTimerStatus.RUNNING:
-                    this.timerTicked(timerNotification.value, timerUI);
+                    this.timerTicked(timerNotification.timerValue, timerUI);
                     break;
 
                 case models.enumTimerStatus.OVER_1ST_TIME:
-                    this.timerOvered(timerNotification.value, timerUI);
+                    this.timerOvered(timerNotification.timerValue, timerUI);
 
                     break;
                 case models.enumTimerStatus.OVER:
-                    this.timerOvered(timerNotification.value, timerUI);
+                    this.timerOvered(timerNotification.timerValue, timerUI);
 
                     break;
                 case models.enumTimerStatus.DONE:
                     // this.WhenIsNext(timerNotification.guid);
-                    this.timerStopped(timerNotification.value, timerUI);
+                    this.timerStopped(timerNotification.timerValue, timerUI);
                     break;
 
                 default:

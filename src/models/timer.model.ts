@@ -55,6 +55,6 @@ export interface TimerValue {
 }
 
 export class TimerChangeNotification {
-    constructor(public guid: string, public value: TimerValue) {
+    constructor(public guidEvent: string, public timerValue: TimerValue) {
     }
 }
