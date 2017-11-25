@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
-import { SmartAudioProvider } from "providers/smart-audio/smart-audio"
 import { Subscription } from 'rxjs/Subscription';
 import { TimerService } from 'providers/timer-service/timer-service';
-
+import { LocalNotifications } from "@ionic-native/local-notifications";
 import * as models from "models";
 
+
 @Injectable()
-export class TimerSoundProvider {
+export class TimerNotificationProvider {
     private _timerSubscription: Subscription;
     constructor(
-        private smartAudio: SmartAudioProvider,
         private timerService: TimerService,
+        private localNotification: LocalNotifications,
     ) {
         this._timerSubscription = this.timerService.notification$.subscribe(this.manageTimerNotification);
 
-        this.smartAudio.preload("sound", "assets/sounds/alert.m4a");
-        console.log('Hello TimerSoundProvider Provider');
+        console.log('Hello TimerNotificationProvider Provider');
     }
-
     private manageTimerNotification = (timerNotification: models.TimerChangeNotification) => {
         if (timerNotification) {
             console.log("timerNotification from timer-sound:", timerNotification);
@@ -25,11 +23,16 @@ export class TimerSoundProvider {
             switch (timerNotification.timerValue.status) {
 
                 case models.enumTimerStatus.OVER_1ST_TIME:
-                    this.smartAudio.play("sound");
-                    break;
-                case models.enumTimerStatus.DONE:
-                    this.smartAudio.stop("sound");
-                    alert("après stop sound");
+                    this.localNotification.on("click", () => {
+                        // alert("j'ai clické");
+                        // if (this.timerService.isTimerActiveAndRunning(timerNotification.guid)) {
+                            this.timerService.stopTimer(timerNotification.timerValue.guid);
+                        // }
+                    });
+                    this.localNotification.schedule({
+                        title: "The timer: " + timerNotification.timerValue.title + " is over",
+                        text: "Tap on this notification to stop the alarm"
+                    });
                     break;
                 default:
                     break;

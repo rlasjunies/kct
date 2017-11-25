@@ -86,18 +86,14 @@ imports: [
 
 ## 3.3. Unit testing
 
+<https://www.joshmorony.com/introduction-to-testing-ionic-2-applications-with-testbed/>
 <http://www.joshmorony.com/how-to-unit-test-an-ionic-2-application/>  
 <https://developers.livechatinc.com/blog/testing-angular-2-apps-dependency-injection-and-components/>
 
 ### 3.3.1. installation
 
-- `npm install karma --save-dev`
-- `npm install -g karma-cli`
-- `karma init karma.conf.js`
-- `npm install jasmine-core --save-dev`
-- `npm install karma-browserify --save-dev`
-- `npm install browserify --save-dev`
-- `npm install browserify-istanbul tsify isparta --save-dev`
+> https://github.com/ionic-team/ionic-unit-testing-example/tree/ionic-v2-branch
+
 
 ### 3.3.2. run
 

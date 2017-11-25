@@ -18,9 +18,10 @@ export class MyApp {
         public platform: Platform,
         public statusBar: StatusBar,
         public splashScreen: SplashScreen,
-        private localNotifications: LocalNotifications,
+        // private localNotifications: LocalNotifications,
         private timerService: providers.TimerService,
         private timerSound: providers.TimerSoundProvider,
+        private timerNotification: providers.TimerNotificationProvider,
         private backgroundMode: BackgroundMode,
     ) {
         this.initializeApp();
@@ -28,12 +29,9 @@ export class MyApp {
 
     initializeApp = () => {
         this.platform.ready().then(() => {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
             this.statusBar.styleDefault();
             this.splashScreen.hide();
             this.backgroundMode.enable();
-            console.log('initilizeApp - platform ... ready!');
         });
     }
 
@@ -43,6 +41,4 @@ export class MyApp {
     openSettingPage() {
         this.nav.push(pages.ID_settings);
     }
-
-
 }

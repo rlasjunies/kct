@@ -87,5 +87,6 @@
     <plugin name="cordova-plugin-device" spec="1.1.7" />
     <plugin name="cordova-plugin-statusbar" spec="2.3.0" />
     <plugin name="cordova-plugin-background-mode" spec="0.7.2" />
-     <plugin name="cordova-plugin-nativeaudio" spec="~3.0.9" />
+    <plugin name="cordova-plugin-nativeaudio" spec="~3.0.9" />
+    <plugin name="de.appplant.cordova.plugin.local-notification" spec="^0.8.5" />
 </widget>

@@ -1,9 +1,9 @@
-import { Expect, Test } from "alsatian";
+// import { Expect, Test } from "alsatian";
 
-export class ExampleTestFixture {
+// export class ExampleTestFixture {
 
-  @Test()
-  public exampleTest() {
-    Expect(1 + 1).toBe(2);
-  }
-}
+//   @Test()
+//   public exampleTest() {
+//     Expect(1 + 1).toBe(2);
+//   }
+// }

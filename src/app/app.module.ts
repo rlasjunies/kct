@@ -34,6 +34,7 @@ import * as providers from "providers";
     BackgroundMode,
     providers.SmartAudioProvider,
     providers.TimerSoundProvider,
+    providers.TimerNotificationProvider,
   ]
 })
 export class AppModule {}

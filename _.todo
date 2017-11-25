@@ -11,7 +11,15 @@
 
 ✔ bug on device: the sound is started every second. Command is called at every tick() @done (2017-11-16 21:54:25)
 
+☐ bug?: in timer-service, stop timer: the line this.timers[guig]=null is incorrect should be spline
+☐ when timer is over, make it selected and blinking / orange
+☐ bug: settings, text is not wrapped it's not possible to read the content
 ☐ bug?: timer did not continue to run after reployment of the app. Is it a bug? pause /resuming app?
+☐ passer en mode background que s'il y a des timers en-cours
+☐ passer l'application en foreground quand il y a l'alarme
+☐ faire 1 notification si alarme et en background
+☐ resume: si jour différent, si alarm en-cours, si timer en-cours
+☐ robustifier cleartimer: qu'est-ce qu'il se passe si on donne un mauvais/inexistant guid timer
 
 ✔ need to create data for tests on the device. Currently minute 15min before to have sound @done (2017-11-18 15:14:01)
     ✔ add resetForTest function in timer-config-service @done (2017-11-18 15:12:56)

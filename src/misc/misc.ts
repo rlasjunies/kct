@@ -31,6 +31,15 @@ export function GUID_new(): string {
     return guid;
 };
 
+
+export function arrayRemove(array: any[], idToRemove: any): any[ ] {
+    const index = array.indexOf(idToRemove);
+    if (index > -1) {
+        return array.splice(index, 1);
+    } else {
+        return array;
+    }
+}
 /**
  * Zero padding (add 0 char on the left of a number i.e.: ZeroPadding(9,2) => "09"
  *
