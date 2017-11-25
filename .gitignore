@@ -7,22 +7,21 @@
 *.tmp
 *.map
 *.tmp.*
-log.txt
 *.sublime-project
 *.sublime-workspace
-.vscode/
 npm-debug.log*
 
+.vscode/
 .idea/
 .sass-cache/
 .tmp/
 .versions/
+.DS_Store
+
 coverage/
 dist/
 tests/
 node_modules/
-node_modules.old/
-node_modules.old2/
 tmp/
 temp/
 hooks/
@@ -35,7 +34,4 @@ $RECYCLE.BIN/
 
 npm
 yarn.lock
-
-.DS_Store
 Thumbs.db
-UserInterfaceState.xcuserstate
