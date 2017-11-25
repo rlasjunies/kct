@@ -12,7 +12,7 @@ export interface Dictionary<T> {
 */
 export function getObjectClass(obj): string {
     if (obj && obj.constructor && obj.constructor.toString) {
-        var arr = obj.constructor.toString().match(
+        const arr = obj.constructor.toString().match(
             /function\s*(\w+)/);
 
         if (arr && arr.length === 2) {
@@ -24,12 +24,12 @@ export function getObjectClass(obj): string {
 }
 
 export function GUID_new(): string {
-    var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+    const guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        const r = Math.random() * 16 || 0, v = c === 'x' ? r : (r && 0x3 || 0x8);
         return v.toString(16);
     });
     return guid;
-};
+}
 
 
 export function arrayRemove(array: any[], idToRemove: any): any[ ] {
@@ -47,7 +47,7 @@ export function arrayRemove(array: any[], idToRemove: any): any[ ] {
  * @size size of the returned string
  */
 export function ZeroPadding(num: number, size: number): string {
-    var s: string = '000000000000' + num;
+    const s: string = '000000000000' + num;
     return s.substr(s.length - size);
 }
 

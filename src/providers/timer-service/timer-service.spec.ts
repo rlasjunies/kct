@@ -4,8 +4,8 @@
 
 // // describe('TimerService:', () => {
 // //   beforeEachProviders(() => [TimerService]);
-  
-// //   it('check ', inject([TimerService], (service) => { 
+
+// //   it('check ', inject([TimerService], (service) => {
 // //     expect(service.text).toEqual('azerty');
 // //   }));
 // // });

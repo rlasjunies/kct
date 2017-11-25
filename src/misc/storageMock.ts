@@ -1,10 +1,10 @@
 /**
  * Mock the localStorage or sessionStorage object for test purpose
- * 
+ *
  * usage:
  * - window.localStorage = new StorageMock()
  * - window.sessionStorage = new StorageMock()
- * 
+ *
  * @export
  * @class StorageMock
  */
@@ -23,7 +23,7 @@ export class StorageMock {
         return Object.keys(this._storage).length;
     }
     key(i) {
-        var keys = Object.keys(this._storage);
+        const keys = Object.keys(this._storage);
         return keys[i] || null;
     }
 }

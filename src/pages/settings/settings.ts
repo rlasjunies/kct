@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { TimerConfigService } from "providers/timer-config-service/timer-config-service";
+import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 
-export const ID_settings = "settings";
+export const ID_settings = 'settings';
 
 @IonicPage({
-    name: "settings",
-    segment: "settings"
+    name: 'settings',
+    segment: 'settings'
 })
 @Component({
     selector: 'page-settings',

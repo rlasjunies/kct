@@ -7,10 +7,10 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class HoursSelector {
 
     @Input()
-    hours: number = 0;
+    hours = 0;
 
     @Output()
-    hoursChange: EventEmitter<number> = new EventEmitter()
+    hoursChange: EventEmitter<number> = new EventEmitter();
     constructor() {}
 
     radioClicked(evt) {

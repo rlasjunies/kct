@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { NativeAudio } from '@ionic-native/native-audio';
-import { Platform } from "ionic-angular"
+import { Platform } from 'ionic-angular';
 
 @Injectable()
 export class SmartAudioProvider {
 
-    audioType: string = 'html5';
+    audioType = 'html5';
     sounds: any = [];
 
     htmlAudioElement: HTMLAudioElement;
@@ -23,7 +23,7 @@ export class SmartAudioProvider {
 
         if (this.audioType === 'html5') {
 
-            let audio = {
+            const audio = {
                 key: key,
                 asset: asset,
                 type: 'html5',
@@ -36,7 +36,7 @@ export class SmartAudioProvider {
 
             this.nativeAudio.preloadSimple(key, asset);
 
-            let audio = {
+            const audio = {
                 key: key,
                 asset: key,
                 type: 'native'
@@ -48,12 +48,12 @@ export class SmartAudioProvider {
     }
 
     play(key) {
-        let audio = this.sounds.find((sound) => {
+        const audio = this.sounds.find((sound) => {
             return sound.key === key;
         });
 
         if (audio.type === 'html5') {
-            //let audioAsset = new Audio(audio.asset);
+            // let audioAsset = new Audio(audio.asset);
             // audioAsset.play();
             audio.audioAsset.play();
         } else {
@@ -65,7 +65,7 @@ export class SmartAudioProvider {
         }
     }
     stop(key) {
-        let audio = this.sounds.find((sound) => {
+        const audio = this.sounds.find((sound) => {
             return sound.key === key;
         });
 

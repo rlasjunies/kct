@@ -1,3 +1,3 @@
-export * from "./misc";
+export * from './misc';
 // export * from "./storageMock";
-export * from "./timer";
+export * from './timer';

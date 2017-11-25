@@ -5,12 +5,12 @@ import { Events } from 'ionic-angular';
 import * as constant from 'app/constant';
 import * as models from 'models';
 import * as misc from 'misc/misc';
-import { TimerService } from "providers/timer-service/timer-service"
+import { TimerService } from 'providers/timer-service/timer-service';
 
 @Injectable()
 export class TimerConfigService {
-    public eventsTimersconfigChanged = "timersConfig:changed";
-    public eventsTimersconfigDeleted = "timersConfig:deleted";
+    public eventsTimersconfigChanged = 'timersConfig:changed';
+    public eventsTimersconfigDeleted = 'timersConfig:deleted';
 
     constructor(
         public storage: Storage,
@@ -23,7 +23,7 @@ export class TimerConfigService {
     private _config: models.IConfig;
 
     public reinitializeAll() {
-        for (var guid in this._config) {
+        for (const guid in this._config) {
             this.storage.removeItem(constant.STORAGEKEY_PREFIX + guid);
         }
         this.storage.removeItem(constant.STORAGEKEY_TIMERS);
@@ -36,17 +36,42 @@ export class TimerConfigService {
         // check first time in the application
         if (!this._config) {
             // 1st time in the application
-            var config: models.IConfig = {
+            const config: models.IConfig = {
                 dayOfLastTimersCalculation: '2016-08-10',
                 timersConfig: [
-                    { guid: '569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3', weekdays: 255, title: 'Paul - game', durationMilliSecond: 5000, durationHumanized: '01:30', icon: 'game-controller-b', enable: true },
-                    { guid: 'a99897da-1460-409b-9778-571a3c4756ae', weekdays: 255, title: 'Paul - TV', durationMilliSecond: 5000, durationHumanized: '01:00', icon: 'film', enable: true },
-                    { guid: '17913ab4-b7b2-4aba-af9f-01e6019844b3', weekdays: 255, title: 'Louis - game', durationMilliSecond: 5000, durationHumanized: '01:30', icon: 'game-controller-b', enable: true },
-                    { guid: '4d555d07-341c-40aa-aabe-9799577ba2a6', weekdays: 255, title: 'Richard - TV', durationMilliSecond: 5000, durationHumanized: '01:00', icon: 'film', enable: false },
-                    { guid: 'ef8d4703-d939-4b75-a814-0157cb8ac0b5', weekdays: 255, title: 'Louis - TV', durationMilliSecond: 5000, durationHumanized: '01:00', icon: 'game-controller-b', enable: true },
-                    { guid: '4d555d07-341c-40aa-aabe-9799577bz2a6', weekdays: 255, title: 'tests1', durationMilliSecond: 5000, durationHumanized: '00:03', icon: 'game-controller-b', enable: true },
-                    { guid: '4d555d07-341c-40aa-aabe-9799577be2a6', weekdays: 255, title: 'tests2', durationMilliSecond: 5000, durationHumanized: '00:03', icon: 'game-controller-b', enable: true },
-                    { guid: '4d555d07-341c-40aa-aabe-9799577br2a6', weekdays: 255, title: 'tests3', durationMilliSecond: 5000, durationHumanized: '00:03', icon: 'game-controller-b', enable: true },
+                    {
+                        guid: '569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3', weekdays: 255,
+                        title: 'Paul - game', durationMilliSecond: 5000, durationHumanized: '01:30', icon: 'game-controller-b', enable: true
+                    },
+                    {
+                        guid: 'a99897da-1460-409b-9778-571a3c4756ae', weekdays: 255,
+                        title: 'Paul - TV', durationMilliSecond: 5000, durationHumanized: '01:00', icon: 'film', enable: true
+                    },
+                    {
+                        guid: '17913ab4-b7b2-4aba-af9f-01e6019844b3', weekdays: 255,
+                        title: 'Louis - game', durationMilliSecond: 5000, durationHumanized: '01:30', icon: 'game-controller-b',
+                        enable: true
+                    },
+                    {
+                        guid: '4d555d07-341c-40aa-aabe-9799577ba2a6', weekdays: 255,
+                        title: 'Richard - TV', durationMilliSecond: 5000, durationHumanized: '01:00', icon: 'film', enable: false
+                    },
+                    {
+                        guid: 'ef8d4703-d939-4b75-a814-0157cb8ac0b5', weekdays: 255,
+                        title: 'Louis - TV', durationMilliSecond: 5000, durationHumanized: '01:00', icon: 'game-controller-b', enable: true
+                    },
+                    {
+                        guid: '4d555d07-341c-40aa-aabe-9799577bz2a6', weekdays: 255,
+                        title: 'tests1', durationMilliSecond: 5000, durationHumanized: '00:03', icon: 'game-controller-b', enable: true
+                    },
+                    {
+                        guid: '4d555d07-341c-40aa-aabe-9799577be2a6', weekdays: 255,
+                        title: 'tests2', durationMilliSecond: 5000, durationHumanized: '00:03', icon: 'game-controller-b', enable: true
+                    },
+                    {
+                        guid: '4d555d07-341c-40aa-aabe-9799577br2a6', weekdays: 255,
+                        title: 'tests3', durationMilliSecond: 5000, durationHumanized: '00:03', icon: 'game-controller-b', enable: true
+                    },
                 ]
             };
             // this.storage.setItem(constant.STORAGEKEY_KIDS, JSON.stringify(timersInit));
@@ -54,7 +79,7 @@ export class TimerConfigService {
             this._storeConfig();
 
             // For each timer create an unique timerValue
-            for (var timerConf in config.timersConfig) {
+            for (const timerConf in config.timersConfig) {
                 this._storeTimerValue(config.timersConfig[timerConf]);
             }
 
@@ -65,11 +90,11 @@ export class TimerConfigService {
 
         // timers should be reinitialize every day
         // Shoud we initialize the timers? Is last initialisation date today or before?
-        var n = moment(Date.now());
-        var d = moment(this._config.dayOfLastTimersCalculation, constant.DATE_STORE_FORMAT);
-        var diff = n.diff(d);
-        var duration = moment.duration(diff);
-        var days = duration.asDays();
+        const n = moment(Date.now());
+        const d = moment(this._config.dayOfLastTimersCalculation, constant.DATE_STORE_FORMAT);
+        const diff = n.diff(d);
+        const duration = moment.duration(diff);
+        const days = duration.asDays();
 
         if (days > 1) {
             // More than one day that we evaluate the timers
@@ -82,7 +107,7 @@ export class TimerConfigService {
     private _initializeTimers(): void {
         console.log('_initializeTimers ....!');
 
-        for (let timerConfig of this._config.timersConfig) {
+        for (const timerConfig of this._config.timersConfig) {
             this._initializeTimer(timerConfig);
         }
 
@@ -92,7 +117,7 @@ export class TimerConfigService {
     }
 
     private _initializeTimer(timerConfig: models.TimerConfig) {
-        const todayDay: number = moment(Date.now()).isoWeekday() -1;
+        const todayDay: number = moment(Date.now()).isoWeekday() - 1;
 
         // remove the persisted timer
         this.storage.removeItem(constant.STORAGEKEY_PREFIX + timerConfig.guid);
@@ -100,7 +125,7 @@ export class TimerConfigService {
         // Is it a good day?
         // console.log("today - config days!", todayDay, timerConfig.weekdays);
         // console.log('timer today?:' + (Math.pow(2, todayDay) & timerConfig.weekdays));
-        if ((Math.pow(2, todayDay) & timerConfig.weekdays) !== 0) {
+        if ((Math.pow(2, todayDay) && timerConfig.weekdays) !== 0) {
             // Timer can run today
             this._storeTimerValue(timerConfig);
         }
@@ -118,24 +143,24 @@ export class TimerConfigService {
         // 40 = thurs + saturday
 
         // test#1: made on monday
-        // test#2: made on thursday 
+        // test#2: made on thursday
         // test#3: made on friday
         // test#4: made on sunday
 
-		/** algo
-		 * 		todayDayNumber => offset
-		 * 			loop 7 times/days
-		 * 				isThereTimerForThisDay
-		 */
+        /** algo
+        * 	todayDayNumber => offset
+        * 	loop 7 times/days
+        * 	isThereTimerForThisDay
+        */
 
-        let config: models.TimerConfig = this._config.timersConfig.find((timer) => {
-            return (timer.guid === guid)
-        })
-        let todayDay: number = moment(Date.now()).weekday() + 1;
+        const config: models.TimerConfig = this._config.timersConfig.find((timer) => {
+            return (timer.guid === guid);
+        });
+        const todayDay: number = moment(Date.now()).weekday() + 1;
         // let tomorrow: number = moment(Date.now()).weekday() + 2;
-        if ((Math.pow(2, todayDay) & config.weekdays) !== 0) {
+        if ((Math.pow(2, todayDay) && config.weekdays) !== 0) {
             // Timer can run today
-            return "today";
+            return 'today';
         }
     }
 
@@ -146,18 +171,18 @@ export class TimerConfigService {
         });
     }
 
-    public update(timerConf: models.TimerConfig): void{
-        console.log("Entering in update", timerConf);
+    public update(timerConf: models.TimerConfig): void {
+        console.log('Entering in update', timerConf);
         this.checkConfigIsLoadedOrLoadIt();
         this._stopTimerIfActive(timerConf.guid);
 
         this._config.timersConfig[timerConf.guid] = timerConf;
         this._storeConfig();
-        this._initializeTimer(timerConf)
+        this._initializeTimer(timerConf);
         this.events.publish(this.eventsTimersconfigChanged, timerConf);
     }
 
-    private _stopTimerIfActive(guid:string){
+    private _stopTimerIfActive(guid: string) {
         if (this.timerService.isTimerActiveAndRunning(guid)) {
             this.timerService.stopTimer(guid);
         }
@@ -168,7 +193,7 @@ export class TimerConfigService {
      */
     public new_(): models.TimerConfig {
         this.checkConfigIsLoadedOrLoadIt();
-        let newConfig = {
+        const newConfig = {
             guid: misc.GUID_new(),
             title: '',
             durationMilliSecond: 5400000,
@@ -193,7 +218,7 @@ export class TimerConfigService {
         // if (this.canBeConfigured(guid)) {
         // remove the timerConfig in memory and persist
         // delete this._config.timersConfig[guid];
-        let index = this._config.timersConfig.findIndex((timer) => {
+        const index = this._config.timersConfig.findIndex((timer) => {
             return timer.guid === guid;
         });
         this._config.timersConfig.splice(index, 1);
@@ -220,7 +245,7 @@ export class TimerConfigService {
      * usefull for creating a new timerConfig???
      */
     private _storeTimerValue(timerConf: models.TimerConfig) {
-        var timerValue: models.TimerValue = {
+        const timerValue: models.TimerValue = {
             guid: timerConf.guid,
             title: timerConf.title,
             durationLeft_MilliSecond: timerConf.durationMilliSecond,
@@ -228,12 +253,12 @@ export class TimerConfigService {
             status: 10
         };
 
-        console.log("storeTimerValue:", timerValue);
+        console.log('storeTimerValue:', timerValue);
         this.storage.setItem(constant.STORAGEKEY_PREFIX + timerConf.guid, JSON.stringify(timerValue));
     }
 
     private checkConfigIsLoadedOrLoadIt() {
-        if (!this._config) { this.getAll(); };
+        if (!this._config) { this.getAll(); }
     }
 }
 

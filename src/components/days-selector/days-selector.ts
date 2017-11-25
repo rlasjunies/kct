@@ -1,26 +1,26 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import * as moment from "moment";
+import * as moment from 'moment';
 
 @Component({
     selector: 'days-selector',
     templateUrl: 'days-selector.html'
 })
 export class DaysSelector {
-    public day1: boolean = false;
-    public day2: boolean = false;
-    public day3: boolean = false;
-    public day4: boolean = false;
-    public day5: boolean = false;
-    public day6: boolean = false;
-    public day7: boolean = false;
+    public day1 = false;
+    public day2 = false;
+    public day3 = false;
+    public day4 = false;
+    public day5 = false;
+    public day6 = false;
+    public day7 = false;
 
-    public day1Text: string = "";
-    public day2Text: string = "";
-    public day3Text: string = "";
-    public day4Text: string = "";
-    public day5Text: string = "";
-    public day6Text: string = "";
-    public day7Text: string = "";
+    public day1Text = '';
+    public day2Text = '';
+    public day3Text = '';
+    public day4Text = '';
+    public day5Text = '';
+    public day6Text = '';
+    public day7Text = '';
 
     _days: number;
 
@@ -29,21 +29,21 @@ export class DaysSelector {
     @Input()
     set days(days: number) {
         this._days = Number(days) || 0;
-        this.day1 = (1 & this._days) === 1; // 2^0
-        this.day2 = (2 & this._days) === 2; // 2^1
-        this.day3 = (4 & this._days) === 4; // 2^2
-        this.day4 = (8 & this._days) === 8; // 2^3
-        this.day5 = (16 & this._days) === 16; // 2^4
-        this.day6 = (32 & this._days) === 32; // 2^5
-        this.day7 = (64 & this._days) === 64; // 2^6
+        this.day1 = (1 && this._days) === 1; // 2^0
+        this.day2 = (2 && this._days) === 2; // 2^1
+        this.day3 = (4 && this._days) === 4; // 2^2
+        this.day4 = (8 && this._days) === 8; // 2^3
+        this.day5 = (16 && this._days) === 16; // 2^4
+        this.day6 = (32 && this._days) === 32; // 2^5
+        this.day7 = (64 && this._days) === 64; // 2^6
     }
     @Output() daysSelectedChanged: EventEmitter<number> = new EventEmitter();
     constructor() {
-        this._mql = window.matchMedia("(min-width: 700px)");
+        this._mql = window.matchMedia('(min-width: 700px)');
         this._mql.addListener(this.calcultateSmallLargeScreenAndDefineDaysText);
         this.calcultateSmallLargeScreenAndDefineDaysText(this._mql);
 
-        console.log("days-seclector constructor");
+        console.log('days-seclector constructor');
     }
 
     calcultateSmallLargeScreenAndDefineDaysText = (mql: MediaQueryList) => {
@@ -69,6 +69,7 @@ export class DaysSelector {
 
     calculate(dayToToggle: number) {
         // console.log("dayToToggle:", dayToToggle);
+        // tslint:disable-next-line:no-bitwise
         this.days = this._days ^ dayToToggle;
         this.daysSelectedChanged.emit(this._days);
     }

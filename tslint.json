@@ -13,8 +13,8 @@
       "check-space"
     ],
     "curly": true,
-    "eofline": true,
-    "forin": true,
+    "eofline": false,
+    "forin": false,
     "import-blacklist": [
       true,
       "rxjs"

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-export const ID_credits = "credits";
+export const ID_credits = 'credits';
 @IonicPage({
-    name: "credits",
-    segment: "credits"
+    name: 'credits',
+    segment: 'credits'
 })
 @Component({
   selector: 'page-credits',

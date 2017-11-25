@@ -27,7 +27,7 @@ export class TimerService {
     }
 
     public startTimer = (guid: string): void => {
-        var timerValue: TimerValue = this.getTimerValue(guid);
+        const timerValue: TimerValue = this.getTimerValue(guid);
         console.log('timer-service:', guid);
         // RL 20170506 - remove the control enumTimerStatus.RUNNING
         if (timerValue.status === enumTimerStatus.DONE ||
@@ -38,9 +38,12 @@ export class TimerService {
             console.log('timer-service:before setInterval', guid);
 
             this._timers[guid] = setInterval(() => {
-                var timerValue: TimerValue;
-                timerValue = this.getTimerValue(guid);
-                timerValue.durationLeft_MilliSecond = moment.duration(timerValue.durationLeft_MilliSecond).subtract(1, 'seconds').asMilliseconds();
+                // let timerValue: TimerValue;
+                // timerValue = this.getTimerValue(guid);
+                timerValue.durationLeft_MilliSecond = moment
+                    .duration(timerValue.durationLeft_MilliSecond)
+                    .subtract(1, 'seconds')
+                    .asMilliseconds();
 
                 // overtime?
                 if (timerValue.durationLeft_MilliSecond <= 0) {
@@ -61,7 +64,7 @@ export class TimerService {
                     this.raiseTimerChangeNotification(guid + constant.TIMER_TICK_EVENT, timerValue);
                 }
                 // Persist the duration left
-                var timerValueStringified = JSON.stringify(timerValue);
+                const timerValueStringified = JSON.stringify(timerValue);
                 localStorage.setItem(constant.STORAGEKEY_PREFIX + guid, timerValueStringified);
             }, constant.TIMER_DURATION);
 
@@ -77,7 +80,7 @@ export class TimerService {
         this._timers[guid] = null;
 
         // clean the timer status
-        var timerValue: TimerValue = this.getTimerValue(guid);
+        const timerValue: TimerValue = this.getTimerValue(guid);
         if (timerValue.status === enumTimerStatus.OVER_1ST_TIME ||
             timerValue.status === enumTimerStatus.OVER) {
             timerValue.status = enumTimerStatus.DONE;
@@ -101,7 +104,7 @@ export class TimerService {
             || (timerValue.status === enumTimerStatus.STARTED)) {
             return true;
         } else {
-            return false
+            return false;
         }
     }
 }

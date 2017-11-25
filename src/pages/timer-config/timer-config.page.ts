@@ -5,14 +5,14 @@ import { IonicPage, NavController, NavParams, ModalController, AlertController }
 
 import * as model from 'models';
 import * as misc from 'misc/misc';
-import * as pages from "pages";
+import * as pages from 'pages';
 
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 
-export const ID_timerConfig = "timer-config";
+export const ID_timerConfig = 'timer-config';
 @IonicPage({
-    name: "timer-config",
-    segment: "timer-config"
+    name: 'timer-config',
+    segment: 'timer-config'
 })
 @Component({
     selector: 'page-timer-config',
@@ -22,7 +22,7 @@ export const ID_timerConfig = "timer-config";
     ]
 })
 export class TimerConfigPage {
-    static ID_timerConfig = "timer-config";
+    static ID_timerConfig = 'timer-config';
     public timerConfig: model.TimerConfig;
     public durationMinutes: number;
     public durationHours: number;
@@ -34,12 +34,12 @@ export class TimerConfigPage {
         public alerCtrl: AlertController,
         public modalCtrl: ModalController
     ) {
-        let id: string | number = navParam.get('id');
+        const id: string | number = navParam.get('id');
 
         if (!id) {
             console.log('TimerConfigPage: ID param missing');
             // error case
-            // trick to avoid errors from html 
+            // trick to avoid errors from html
             // and there move back to
             this.timerConfig = {
                 guid: misc.GUID_new(),
@@ -64,11 +64,11 @@ export class TimerConfigPage {
 
 
     avatarClicked() {
-        let modal = this.modalCtrl
+        const modal = this.modalCtrl
             .create(pages.ID_avatarSelection, { id: this.timerConfig.icon });
 
         modal.onDidDismiss((iconSelected: string) => {
-            if (iconSelected !== "") {
+            if (iconSelected !== '') {
                 this.timerConfig.icon = iconSelected;
                 this.saveTimerConfig();
             }
@@ -76,22 +76,22 @@ export class TimerConfigPage {
         modal.present();
     }
     titleChange(value: string) {
-        console.log("Title changed:", value);
+        console.log('Title changed:', value);
         this.saveTimerConfig();
     }
     minutesSelectionChanged(minutes: number) {
-        console.log("Minutes changed:", minutes);        
+        console.log('Minutes changed:', minutes);
         this.durationMinutes = minutes;
         this.saveTimerConfig();
     }
     hoursSelectionchanged(hours: number) {
-        console.log("Hours changed:", hours);
+        console.log('Hours changed:', hours);
         this.durationHours = hours;
         this.saveTimerConfig();
     }
 
     daysSelectionChanged(days: number) {
-        console.log("Days changed:", days);
+        console.log('Days changed:', days);
         this.timerConfig.weekdays = days;
         this.saveTimerConfig();
     }
@@ -103,7 +103,7 @@ export class TimerConfigPage {
     }
 
     Delete() {
-        let prompt = this.alerCtrl.create({
+        const prompt = this.alerCtrl.create({
             title: 'Delete',
             message: `Are you sure to delete this timer:\n${this.timerConfig.title}`,
             buttons: [
@@ -131,11 +131,12 @@ function __formatToDurationHumanized(durationHours: number, durationMinutes: num
 }
 
 function __convertToMillisecond(durationHours: number, durationMinutes: number): number {
-    return moment.duration(parseInt(durationHours.toString()), 'hour').add(parseInt(durationMinutes.toString()), 'minute').asMilliseconds();
-    // return  
+    return moment.duration(parseInt(durationHours.toString(), 10), 'hour')
+        .add(parseInt(durationMinutes.toString(), 10), 'minute').asMilliseconds();
+    // return
 }
 
 function __convertMillisecondToHoursAndMinutes(durationMilliSecond: number): [number, number] {
-    let duration = moment.duration(durationMilliSecond);
+    const duration = moment.duration(durationMilliSecond);
     return [duration.hours(), duration.minutes()];
 }

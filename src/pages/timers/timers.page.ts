@@ -5,8 +5,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 import * as models from 'models';
 import * as misc from 'misc';
-import * as constant from 'app/constant';
-import * as pages from "pages";
+// import * as constant from 'app/constant';
+import * as pages from 'pages';
 
 import { TimerService } from 'providers/timer-service/timer-service';
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
@@ -17,10 +17,10 @@ export interface DictionaryUITimer {
 }
 
 export interface DictionaryMedia extends misc.Dictionary<any> { }
-export const ID_timers = "timers";
+export const ID_timers = 'timers';
 @IonicPage({
-        name: "timers",
-        segment: "timers"
+        name: 'timers',
+        segment: 'timers'
     }
 )
 @Component({
@@ -41,13 +41,13 @@ export class TimersPage {
         ) {
 
         this.loadTimers();
-        this.events.subscribe(timerConfigService.eventsTimersconfigChanged, this.refreshListWhenTimerConfigChanged)
-        this.events.subscribe(timerConfigService.eventsTimersconfigDeleted, this.refreshListWhenTimerConfigDeleted)
+        this.events.subscribe(timerConfigService.eventsTimersconfigChanged, this.refreshListWhenTimerConfigChanged);
+        this.events.subscribe(timerConfigService.eventsTimersconfigDeleted, this.refreshListWhenTimerConfigDeleted);
     }
-    ionViewWillEnter(){
+    ionViewWillEnter() {
         this.content.resize();
     }
-    
+
     ngOnInit() {
         this._timerSubscription = this.timerService.notification$.subscribe(this.manageTimerNotification);
     }
@@ -64,16 +64,16 @@ export class TimersPage {
         // this.orderTimers();
     }
     refreshListWhenTimerConfigDeleted = (timerGuid: string) => {
-        this.timers = this.timers.filter((timer) => { return timer.guid !== timerGuid });
+        this.timers = this.timers.filter((timer) => timer.guid !== timerGuid);
     }
 
     loadTimers() {
         // retrieve kids config
-        let timersConfig: models.TimerConfig[] = this.timerConfigService.getAll();
+        const timersConfig: models.TimerConfig[] = this.timerConfigService.getAll();
         this.timers = [];
 
         // retrieve kids timer
-        for (let timerConfig of timersConfig) {
+        for (const timerConfig of timersConfig) {
             this.loadTimer(timerConfig);
         }
         // this.orderTimers();
@@ -81,11 +81,11 @@ export class TimersPage {
 
     loadTimer(timerConfig: models.TimerConfig) {
         // check if a timer is available, init UI information in consequence if needed
-        let timerValue = this.timerService.getTimerValue(timerConfig.guid);
+        const timerValue = this.timerService.getTimerValue(timerConfig.guid);
         let durationLeft: moment.Duration = moment.duration();
-        let durationLeftString: string = "";
-        let timerStatus: number = 0;
-        let percentageDone: number = 0;
+        let durationLeftString = '';
+        let timerStatus = 0;
+        let percentageDone = 0;
 
         if (timerValue) {
             percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration);
@@ -95,7 +95,7 @@ export class TimersPage {
         }
 
         // Initiatilise the UITimer poco
-        let newUITimer: models.UITimer
+        const newUITimer: models.UITimer
             = {
                 guid: (<models.TimerConfig>(<any>timerConfig)).guid,
                 icon: timerConfig.icon,
@@ -117,10 +117,10 @@ export class TimersPage {
         this.arrayAddOrReplaceInTimers(newUITimer);
     }
 
-    arrayAddOrReplaceInTimers( newUITimer: models.UITimer){
-        const index = this.timers.findIndex((uiTimer: models.UITimer) => { return uiTimer.guid === newUITimer.guid;})
+    arrayAddOrReplaceInTimers( newUITimer: models.UITimer) {
+        const index = this.timers.findIndex((uiTimer: models.UITimer) => uiTimer.guid === newUITimer.guid);
         const numberToRemove = index === -1 ? 0 : 1;
-        this.timers.splice(index, numberToRemove,newUITimer );
+        this.timers.splice(index, numberToRemove, newUITimer );
     }
     // orderTimers() {
     //     let timersRunnings = this.timers.filter((value) => {
@@ -144,15 +144,15 @@ export class TimersPage {
     // }
 
     settingClicked(timer: models.UITimer) {
-        console.log("Dans setting clicked", timer.guid);
-        this.navCtrl.push(pages.ID_timerConfig, { id: timer.guid })
+        console.log('Dans setting clicked', timer.guid);
+        this.navCtrl.push(pages.ID_timerConfig, { id: timer.guid });
     }
     rewardClicked(timer: models.UITimer, value: number) {
-        console.log("reward for timers", timer.guid, value);
+        console.log('reward for timers', timer.guid, value);
     }
     penaltyClicked(timer: models.UITimer, value: number) {
         // this.navCtrl.push(pages.ID_timerConfig, { id: timer.guid })
-        console.log("penalty from timers", timer.guid, value);
+        console.log('penalty from timers', timer.guid, value);
     }
     start(guid: string) {
         this.timerService.startTimer(guid);
@@ -217,7 +217,7 @@ export class TimersPage {
         timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
         timerUI.status = models.enumTimerStatus.RUNNING; // timerValue.status;
         misc.statusCalcultation(timerUI);
-    };
+    }
 
     private timerTicked(timerValue: models.TimerValue, timerUI: models.UITimer) {
         console.log('timer:' + timerValue.title + '_tick received');
@@ -228,7 +228,7 @@ export class TimersPage {
         timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
         timerUI.status = timerValue.status;
         misc.statusCalcultation(timerUI);
-    };
+    }
 
     private timerOvered(timerValue: models.TimerValue, timerUI: models.UITimer) {
         console.log('timer:' + timerValue.title + '_over received ...:' + JSON.stringify(timerValue));
@@ -246,12 +246,13 @@ export class TimersPage {
         //     this._media[timerUI.guid].load();
         //     this._media[timerUI.guid].play();
         // }
-    };
+    }
     private timerStopped(timerValue: models.TimerValue, timerUI: models.UITimer) {
         console.log('timer:' + timerValue.title + '_stopped received ...:' + JSON.stringify(timerValue));
 
         timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
-        timerUI.percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration); timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
+        timerUI.percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration);
+        timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
         timerUI.status = models.enumTimerStatus.DONE;  // timerValue.status;
         misc.statusCalcultation(timerUI);
     }
@@ -260,17 +261,18 @@ export class TimersPage {
         console.log('timer:' + timerValue.title + '_stopped received ...:' + JSON.stringify(timerValue));
 
         timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
-        timerUI.percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration); timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
+        timerUI.percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration);
+        timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
         timerUI.status = models.enumTimerStatus.HOLD; // timerValue.status;
         misc.statusCalcultation(timerUI);
     }
 
     calculPercentage(left: number, total: number) {
-        return Math.round(100 * (total - left) / total)
+        return Math.round(100 * (total - left) / total);
     }
     private manageTimerNotification = (timerNotification: models.TimerChangeNotification) => {
         if (timerNotification) {
-            let timerUI = this.helperRetrieveTimerFromGuid(timerNotification.timerValue.guid);
+            const timerUI = this.helperRetrieveTimerFromGuid(timerNotification.timerValue.guid);
 
             switch (timerNotification.timerValue.status) {
                 case models.enumTimerStatus.STARTED:
@@ -328,6 +330,6 @@ export class TimersPage {
         }
     }
     addNewTimer() {
-        this.navCtrl.push(pages.ID_timerConfig, { id: -1 })
+        this.navCtrl.push(pages.ID_timerConfig, { id: -1 });
     }
 }

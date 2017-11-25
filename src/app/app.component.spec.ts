@@ -12,7 +12,7 @@ import { TimerService, TimerSoundProvider, SmartAudioProvider, TimerNotification
 
 describe('Root Component', () => {
 
-  let de: DebugElement;
+  // let de: DebugElement;
   let comp: MyApp;
   let fixture: ComponentFixture<MyApp>;
 
@@ -48,7 +48,7 @@ describe('Root Component', () => {
   it('should create component', () => {
     expect(comp instanceof MyApp).toBe(true);
   });
-  
+
   it('should create component #2', () => {
     expect(comp instanceof MyApp).toBe(true);
   });

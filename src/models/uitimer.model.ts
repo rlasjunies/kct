@@ -1,11 +1,11 @@
-import * as moment from "moment";
-import * as model from "./index";
+import * as moment from 'moment';
+import * as model from './index';
 export interface UITimer {
-	durationHumanized: string;
-	durationLeft: moment.Duration;
-	percentageDone: number;
-	durationLeftString: string;
-	weekDaysHumanized: string[];
+    durationHumanized: string;
+    durationLeft: moment.Duration;
+    percentageDone: number;
+    durationLeftString: string;
+    weekDaysHumanized: string[];
     guid: string;
     icon: string;
     title: string;

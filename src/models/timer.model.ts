@@ -10,7 +10,7 @@ export interface TimerConfig {
     durationHumanized: string;
     title: string;
     icon: string;
-	weekdays: number;
+    weekdays: number;
     enable: boolean;
 }
 
@@ -49,7 +49,7 @@ export function enumTimerStatus_String(val: enumTimerStatus): string {
 export interface TimerValue {
     guid: string;
     durationLeft_MilliSecond: number;
-	duration: number;
+    duration: number;
     title: string;
     status: enumTimerStatus;
 }
