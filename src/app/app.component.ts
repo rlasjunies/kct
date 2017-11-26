@@ -17,7 +17,8 @@ export class MyApp {
         public platform: Platform,
         public statusBar: StatusBar,
         public splashScreen: SplashScreen,
-       private timerService: providers.TimerService,
+        // tslint:disable-next-line:dec
+        private timerService: providers.TimerService,
        private timerSound: providers.TimerSoundProvider,
        private timerNotification: providers.TimerNotificationProvider,
         private backgroundMode: BackgroundMode,
