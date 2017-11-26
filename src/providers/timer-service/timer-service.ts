@@ -3,7 +3,7 @@ import * as constant from 'app/constant';
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
+import { arrayRemove } from 'misc';
 import { TimerValue, enumTimerStatus, TimerChangeNotification } from 'models';
 
 @Injectable()
@@ -75,11 +75,10 @@ export class TimerService {
 
     public stopTimer = (guid: string): void => {
         // clear the timer
-        // console.log("before clearinterval", this._timers[guid] )
         clearInterval(this._timers[guid]);
-        this._timers[guid] = null;
+        arrayRemove(this._timers, guid);
 
-        // clean the timer status
+        // raised the timer status event
         const timerValue: TimerValue = this.getTimerValue(guid);
         if (timerValue.status === enumTimerStatus.OVER_1ST_TIME ||
             timerValue.status === enumTimerStatus.OVER) {

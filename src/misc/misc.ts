@@ -31,15 +31,21 @@ export function GUID_new(): string {
     return guid;
 }
 
-
-export function arrayRemove(array: any[], idToRemove: any): any[ ] {
+/**
+ * remove 1 element in the array
+ * it is the same array
+ *
+ * @export
+ * @param {any[]} array
+ * @param {*} idToRemove
+ */
+export function arrayRemove(array: any[], idToRemove: any): void {
     const index = array.indexOf(idToRemove);
     if (index > -1) {
-        return array.splice(index, 1);
-    } else {
-        return array;
+        array.splice(index, 1);
     }
 }
+
 /**
  * Zero padding (add 0 char on the left of a number i.e.: ZeroPadding(9,2) => "09"
  *
