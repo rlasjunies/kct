@@ -253,7 +253,7 @@ export class TimersPage {
         timerUI.durationLeft = moment.duration(timerValue.durationLeft_MilliSecond);
         timerUI.percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration);
         timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
-        timerUI.status = models.enumTimerStatus.DONE;  // timerValue.status;
+        timerUI.status = models.enumTimerStatus.ACKNOWLEDGE;  // timerValue.status;
         misc.statusCalcultation(timerUI);
     }
 
@@ -295,7 +295,7 @@ export class TimersPage {
                     this.timerOvered(timerNotification.timerValue, timerUI);
 
                     break;
-                case models.enumTimerStatus.DONE:
+                case models.enumTimerStatus.ACKNOWLEDGE:
                     // this.WhenIsNext(timerNotification.guid);
                     this.timerStopped(timerNotification.timerValue, timerUI);
                     break;

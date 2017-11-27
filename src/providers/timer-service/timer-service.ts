@@ -18,7 +18,7 @@ export class TimerService {
     notification$ = this._notification.asObservable();
 
     constructor() {
-        console.log('TimerService ... loaded!');
+        // console.log('TimerService ... loaded!');
     }
 
     private raiseTimerChangeNotification = (guidEvent: string, value: TimerValue) => {
@@ -30,7 +30,7 @@ export class TimerService {
         const timerValue: TimerValue = this.getTimerValue(guid);
         console.log('timer-service:', guid);
         // RL 20170506 - remove the control enumTimerStatus.RUNNING
-        if (timerValue.status === enumTimerStatus.DONE ||
+        if (timerValue.status === enumTimerStatus.ACKNOWLEDGE ||
             timerValue.status === enumTimerStatus.OVER_1ST_TIME ||
             timerValue.status === enumTimerStatus.OVER) {
             console.log('Could not start timer status is not good');
@@ -40,10 +40,11 @@ export class TimerService {
             this._timers[guid] = setInterval(() => {
                 // let timerValue: TimerValue;
                 // timerValue = this.getTimerValue(guid);
-                timerValue.durationLeft_MilliSecond = moment
-                    .duration(timerValue.durationLeft_MilliSecond)
-                    .subtract(1, 'seconds')
-                    .asMilliseconds();
+                timerValue.durationLeft_MilliSecond =
+                    moment
+                        .duration(timerValue.durationLeft_MilliSecond)
+                        .subtract(1, 'seconds')
+                        .asMilliseconds();
 
                 // overtime?
                 if (timerValue.durationLeft_MilliSecond <= 0) {
@@ -74,21 +75,28 @@ export class TimerService {
     }
 
     public stopTimer = (guid: string): void => {
-        // clear the timer
-        clearInterval(this._timers[guid]);
-        arrayRemove(this._timers, guid);
-
-        // raised the timer status event
+        // alert('dans stop timer guid=' + guid);
         const timerValue: TimerValue = this.getTimerValue(guid);
-        if (timerValue.status === enumTimerStatus.OVER_1ST_TIME ||
-            timerValue.status === enumTimerStatus.OVER) {
-            timerValue.status = enumTimerStatus.DONE;
-            this.raiseTimerChangeNotification(guid + constant.TIMER_STOPPED_EVENT, timerValue);
+        if (timerValue) {
+            // clear the timer
+            clearInterval(this._timers[guid]);
+            arrayRemove(this._timers, guid);
+
+            // raised the timer status event
+            if (timerValue.status === enumTimerStatus.OVER_1ST_TIME ||
+                timerValue.status === enumTimerStatus.OVER) {
+                timerValue.status = enumTimerStatus.ACKNOWLEDGE;
+                // alert('dans stop timer raised ACKNOWLEDGE');
+                this.raiseTimerChangeNotification(guid + constant.TIMER_STOPPED_EVENT, timerValue);
+            } else if (timerValue.status === enumTimerStatus.RUNNING) {
+                timerValue.status = enumTimerStatus.HOLD;
+                // alert('dans stop timer raised HOLD');
+                this.raiseTimerChangeNotification(guid + constant.TIMER_HELD_EVENT, timerValue);
+            }
+            localStorage.setItem(constant.STORAGEKEY_PREFIX + guid, JSON.stringify(timerValue));
         } else {
-            timerValue.status = enumTimerStatus.HOLD;
-            this.raiseTimerChangeNotification(guid + constant.TIMER_HELD_EVENT, timerValue);
+            console.warn('ALGO ERROR: should not be in that case');
         }
-        localStorage.setItem(constant.STORAGEKEY_PREFIX + guid, JSON.stringify(timerValue));
     }
 
     public getTimerValue = (guid: string): TimerValue => {

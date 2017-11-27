@@ -15,20 +15,18 @@ export class TimerSoundProvider {
         this._timerSubscription = this.timerService.notification$.subscribe(this.manageTimerNotification);
 
         this.smartAudio.preload('sound', 'assets/sounds/alert.m4a');
-        console.log('Hello TimerSoundProvider Provider');
     }
 
     private manageTimerNotification = (timerNotification: models.TimerChangeNotification) => {
         if (timerNotification) {
-            console.log('timerNotification from timer-sound:', timerNotification);
-
             switch (timerNotification.timerValue.status) {
-
                 case models.enumTimerStatus.OVER_1ST_TIME:
                     this.smartAudio.play('sound');
                     break;
-                case models.enumTimerStatus.DONE:
+                case models.enumTimerStatus.ACKNOWLEDGE:
                     this.smartAudio.stop('sound');
+                    // alert('dans timer sound notification mgt, status over 1st time:');
+                    // alert('dans stop sound after status done');
                     break;
                 default:
                     break;

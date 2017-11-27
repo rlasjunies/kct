@@ -14,7 +14,7 @@ export class GaugeRadial {
     @Input() set state(value: number) {
         this._state = value;
         switch (this._state) {
-            case models.enumTimerStatus.DONE:
+            case models.enumTimerStatus.ACKNOWLEDGE:
                 this.iconName = '';
                 break;
             case models.enumTimerStatus.ALERT:

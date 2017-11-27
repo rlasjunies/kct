@@ -20,7 +20,7 @@ export enum enumTimerStatus {
     RUNNING = 30, // : yellow,
     OVER_1ST_TIME = 35, // : orange,
     OVER = 40, // : orange,
-    DONE = 50, // : grey
+    ACKNOWLEDGE = 50, // : grey
     STARTED = 60,
     ALERT = 70 //
 }
@@ -37,7 +37,7 @@ export function enumTimerStatus_String(val: enumTimerStatus): string {
             return 'OVER_AST_TIME';
         case enumTimerStatus.OVER:
             return 'OVER';
-        case enumTimerStatus.DONE:
+        case enumTimerStatus.ACKNOWLEDGE:
             return 'DONE';
         case enumTimerStatus.ALERT:
             return 'ALERT';

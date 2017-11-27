@@ -18,19 +18,19 @@ export class TimerNotificationProvider {
     }
     private manageTimerNotification = (timerNotification: models.TimerChangeNotification) => {
         if (timerNotification) {
-            console.log('timerNotification from timer-sound:', timerNotification);
+            // console.log('timerNotification from timer-sound:', timerNotification);
 
             switch (timerNotification.timerValue.status) {
 
                 case models.enumTimerStatus.OVER_1ST_TIME:
+
+                    // TODO remove the notification when the timer is ack by another way
+                    // TODO check id the app is in background
                     this.localNotification.on('click', () => {
-                        // alert("j'ai clické");
-                        // if (this.timerService.isTimerActiveAndRunning(timerNotification.guid)) {
-                            this.timerService.stopTimer(timerNotification.timerValue.guid);
-                        // }
+                        this.timerService.stopTimer(timerNotification.timerValue.guid);
                     });
                     this.localNotification.schedule({
-                        title: 'The timer: ' + timerNotification.timerValue.title + ' is over',
+                        title: 'The timer: "' + timerNotification.timerValue.title + '" is over',
                         text: 'Tap on this notification to stop the alarm'
                     });
                     break;
@@ -38,7 +38,7 @@ export class TimerNotificationProvider {
                     break;
             }
         } else {
-            console.log('!!!!! timerNotification value null');
+            //  console.log('!!!!! timerNotification value null');
         }
     }
 }
