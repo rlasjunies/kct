@@ -27,21 +27,11 @@ export class BackgroundModeProvider {
     effectOnBackgroundModeEvents = (event: string) => {
         switch (event) {
             case 'pause':
-                if (this.timerP.isThereAtLeastOneTimerRunning()) {
-                    this.backgroundModeNative.configure({
-                        text: 'Timers are running in background',
-                        ticker: 'This is a ticker',
-                        title: 'Titel of the background task',
-                        bigText: true,
-                    });
-                    this.backgroundModeNative.enable();
-                }
+                this.activateBackgroundMode();
                 break;
 
             case 'resume':
-                if (this.backgroundModeNative.isEnabled()) {
-                    this.backgroundModeNative.disable();
-                }
+                this.disableBackgroundMode();
                 break;
             default:
                 break;
@@ -52,14 +42,34 @@ export class BackgroundModeProvider {
         if (timerNotification) {
             switch (timerNotification.timerValue.status) {
                 case models.enumTimerStatus.OVER_1ST_TIME:
-                    this.backgroundModeNative.moveToForeground();
-                    this.backgroundModeNative.disable();
+                    this.disableBackgroundModeAndForegroundTheApp();
                     break;
                 default:
                     break;
             }
         } else {
             console.warn('background_mode:effectTimerNotification: timerNotification value null');
+        }
+    }
+
+    private disableBackgroundModeAndForegroundTheApp() {
+        this.backgroundModeNative.moveToForeground();
+        this.backgroundModeNative.disable();
+    }
+
+    private disableBackgroundMode() {
+        if (this.backgroundModeNative.isEnabled()) {
+            this.backgroundModeNative.disable();
+        }
+    }
+
+    private activateBackgroundMode() {
+        if (this.timerP.isThereAtLeastOneTimerRunning()) {
+            this.backgroundModeNative.setDefaults({
+                title: 'Timers are running in background',
+                text: '',
+            });
+            this.backgroundModeNative.enable();
         }
     }
 }
