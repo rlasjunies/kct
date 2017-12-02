@@ -7,7 +7,7 @@ import { arrayRemove } from 'misc';
 import { TimerValue, enumTimerStatus, TimerChangeNotification } from 'models';
 
 @Injectable()
-export class TimerService {
+export class TimerProvider {
     private _timers: string[] = [];
 
     // Observable navItem source
@@ -21,8 +21,14 @@ export class TimerService {
         // console.log('TimerService ... loaded!');
     }
 
+    public isThereAtLeastOneTimerRunning = (): boolean => {
+        // // return this.cimer.
+        // })
+        return true;
+    }
+
     private raiseTimerChangeNotification = (guidEvent: string, value: TimerValue) => {
-        console.log('raiseTimerChange:', guidEvent);
+        // console.log('raiseTimerChange:', guidEvent);
         this._notification.next(new TimerChangeNotification(guidEvent, value));
     }
 

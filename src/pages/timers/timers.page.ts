@@ -8,7 +8,7 @@ import * as misc from 'misc';
 // import * as constant from 'app/constant';
 import * as pages from 'pages';
 
-import { TimerService } from 'providers/timer-service/timer-service';
+import { TimerProvider } from 'providers/timer-service/timer-service';
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 
 export interface DictionaryUITimer {
@@ -35,7 +35,7 @@ export class TimersPage {
 
     constructor(
         private navCtrl: NavController,
-        private timerService: TimerService,
+        private timerService: TimerProvider,
         private timerConfigService: TimerConfigService,
         private events: Events
         ) {

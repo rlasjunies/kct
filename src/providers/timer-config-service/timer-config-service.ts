@@ -5,7 +5,7 @@ import { Events } from 'ionic-angular';
 import * as constant from 'app/constant';
 import * as models from 'models';
 import * as misc from 'misc/misc';
-import { TimerService } from 'providers/timer-service/timer-service';
+import { TimerProvider } from 'providers/timer-service/timer-service';
 
 @Injectable()
 export class TimerConfigService {
@@ -15,7 +15,7 @@ export class TimerConfigService {
     constructor(
         public storage: Storage,
         private events: Events,
-        private timerService: TimerService
+        private timerService: TimerProvider
     ) {
         // console.log('TimerConfigService ... loaded!');
     }

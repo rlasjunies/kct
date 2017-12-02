@@ -17,6 +17,8 @@ export class SmartAudioProvider {
         if (platform.is('cordova')) {
             this.audioType = 'native';
         }
+
+        this.preload('sound', 'assets/sounds/alert.m4a');
     }
 
     preload(key, asset) {
@@ -47,7 +49,26 @@ export class SmartAudioProvider {
 
     }
 
-    play(key) {
+    playLoop(key) {
+        const audio = this.sounds.find((sound) => {
+            return sound.key === key;
+        });
+
+        if (audio.type === 'html5') {
+            // let audioAsset = new Audio(audio.asset);
+            // audioAsset.play();
+            audio.audioAsset.loop = true;
+            audio.audioAsset.play();
+        } else {
+            this.nativeAudio.loop(audio.key).then((res) => {
+                console.log(res);
+                // alert('play asset:' + audio.key + '|||' + res);
+            }, (err) => {
+                console.error(err);
+            });
+        }
+    }
+    playOnce(key) {
         const audio = this.sounds.find((sound) => {
             return sound.key === key;
         });
@@ -57,10 +78,11 @@ export class SmartAudioProvider {
             // audioAsset.play();
             audio.audioAsset.play();
         } else {
-            this.nativeAudio.play(audio.asset).then((res) => {
+            this.nativeAudio.loop(audio.key).then((res) => {
                 console.log(res);
+                // alert('play asset:' + audio.key + '|||' + res);
             }, (err) => {
-                console.log(err);
+                console.error(err);
             });
         }
     }
@@ -73,11 +95,14 @@ export class SmartAudioProvider {
             // let audioAsset = new Audio(audio.asset);
             audio.audioAsset.pause();
         } else {
-            this.nativeAudio.stop(audio.asset).then((res) => {
-                console.log(res);
-            }, (err) => {
-                console.log(err);
-            });
+            this.nativeAudio.stop(audio.key)
+                .then((res) => {
+                    console.log(res);
+                    // alert('stop ok, asset:' + audio.key + '|||' + res);
+                }, (err) => {
+                    console.error(err);
+                    // alert('err: on stop' + err);
+                });
         }
     }
 }
