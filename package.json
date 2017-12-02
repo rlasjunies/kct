@@ -14,7 +14,8 @@
     "test-ci": "karma start ./test-config/karma.conf.js --single-run",
     "e2e-update": "webdriver-manager update --standalone false --gecko false",
     "e2e-test": "protractor ./test-config/protractor.conf.js",
-    "e2e": "npm run e2e-update && npm run e2e-test"
+    "e2e": "npm run e2e-update && npm run e2e-test",
+    "emulate": "ionic cordova emulate -c android  --address 192.168.1.36"
   },
   "dependencies": {
     "@angular/common": "4.4.3",
