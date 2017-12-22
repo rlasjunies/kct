@@ -87,8 +87,21 @@ imports: [
 ## 3.3. Unit testing
 
 <https://www.joshmorony.com/introduction-to-testing-ionic-2-applications-with-testbed/>
-<http://www.joshmorony.com/how-to-unit-test-an-ionic-2-application/>  
+
+<http://www.joshmorony.com/how-to-unit-test-an-ionic-2-application/>
+
 <https://developers.livechatinc.com/blog/testing-angular-2-apps-dependency-injection-and-components/>
+
+<https://leifwells.github.io/2017/08/27/testing-in-ionic-configure-existing-projects-for-testing/>
+
+<https://leifwells.github.io/2017/09/05/testing-in-ionic-code-coverage/>
+
+
+<https://github.com/ionic-team/ionic-unit-testing-example/tree/ionic-v2-branch>
+
+<https://semaphoreci.com/community/tutorials/testing-services-in-angular-2>
+
+<https://auth0.com/blog/angular-2-testing-in-depth-services/>
 
 ### 3.3.1. installation
 

@@ -1,14 +1,14 @@
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { MyApp } from './app.component';
-import { IonicModule, Platform } from 'ionic-angular';
+import { IonicModule, Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeAudio } from '@ionic-native/native-audio';
-import { LocalNotifications } from '@ionic-native/local-notifications';
+// import { LocalNotifications } from '@ionic-native/local-notifications';
 import { BackgroundMode } from '@ionic-native/background-mode';
-import { PlatformMock, StatusBarMock, SplashScreenMock } from '../../test-config/mocks-ionic';
-import { TimerService, TimerSoundProvider, SmartAudioProvider, TimerNotificationProvider, TimerConfigService } from 'providers';
+import { PlatformMock, StatusBarMock, SplashScreenMock, NativeAudioMock, BackgroundModeMock } from '../../test-config/mocks-ionic';
+import * as providers from 'providers';
 
 describe('Root Component', () => {
 
@@ -27,17 +27,14 @@ describe('Root Component', () => {
         { provide: StatusBar, useClass: StatusBarMock },
         { provide: SplashScreen, useClass: SplashScreenMock },
         { provide: Platform, useClass: PlatformMock },
-        TimerConfigService,
-        TimerService,
-        TimerNotificationProvider,
-        TimerSoundProvider,
-        SmartAudioProvider,
-        NativeAudio,
-        LocalNotifications,
-        BackgroundMode
+        { provide: NativeAudio, useClass: NativeAudioMock},
+        { provide: BackgroundMode, useClass: BackgroundModeMock },
+        providers.TimerProvider,
+        providers.TimerSoundProvider,
+        providers.SmartAudioProvider,
+        providers.BackgroundModeProvider,
       ]
     });
-
   }));
 
   beforeEach(() => {

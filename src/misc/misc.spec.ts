@@ -1,6 +1,6 @@
 import * as misc from './misc';
 
-describe('Root Component', () => {
+describe('Misc provider', () => {
 
     it('should remove 1st record from the array', () => {
         const arr = [1, 2, 3, 4 ];
