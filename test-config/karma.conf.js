@@ -2,17 +2,30 @@ var webpackConfig = require('./webpack.test.js');
 
 module.exports = function(config) {
   var _config = {
-    basePath: '',
+    basePath: '../',
 
     frameworks: ['jasmine'],
 
-    files: [{
-      pattern: './karma-test-shim.js',
-      watched: true
-    }],
+    files: [
+      {
+        pattern: './test-config/karma-test-shim.js',
+        watched: true
+      },
+      {
+        pattern: './src/assets/**/*',
+        watched: false,
+        included: false,
+        served: true,
+        nocache: false
+      }
+    ],
+
+    proxies: {
+      '/assets/': '/base/src/assets/'
+    },
 
     preprocessors: {
-      './karma-test-shim.js': ['webpack', 'sourcemap']
+      './test-config/karma-test-shim.js': ['webpack', 'sourcemap']
     },
 
     webpack: webpackConfig,
@@ -31,7 +44,12 @@ module.exports = function(config) {
       terminal: true
     },
 
-    reporters: ['mocha'],
+    coverageIstanbulReporter: {
+      reports: [ 'html', 'lcovonly' ],
+      fixWebpackSourcePaths: true
+    },
+
+    reporters: config.coverage ? ['mocha', 'dots', 'coverage-istanbul'] : ['mocha', 'dots'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
