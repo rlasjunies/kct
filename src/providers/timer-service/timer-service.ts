@@ -17,10 +17,8 @@ export class TimerProvider {
     // Observable navItem stream
     notification$ = this._notification.asObservable();
 
-    constructor() {
-        // console.log('TimerService ... loaded!');
-    }
-
+    
+    // TODO: evaluate if there is at leat one timer running
     public isThereAtLeastOneTimerRunning = (): boolean => {
         // // return this.cimer.
         // })
@@ -39,7 +37,7 @@ export class TimerProvider {
         if (timerValue.status === enumTimerStatus.ACKNOWLEDGE ||
             timerValue.status === enumTimerStatus.OVER_1ST_TIME ||
             timerValue.status === enumTimerStatus.OVER) {
-            console.log('Could not start timer status is not good');
+            console.warn('Could not start timer status is not good');
         } else {
             console.log('timer-service:before setInterval', guid);
 
@@ -81,7 +79,6 @@ export class TimerProvider {
     }
 
     public stopTimer = (guid: string): void => {
-        // alert('dans stop timer guid=' + guid);
         const timerValue: TimerValue = this.getTimerValue(guid);
         if (timerValue) {
             // clear the timer
