@@ -1,13 +1,13 @@
 import * as moment from 'moment';
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Modal, AlertController } from 'ionic-angular';
 
+import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 import * as model from 'models';
 import * as misc from 'misc/misc';
 import * as pages from 'pages';
 
-import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 
 export const ID_timerConfig = 'timer-config';
 @IonicPage({
@@ -26,13 +26,14 @@ export class TimerConfigPage {
     public timerConfig: model.TimerConfig;
     public durationMinutes: number;
     public durationHours: number;
+    private modalAvatar: Modal;
 
     constructor(
         public navCtrl: NavController,
         public navParam: NavParams,
         private timerConfigService: TimerConfigService,
         public alerCtrl: AlertController,
-        public modalCtrl: ModalController
+        public modalController: ModalController
     ) {
         const id: string | number = navParam.get('id');
 
@@ -64,16 +65,20 @@ export class TimerConfigPage {
 
 
     avatarClicked() {
-        const modal = this.modalCtrl
+        this.modalAvatar = this.modalController
             .create(pages.ID_avatarSelection, { id: this.timerConfig.icon });
 
-        modal.onDidDismiss((iconSelected: string) => {
+        this.modalAvatar.onDidDismiss((iconSelected: string) => {
             if (iconSelected !== '') {
                 this.timerConfig.icon = iconSelected;
                 this.saveTimerConfig();
             }
         });
-        modal.present();
+
+        this.modalAvatar.present();
+    }
+    backButtonAction() {
+        this.modalAvatar.dismiss();
     }
     titleChange(value: string) {
         console.log('Title changed:', value);
