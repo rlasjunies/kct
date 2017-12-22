@@ -20,11 +20,19 @@ export class BackgroundModeProvider {
         this._timerSubscription = this.timerP.notification$.subscribe(this.effectOnTimerNotification);
     }
 
+    public initializationToDoWhenDeviceReady() {
+        this.backgroundModeNative.setDefaults({
+            title: 'Timers are running in background',
+            text: '',
+        });
+    }
+
     public dispatch = (event: string) => {
         this._notification.next(event);
     }
 
     effectOnBackgroundModeEvents = (event: string) => {
+        // console.log('effectOnBackgroundMoveEvents:', event);
         switch (event) {
             case 'pause':
                 this.activateBackgroundMode();
@@ -33,6 +41,7 @@ export class BackgroundModeProvider {
             case 'resume':
                 this.disableBackgroundMode();
                 break;
+
             default:
                 break;
         }
@@ -44,11 +53,12 @@ export class BackgroundModeProvider {
                 case models.enumTimerStatus.OVER_1ST_TIME:
                     this.disableBackgroundModeAndForegroundTheApp();
                     break;
+
                 default:
                     break;
             }
         } else {
-            console.warn('background_mode:effectTimerNotification: timerNotification value null');
+            // console.warn('background_mode:effectTimerNotification: timerNotification value null');
         }
     }
 
@@ -64,11 +74,9 @@ export class BackgroundModeProvider {
     }
 
     private activateBackgroundMode() {
+        // console.log('... activateBackgroundMode');
         if (this.timerP.isThereAtLeastOneTimerRunning()) {
-            this.backgroundModeNative.setDefaults({
-                title: 'Timers are running in background',
-                text: '',
-            });
+            console.log('.... setDefaults');
             this.backgroundModeNative.enable();
         }
     }
