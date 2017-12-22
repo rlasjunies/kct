@@ -13,7 +13,7 @@
         ✔ passer l'application en foreground quand il y a l'alarme @done (2017-12-2 07:58:43)
         ☐ passer en mode background que s'il y a des timers en-cours
         ✔ améliorer le message de la notification quand en mode background @done (2017-12-2 08:14:57)
-        ☐ check backbutton, if timers are running back button should not pause, but put in background
+        ✔ check backbutton, if timers are running back button should not pause, but put in background @done (2017-12-22 18:06:00)
 
 ☐ create an appEvent service. All the service should connect to or post messages on it
 ☐ Whe the app is stopped while timer is running, the timer does not continue, are not recalculated
