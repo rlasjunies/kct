@@ -10,18 +10,6 @@ export interface Dictionary<T> {
 /* Returns the class name of the argument or undefined if
 * it's not a valid JavaScript object.
 */
-export function getObjectClass(obj): string {
-    if (obj && obj.constructor && obj.constructor.toString) {
-        const arr = obj.constructor.toString().match(
-            /function\s*(\w+)/);
-
-        if (arr && arr.length === 2) {
-            return arr[1];
-        }
-    }
-
-    return undefined;
-}
 
 export function GUID_new(): string {
     const guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -53,8 +41,19 @@ export function arrayRemove(array: any[], idToRemove: any): void {
  * @size size of the returned string
  */
 export function ZeroPadding(num: number, size: number): string {
-    const s: string = '000000000000' + num;
-    return s.substr(s.length - size);
+    let sNum = '' + num;
+    const slength = sNum.length;
+    if (slength <= size) {
+        // add digit on the left
+        for (let i = 0 ; i < size - slength; i++) {
+            sNum = '0' + sNum;
+        }
+    } else {
+        // substract the over
+        sNum = sNum.substr(sNum.length - size);
+    }
+
+    return sNum;
 }
 
 // /* Wait the end of several promises
