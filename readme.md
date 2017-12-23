@@ -7,9 +7,10 @@
     - [2.1. cannot find module "pages"](#21-cannot-find-module-pages)
     - [2.2. ionic tabs](#22-ionic-tabs)
     - [2.3. Unit testing](#23-unit-testing)
-        - [2.3.1. Tuto on unit testing](#231-tuto-on-unit-testing)
-        - [2.3.2. installation](#232-installation)
-        - [2.3.3. run](#233-run)
+        - [2.3.1. installation](#231-installation)
+        - [2.3.2. Tuto on unit testing](#232-tuto-on-unit-testing)
+        - [2.3.3. Code coverage info](#233-code-coverage-info)
+        - [2.3.4. run](#234-run)
 - [3. switch to yarn](#3-switch-to-yarn)
     - [3.1. icons for notification](#31-icons-for-notification)
     - [3.2. notification documentation](#32-notification-documentation)
@@ -87,7 +88,10 @@ imports: [
 
 ## 2.3. Unit testing
 
-### 2.3.1. Tuto on unit testing
+### 2.3.1. installation
+
+> https://github.com/ionic-team/ionic-unit-testing-example/tree/ionic-v2-branch
+### 2.3.2. Tuto on unit testing
 <https://www.joshmorony.com/introduction-to-testing-ionic-2-applications-with-testbed/>
 
 <http://www.joshmorony.com/how-to-unit-test-an-ionic-2-application/>
@@ -105,12 +109,13 @@ imports: [
 
 <https://auth0.com/blog/angular-2-testing-in-depth-services/>
 
-### 2.3.2. installation
+### 2.3.3. Code coverage info
 
-> https://github.com/ionic-team/ionic-unit-testing-example/tree/ionic-v2-branch
+> How to exclude some part of the code from code coverage
 
+<https://stackoverflow.com/questions/30327830/excluding-files-from-coverage-when-using-mocha-and-istanbul>
 
-### 2.3.3. run
+### 2.3.4. run
 
 - `npm test`
 - `npm run test-coverage`
