@@ -45,8 +45,6 @@ export class TimerProvider {
             console.log('timer-service:before setInterval', guid);
 
             this._timers[guid] = setInterval(() => {
-                // let timerValue: TimerValue;
-                // timerValue = this.getTimerValue(guid);
                 timerValue.durationLeft_MilliSecond =
                     moment
                         .duration(timerValue.durationLeft_MilliSecond)
@@ -104,9 +102,9 @@ export class TimerProvider {
         }
     }
 
-    // public getTimerValue = (guid: string): TimerValue => {
-    //     return JSON.parse(this.storage.getItem(constant.STORAGEKEY_PREFIX + guid));
-    // }
+    public getTimerValue = (guid: string): TimerValue => {
+        return this.storage.getTimerValue(guid);
+    }
 
     public isTimerActiveAndRunning = (guid: string): boolean => {
         const timerValue = this.storage.getTimerValue(guid);
