@@ -25,14 +25,14 @@ export class TimerConfigService {
 
     public reinitializeAll() {
         for (const guid in this._config) {
-            this.storage.removeItem(constant.STORAGEKEY_PREFIX + guid);
+            this.storage.removeTimerValue(guid);
         }
-        this.storage.removeItem(constant.STORAGEKEY_TIMERS);
+        this.storage.removeConfig();
         this.getAll();
     }
 
     public getAll(): models.TimerConfig[] {
-        this._config = JSON.parse(this.storage.getItem(constant.STORAGEKEY_TIMERS));
+        this._config = this.storage.getConfig();
 
         // check first time in the application
         if (!this._config) {
@@ -121,7 +121,7 @@ export class TimerConfigService {
         const todayDay: number = moment(Date.now()).isoWeekday() - 1;
 
         // remove the persisted timer
-        this.storage.removeItem(constant.STORAGEKEY_PREFIX + timerConfig.guid);
+        this.storage.removeTimerValue(timerConfig.guid);
 
         // Is it a good day?
         // console.log("today - config days!", todayDay, timerConfig.weekdays);
@@ -216,7 +216,7 @@ export class TimerConfigService {
      */
     public delete(guid: string): boolean {
         this.checkConfigIsLoadedOrLoadIt();
-        // if (this.canBeConfigured(guid)) {
+
         // remove the timerConfig in memory and persist
         // delete this._config.timersConfig[guid];
         const index = this._config.timersConfig.findIndex((timer) => {
@@ -226,19 +226,16 @@ export class TimerConfigService {
         this._storeConfig();
 
         // remove the timerValue persisted key
-        this.storage.removeItem(constant.STORAGEKEY_PREFIX + guid);
+        this.storage.removeTimerValue(guid);
         this.events.publish(this.eventsTimersconfigDeleted, guid);
         return true;
-        // } else {
-        //     return false;
-        // }
     }
 
     /*
      * method to store the instance of the timerConfig array
      */
     private _storeConfig() {
-        this.storage.setItem(constant.STORAGEKEY_TIMERS, JSON.stringify(this._config));
+        this.storage.setConfig(this._config);
     }
 
     /*
@@ -254,8 +251,8 @@ export class TimerConfigService {
             status: 10
         };
 
+        this.storage.setTimerValue(timerConf.guid, timerValue);
         console.log('storeTimerValue:', timerValue);
-        this.storage.setItem(constant.STORAGEKEY_PREFIX + timerConf.guid, JSON.stringify(timerValue));
     }
 
     private checkConfigIsLoadedOrLoadIt() {

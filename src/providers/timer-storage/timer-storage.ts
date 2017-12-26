@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import * as constant from 'app/constant';
+import { TimerValue, TimerConfig, IConfig } from 'models';
 
 /**
  * This class is just an injectable wrapper of the localStoarage
@@ -24,20 +26,28 @@ export class TimerStorageProvider {
     //     // window.localStorage.clear();
     // }
 
-    public getItem(key: string): string | null {
-        return window.localStorage.getItem(key);
-        // return null;
+    public getTimerValue(key: string): TimerValue | null {
+        return JSON.parse(window.localStorage.getItem(key));
     }
 
-    // public key(index: number): string | null {
-    //     return window.localStorage.key(index);
-    // }
+    public setTimerValue(guid: string, data: TimerValue): void {
+        window.localStorage.setItem(constant.STORAGEKEY_PREFIX + guid, JSON.stringify(data));
+    }
+    public removeTimerValue(guid: string): void {
+        window.localStorage.removeItem(constant.STORAGEKEY_PREFIX + guid);
+    }
 
-    public removeItem(key: string): void {
-        window.localStorage.removeItem(key);
+    public setConfig(config: IConfig): void {
+        window.localStorage.setItem(constant.STORAGEKEY_TIMERS, JSON.stringify(config));
     }
-    public setItem(key: string, data: string): void {
-        window.localStorage.setItem(key, data);
+
+    public getConfig(): IConfig | null {
+        return JSON.parse(window.localStorage.getItem(constant.STORAGEKEY_TIMERS));
     }
+
+    public removeConfig(): void {
+        window.localStorage.removeItem(constant.STORAGEKEY_TIMERS);
+    }
+
 
 }

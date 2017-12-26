@@ -34,7 +34,7 @@ export class TimerProvider {
     }
 
     public startTimer = (guid: string): void => {
-        const timerValue: TimerValue = this.getTimerValue(guid);
+        const timerValue: TimerValue = this.storage.getTimerValue(guid);
         console.log('timer-service:', guid);
         // RL 20170506 - remove the control enumTimerStatus.RUNNING
         if (timerValue.status === enumTimerStatus.ACKNOWLEDGE ||
@@ -72,8 +72,7 @@ export class TimerProvider {
                     this.raiseTimerChangeNotification(guid + constant.TIMER_TICK_EVENT, timerValue);
                 }
                 // Persist the duration left
-                const timerValueStringified = JSON.stringify(timerValue);
-                this.storage.setItem(constant.STORAGEKEY_PREFIX + guid, timerValueStringified);
+                this.storage.setTimerValue(guid, timerValue);
             }, constant.TIMER_DURATION);
 
             timerValue.status = enumTimerStatus.STARTED;
@@ -82,7 +81,7 @@ export class TimerProvider {
     }
 
     public stopTimer = (guid: string): void => {
-        const timerValue: TimerValue = this.getTimerValue(guid);
+        const timerValue: TimerValue = this.storage.getTimerValue(guid);
         if (timerValue) {
             // clear the timer
             clearInterval(this._timers[guid]);
@@ -99,18 +98,18 @@ export class TimerProvider {
                 // alert('dans stop timer raised HOLD');
                 this.raiseTimerChangeNotification(guid + constant.TIMER_HELD_EVENT, timerValue);
             }
-            this.storage.setItem(constant.STORAGEKEY_PREFIX + guid, JSON.stringify(timerValue));
+            this.storage.setTimerValue(guid, timerValue);
         } else {
             console.warn('ALGO ERROR: should not be in that case');
         }
     }
 
-    public getTimerValue = (guid: string): TimerValue => {
-        return JSON.parse(this.storage.getItem(constant.STORAGEKEY_PREFIX + guid));
-    }
+    // public getTimerValue = (guid: string): TimerValue => {
+    //     return JSON.parse(this.storage.getItem(constant.STORAGEKEY_PREFIX + guid));
+    // }
 
     public isTimerActiveAndRunning = (guid: string): boolean => {
-        const timerValue = this.getTimerValue(guid);
+        const timerValue = this.storage.getTimerValue(guid);
         if (timerValue === null) {
             return false;
         } else if ((timerValue.status === enumTimerStatus.RUNNING)
