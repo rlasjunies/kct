@@ -25,23 +25,16 @@ import * as providers from 'providers';
     providers: [
         StatusBar,
         SplashScreen,
-        providers.TimerProvider,
-        providers.TimerConfigService,
-        { provide: Storage, useFactory: returnWindowLocalStorage() },
-        { provide: ErrorHandler, useClass: IonicErrorHandler },
         LocalNotifications,
         NativeAudio,
         BackgroundMode,
+        { provide: ErrorHandler, useClass: IonicErrorHandler },
+        providers.TimerProvider,
+        providers.TimerConfigService,
         providers.SmartAudioProvider,
         providers.TimerSoundProvider,
-        // providers.TimerNotificationProvider,
         providers.BackgroundModeProvider,
+        providers.TimerStorageProvider,
     ]
 })
 export class AppModule { }
-
-function returnWindowLocalStorage(): Function {
-    return () => {
-        return window.localStorage;
-    };
-}

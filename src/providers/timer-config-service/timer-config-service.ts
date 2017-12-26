@@ -6,6 +6,7 @@ import * as constant from 'app/constant';
 import * as models from 'models';
 import * as misc from 'misc/misc';
 import { TimerProvider } from 'providers/timer-service/timer-service';
+import { TimerStorageProvider } from 'providers/timer-storage/timer-storage';
 
 @Injectable()
 export class TimerConfigService {
@@ -13,11 +14,11 @@ export class TimerConfigService {
     public eventsTimersconfigDeleted = 'timersConfig:deleted';
 
     constructor(
-        public storage: Storage,
+        public storage: TimerStorageProvider,
         private events: Events,
         private timerService: TimerProvider
     ) {
-        // console.log('TimerConfigService ... loaded!');
+        console.log('TimerConfigService ... loaded!');
     }
 
     private _config: models.IConfig;

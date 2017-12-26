@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { arrayRemove } from 'misc';
 import { TimerValue, enumTimerStatus, TimerChangeNotification } from 'models';
+import { TimerStorageProvider } from 'providers/timer-storage/timer-storage';
 
 @Injectable()
 export class TimerProvider {
@@ -17,11 +18,13 @@ export class TimerProvider {
     // Observable navItem stream
     notification$ = this._notification.asObservable();
 
-    
+    constructor(
+        private storage: TimerStorageProvider,
+    ) { }
+
     // TODO: evaluate if there is at leat one timer running
     public isThereAtLeastOneTimerRunning = (): boolean => {
-        // // return this.cimer.
-        // })
+
         return true;
     }
 
@@ -70,7 +73,7 @@ export class TimerProvider {
                 }
                 // Persist the duration left
                 const timerValueStringified = JSON.stringify(timerValue);
-                localStorage.setItem(constant.STORAGEKEY_PREFIX + guid, timerValueStringified);
+                this.storage.setItem(constant.STORAGEKEY_PREFIX + guid, timerValueStringified);
             }, constant.TIMER_DURATION);
 
             timerValue.status = enumTimerStatus.STARTED;
@@ -96,14 +99,14 @@ export class TimerProvider {
                 // alert('dans stop timer raised HOLD');
                 this.raiseTimerChangeNotification(guid + constant.TIMER_HELD_EVENT, timerValue);
             }
-            localStorage.setItem(constant.STORAGEKEY_PREFIX + guid, JSON.stringify(timerValue));
+            this.storage.setItem(constant.STORAGEKEY_PREFIX + guid, JSON.stringify(timerValue));
         } else {
             console.warn('ALGO ERROR: should not be in that case');
         }
     }
 
     public getTimerValue = (guid: string): TimerValue => {
-        return JSON.parse(localStorage.getItem(constant.STORAGEKEY_PREFIX + guid));
+        return JSON.parse(this.storage.getItem(constant.STORAGEKEY_PREFIX + guid));
     }
 
     public isTimerActiveAndRunning = (guid: string): boolean => {
