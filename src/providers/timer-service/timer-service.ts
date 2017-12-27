@@ -19,13 +19,20 @@ export class TimerProvider {
     notification$ = this._notification.asObservable();
 
     constructor(
-        private storage: TimerStorageProvider,
+        public timerStorage: TimerStorageProvider,
     ) { }
 
-    // TODO: evaluate if there is at leat one timer running
     public isThereAtLeastOneTimerRunning = (): boolean => {
+        let thereIsOneTimerRunning = false;
+        const config = this.timerStorage.getConfig();
 
-        return true;
+        for (const conf of config.timersConfig) {
+            if (this.isTimerActiveAndRunning(conf.guid)) {
+                thereIsOneTimerRunning = true;
+                break;
+            }
+        }
+        return thereIsOneTimerRunning;
     }
 
     private raiseTimerChangeNotification = (guidEvent: string, value: TimerValue) => {
@@ -34,7 +41,7 @@ export class TimerProvider {
     }
 
     public startTimer = (guid: string): void => {
-        const timerValue: TimerValue = this.storage.getTimerValue(guid);
+        const timerValue: TimerValue = this.timerStorage.getTimerValue(guid);
         console.log('timer-service:', guid);
         // RL 20170506 - remove the control enumTimerStatus.RUNNING
         if (timerValue.status === enumTimerStatus.ACKNOWLEDGE ||
@@ -70,7 +77,7 @@ export class TimerProvider {
                     this.raiseTimerChangeNotification(guid + constant.TIMER_TICK_EVENT, timerValue);
                 }
                 // Persist the duration left
-                this.storage.setTimerValue(guid, timerValue);
+                this.timerStorage.setTimerValue(guid, timerValue);
             }, constant.TIMER_DURATION);
 
             timerValue.status = enumTimerStatus.STARTED;
@@ -79,7 +86,7 @@ export class TimerProvider {
     }
 
     public stopTimer = (guid: string): void => {
-        const timerValue: TimerValue = this.storage.getTimerValue(guid);
+        const timerValue: TimerValue = this.timerStorage.getTimerValue(guid);
         if (timerValue) {
             // clear the timer
             clearInterval(this._timers[guid]);
@@ -96,18 +103,18 @@ export class TimerProvider {
                 // alert('dans stop timer raised HOLD');
                 this.raiseTimerChangeNotification(guid + constant.TIMER_HELD_EVENT, timerValue);
             }
-            this.storage.setTimerValue(guid, timerValue);
+            this.timerStorage.setTimerValue(guid, timerValue);
         } else {
             console.warn('ALGO ERROR: should not be in that case');
         }
     }
 
     public getTimerValue = (guid: string): TimerValue => {
-        return this.storage.getTimerValue(guid);
+        return this.timerStorage.getTimerValue(guid);
     }
 
     public isTimerActiveAndRunning = (guid: string): boolean => {
-        const timerValue = this.storage.getTimerValue(guid);
+        const timerValue = this.timerStorage.getTimerValue(guid);
         if (timerValue === null) {
             return false;
         } else if ((timerValue.status === enumTimerStatus.RUNNING)

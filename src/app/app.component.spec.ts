@@ -9,6 +9,8 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { PlatformMock, StatusBarMock, SplashScreenMock, NativeAudioMock, BackgroundModeMock } from '../../test-config/mocks-ionic';
 import * as providers from 'providers';
+import { StorageLocalProvider } from 'providers/storage-local/storage-local';
+import { StorageInMemoryProvider } from 'providers/storage-in-memory/storage-in-memory';
 
 describe('Root Component', () => {
 
@@ -29,7 +31,9 @@ describe('Root Component', () => {
         { provide: Platform, useClass: PlatformMock },
         { provide: NativeAudio, useClass: NativeAudioMock},
         { provide: BackgroundMode, useClass: BackgroundModeMock },
+        { provide: StorageLocalProvider, useClass: StorageInMemoryProvider},
         providers.TimerProvider,
+        providers.TimerStorageProvider,
         providers.TimerSoundProvider,
         providers.SmartAudioProvider,
         providers.BackgroundModeProvider,

@@ -14,10 +14,10 @@ export class BackgroundModeProvider {
 
     constructor(
         private backgroundModeNative: BackgroundMode,
-        private timerP: TimerProvider,
+        private timerService: TimerProvider,
     ) {
         this._notification.subscribe(this.effectOnBackgroundModeEvents);
-        this._timerSubscription = this.timerP.notification$.subscribe(this.effectOnTimerNotification);
+        this._timerSubscription = this.timerService.notification$.subscribe(this.effectOnTimerNotification);
     }
 
     public initializationToDoWhenDeviceReady() {
@@ -74,9 +74,7 @@ export class BackgroundModeProvider {
     }
 
     private activateBackgroundMode() {
-        // console.log('... activateBackgroundMode');
-        if (this.timerP.isThereAtLeastOneTimerRunning()) {
-            console.log('.... setDefaults');
+        if (this.timerService.isThereAtLeastOneTimerRunning()) {
             this.backgroundModeNative.enable();
         }
     }

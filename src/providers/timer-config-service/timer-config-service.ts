@@ -252,7 +252,6 @@ export class TimerConfigService {
         };
 
         this.storage.setTimerValue(timerConf.guid, timerValue);
-        console.log('storeTimerValue:', timerValue);
     }
 
     private checkConfigIsLoadedOrLoadIt() {
