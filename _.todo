@@ -1,26 +1,4 @@
-☐ support sound notification in background
-    ✔ create a smart audio provider @done (2017-11-15 22:11:13)
-    ✔ create a timer sound player service @done (2017-11-15 22:11:20)
-        ☐ * load 1 sound per timer
-        ✔ * subscribe to timer_end => play a sound @done (2017-11-15 22:11:33)
-        ✔ * suscribe to timer_acknoledge => stop playing sound @done (2017-11-15 22:11:33)
-    ✔ enable background mode @done (2017-11-16 21:36:56)
-    ✘ create notification service @cancelled (2017-12-2 07:46:03)
-        ✘ * subscribe to timers @cancelled (2017-12-2 07:46:45)
-        ✘ * if ... is backGround ... notification @cancelled (2017-12-2 07:46:42)
-
-    ✔ create a background service that will react based on event @done (2017-12-2 07:46:16)
-        ✔ passer l'application en foreground quand il y a l'alarme @done (2017-12-2 07:58:43)
-        ✔ passer en mode background que s'il y a des timers en-cours @done (2017-12-27 13:25:04)
-        ✔ améliorer le message de la notification quand en mode background @done (2017-12-2 08:14:57)
-        ✔ check backbutton, if timers are running back button should not pause, but put in background @done (2017-12-22 18:06:00)
-
-☐ create an appEvent service. All the service should connect to or post messages on it
 ☐ Whe the app is stopped while timer is running, the timer does not continue, are not recalculated
-
-✔ bug on device: the sound is started every second. Command is called at every tick() @done (2017-11-16 21:54:25)
-
-☐ tests: not karma test, to do independent ng tests faster? 
 
 ✔ essayer de comprendre pourquoi le démarrage est long. @done (2017-12-2 07:49:49)
     ✔ => à cause de mauvaise définition de service @done (2017-12-2 07:50:37)
@@ -45,12 +23,6 @@
 
 ☐ robustifier cleartimer: qu'est-ce qu'il se passe si on donne un mauvais/inexistant guid timer
 
-✔ need to create data for tests on the device. Currently minute 15min before to have sound @done (2017-11-18 15:14:01)
-    ✔ add resetForTest function in timer-config-service @done (2017-11-18 15:12:56)
-    ✔ add a new page for advanced mode @done (2017-11-18 15:12:57)
-        call reset feature from advanced page
-
-
 ☐ add password to change the timer configuration
     the goal is to control the modification of the configuration
     especially as now it is reset while a timer is running
@@ -66,7 +38,6 @@
     ☐ shows next occurence date
     ☐ When a timer has been added, we need to scroll a bit to see the new card. We need to select, see, the card just added without the need to scroll
         Take care of the case, where a timer is added and deleted before to navigate back in the timers list
-
 
 ☐ list of reward
     ✔ selector of reward on the timer card @done (2017-11-1 16:14:41)
@@ -89,19 +60,39 @@
     ☐ trace the timer execution
         purpose is to not propose timer twice the same day
     ☐ allows time extension / reward for today or next occurence
-
-☐ Faire marcher en tache de fond les timers ( quand l'application n'est pas au 1er plan)
-    il faut définir le nombre de card par ligne en fonction de la taille de l'écran
-    ne marche pas dans le simulateur
-    
     ☐ Add application trace
     purpose is to trace the configuration changes
     
 ☐ Technical
     ☐ rework events from timers
     should be observable
-    
-    ☐ replace storage by a persistant one
+    ✔ replace storage by a persistant one @done (2017-12-27 15:25:02)
+
+    ☐ create an appEvent service. All the service should connect to or post messages on it
+
+✔ bug on device: the sound is started every second. Command is called at every tick() @done (2017-11-16 21:54:25)
+
+✔ support sound notification in background @done (2017-12-27 15:27:53)
+    ✔ create a smart audio provider @done (2017-11-15 22:11:13)
+    ✔ create a timer sound player service @done (2017-11-15 22:11:20)
+    ☐ * load 1 sound per timer
+    ✔ * subscribe to timer_end => play a sound @done (2017-11-15 22:11:33)
+    ✔ * suscribe to timer_acknoledge => stop playing sound @done (2017-11-15 22:11:33)
+✔ enable background mode @done (2017-11-16 21:36:56)
+✘ create notification service @cancelled (2017-12-2 07:46:03)
+    ✘ * subscribe to timers @cancelled (2017-12-2 07:46:45)
+    ✘ * if ... is backGround ... notification @cancelled (2017-12-2 07:46:42)
+
+✔ need to create data for tests on the device. Currently minute 15min before to have sound @done (2017-11-18 15:14:01)
+    ✔ add resetForTest function in timer-config-service @done (2017-11-18 15:12:56)
+    ✔ add a new page for advanced mode @done (2017-11-18 15:12:57)
+    call reset feature from advanced page
+
+✔ create a background service that will react based on event @done (2017-12-2 07:46:16)
+    ✔ passer l'application en foreground quand il y a l'alarme @done (2017-12-2 07:58:43)
+    ✔ passer en mode background que s'il y a des timers en-cours @done (2017-12-27 13:25:04)
+    ✔ améliorer le message de la notification quand en mode background @done (2017-12-2 08:14:57)
+    ✔ check backbutton, if timers are running back button should not pause, but put in background @done (2017-12-22 18:06:00)
 
 ✔ move the timer list to the last modified timer. @done (2017-11-3 18:02:44)
 This is due to the timer ordering, it is confuding to have timers moving around
