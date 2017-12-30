@@ -4,7 +4,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import * as providers from 'providers';
 import * as pages from 'pages';
-import * as models from 'models';
 
 @Component({
     templateUrl: 'app.html'
@@ -17,13 +16,16 @@ export class MyApp {
         public platformNative: Platform,
         public statusBarNative: StatusBar,
         public splashScreenNative: SplashScreen,
+
+        // tslint:disable-next-line
         private timerServiceP: providers.TimerProvider,
+        // tslint:disable-next-line
         private timerSoundP: providers.TimerSoundProvider,
         // private timerNotificationP: providers.TimerNotificationProvider,
-        private audioP: providers.SmartAudioProvider,
+        // private audioP: providers.SmartAudioProvider,
         private backgroundModeP: providers.BackgroundModeProvider,
         private app: App,
-        
+
     ) {
         this.initializeApp();
     }

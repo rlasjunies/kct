@@ -1,8 +1,8 @@
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Observable } from 'rxjs/Observable';
-import { EventEmitter } from 'selenium-webdriver';
-import * as angularCore from '@angular/core'
+// import { Observable } from 'rxjs/Observable';
+// import { EventEmitter } from 'selenium-webdriver';
+import * as angularCore from '@angular/core';
 export class NativeAudioMock {
     preloadSimple(id: string, assetPath: string): Promise<any> {
         return new Promise(function (resolve: Function): void {
@@ -22,7 +22,7 @@ export class BackgroundModeMock {
 }
 
 export class PlatformMock {
-    public ready(): Promise<{ String }> {
+    public ready(): Promise<String> {
         return new Promise((resolve) => {
             resolve('READY');
         });
@@ -93,7 +93,7 @@ export class PlatformMock {
 }
 
 export class StatusBarMock extends StatusBar {
-    hide(): void {}
+    hide(): void { }
     styleDefault() {
         return;
     }
@@ -111,13 +111,6 @@ export class FormMock {
     }
 }
 
-export class AppMock {
-
-    public getRootNav(): any {
-        return new NavMock();
-    }
-
-}
 
 export class NavMock {
 
@@ -147,6 +140,13 @@ export class NavMock {
 
     public registerChildNav(nav: any): void {
         return;
+    }
+
+}
+export class AppMock {
+
+    public getRootNav(): any {
+        return new NavMock();
     }
 
 }

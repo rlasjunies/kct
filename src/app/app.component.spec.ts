@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
+import { async, ComponentFixture, TestBed, } from '@angular/core/testing';
+// import { DebugElement } from '@angular/core';
 import { MyApp } from './app.component';
-import { IonicModule, Platform, Nav } from 'ionic-angular';
+import { IonicModule, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeAudio } from '@ionic-native/native-audio';
