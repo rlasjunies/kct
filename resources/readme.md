@@ -1,3 +1,10 @@
+
+Command to generate the resources:
+
+`ionic cordova resources`
+
+> this command requires now account on ionic server to convert the pictures
+
 gamepad icon - free for commercial use
 https://www.iconfinder.com/icons/512535/control_controller_game_gamepad_play_icon#size=128
 
