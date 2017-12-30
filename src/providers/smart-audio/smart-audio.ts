@@ -14,9 +14,9 @@ export class SmartAudioProvider {
         platform: Platform,
     ) {
 
-        if (platform.is('cordova')) {
-            this.audioType = 'native';
-        }
+        // if (platform.is('cordova')) {
+        //     this.audioType = 'native';
+        // }
 
         this.preload('sound', 'assets/sounds/alert.m4a');
     }
