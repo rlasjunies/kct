@@ -32,10 +32,11 @@ Remarks:
 
 ![alt](http//../resources/images/selectIcon.png)
 
-## Potential features
+## Features backlog
 
 Apart several bugs remaining, here are some features that I would like to see in this program, your help is welcome!
 
 * define a passcode to modify the timers configuration
 * synchronize phones when timer is started / running
 * localisation of the app
+* history of timers executed over weeks
