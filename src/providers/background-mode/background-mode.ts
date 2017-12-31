@@ -3,7 +3,7 @@ import { BackgroundMode } from '@ionic-native/background-mode';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
 import * as models from 'models';
-import { TimerProvider } from 'providers';
+import { TimerProvider } from 'providers/timer-service/timer-service';
 
 @Injectable()
 export class BackgroundModeProvider {
