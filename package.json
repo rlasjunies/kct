@@ -1,7 +1,7 @@
 {
-  "name": "kctimer",
+  "name": "kctimers",
   "description": "kct: an application helping you to manage video and gaming usage duration for your kids",
-  "version": "0.5.0",
+  "version": "0.0.1",
   "author": "Richard Lasjunies",
   "homepage": "http://cpairelasjunies.com/",
   "private": true,
@@ -51,10 +51,11 @@
     "moment": "^2.18.1",
     "rxjs": "5.4.3",
     "sw-toolbox": "3.6.0",
+    "tsutil": "^6.1.1",
     "zone.js": "0.8.18"
   },
   "config": {
-    "ionic_bundler": "webpack"
+    "ionic_webpack": "webpack.config.js"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.0.0",
