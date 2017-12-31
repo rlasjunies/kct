@@ -1,11 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="4" id="com.ionicframework.kct3128288" ios-CFBundleVersion="4" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="9" id="com.ionicframework.kct3128288" ios-CFBundleVersion="9" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>KC Timer</name>
     <description>Application helping you to manage video and gaming usage duration for your kids</description>
     <author email="rlasjunies@gmail.com" href="http://cpairelasjunies.com/">Richard Lasjunies</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
+    <allow-navigation href="http://192.168.1.36:8100" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
