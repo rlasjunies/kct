@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, App } from 'ionic-angular';
+import { Component, ViewChild, isDevMode } from '@angular/core';
+import { Nav, Platform, App} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import * as providers from 'providers';
@@ -11,6 +11,7 @@ import * as pages from 'pages';
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
     rootPage: any = pages.ID_timers;
+    public isDevMode = false;
 
     constructor(
         public platformNative: Platform,
@@ -21,8 +22,6 @@ export class MyApp {
         private timerServiceP: providers.TimerProvider,
         // tslint:disable-next-line
         private timerSoundP: providers.TimerSoundProvider,
-        // private timerNotificationP: providers.TimerNotificationProvider,
-        // private audioP: providers.SmartAudioProvider,
         private backgroundModeP: providers.BackgroundModeProvider,
         private app: App,
 
@@ -32,6 +31,9 @@ export class MyApp {
 
     initializeApp = () => {
         this.platformNative.ready().then(() => {
+
+            this.isDevMode = isDevMode();
+
             this.statusBarNative.hide();
             this.splashScreenNative.hide();
 
@@ -70,10 +72,10 @@ export class MyApp {
 
         });
     }
-    openCreditPage = () => {
-        this.nav.push(pages.ID_credits);
-    }
     openSettingPage = () => {
         this.nav.push(pages.ID_settings);
+    }
+    openAboutPage = () => {
+        this.nav.push(pages.ID_about);
     }
 }

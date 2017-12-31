@@ -7,8 +7,8 @@
     </ion-header>
     <ion-content>
         <ion-list>
-            <button menuClose ion-item (click)="openCreditPage()">Credits</button>
-            <button menuClose ion-item (click)="openSettingPage()">Settings</button>
+            <button *ngIf=isDevMode menuClose ion-item (click)="openSettingPage()">Settings</button>
+            <button menuClose ion-item (click)="openAboutPage()">About</button>
         </ion-list>
     </ion-content>
 
