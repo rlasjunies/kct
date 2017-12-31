@@ -37,6 +37,7 @@ import { StorageLocalProvider } from '../providers/storage-local/storage-local';
         providers.TimerSoundProvider,
         providers.BackgroundModeProvider,
         providers.TimerStorageProvider,
+        providers.DaysEncodingProvider,
         // use for test in Memory { provide: StorageLocalProvider, useClass: StorageInMemoryProvider},
         StorageLocalProvider,
     ]

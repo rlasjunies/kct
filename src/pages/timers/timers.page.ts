@@ -10,6 +10,7 @@ import * as pages from 'pages';
 
 import { TimerProvider } from 'providers/timer-service/timer-service';
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
+import { DaysEncodingProvider } from 'providers';
 
 export interface DictionaryUITimer {
     [index: string]: models.UITimer
@@ -37,7 +38,8 @@ export class TimersPage {
         private navCtrl: NavController,
         private timerService: TimerProvider,
         private timerConfigService: TimerConfigService,
-        private events: Events
+        private events: Events,
+        private daysEncodingService: DaysEncodingProvider,
         ) {
 
         this.loadTimers();
@@ -103,7 +105,7 @@ export class TimersPage {
                 durationHumanized: misc.durationHumanized(moment.duration(timerConfig.durationMilliSecond)),
                 durationLeft: durationLeft,
                 durationLeftString: durationLeftString,
-                weekDaysHumanized: misc.weekDaysHumanizedFromNumber(timerConfig.weekdays),
+                weekDaysHumanized: this.daysEncodingService.weekDaysNumberToHumanizeds(timerConfig.weekdays),
                 percentageDone: percentageDone,
                 status: timerStatus,
                 ready: false,

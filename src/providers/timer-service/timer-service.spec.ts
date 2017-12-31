@@ -10,9 +10,6 @@ describe('timer provider', () => {
     // const storage = new TimerStorageMock();
     let timerService: TimerProvider;
 
-    // let comp: MyApp;
-    // let fixture: ComponentFixture<MyApp>;
-
     beforeEach(async(() => {
 
         TestBed.configureTestingModule({

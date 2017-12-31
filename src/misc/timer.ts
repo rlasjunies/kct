@@ -61,18 +61,3 @@ export function statusCalcultation(timer: models.UITimer): void {
             timer.done = true;
     }
 }
-export function weekDaysHumanizedFromNumber(weekDays: number): string[] {
-    const weekDaysHumanized: string[] = [];
-
-    // this._days = Number(days) || 0;
-    if (1 && weekDays) { weekDaysHumanized.push(moment.weekdaysShort(1)); }
-    if (2 && weekDays) { weekDaysHumanized.push(moment.weekdaysShort(2)); }
-    if (4 && weekDays) { weekDaysHumanized.push(moment.weekdaysShort(3)); }
-    if (8 && weekDays) { weekDaysHumanized.push(moment.weekdaysShort(4)); }
-    if (16 && weekDays) { weekDaysHumanized.push(moment.weekdaysShort(5)); }
-    if (32 && weekDays) { weekDaysHumanized.push(moment.weekdaysShort(6)); }
-    if (64 && weekDays) { weekDaysHumanized.push(moment.weekdaysShort(7)); }
-
-    return weekDaysHumanized;
-}
-
