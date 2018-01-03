@@ -6,7 +6,7 @@ import { DaysEncodingProvider } from "providers";
     selector: 'days-selector',
     templateUrl: 'days-selector.html'
 })
-export class DaysSelector {
+export class DaysSelectorComponent {
     public day1 = false;
     public day2 = false;
     public day3 = false;
@@ -23,7 +23,7 @@ export class DaysSelector {
     public day6Text = '';
     public day7Text = '';
 
-    _days: number;
+    _days: number = 0;
 
     _mql: MediaQueryList;
 
@@ -64,7 +64,6 @@ export class DaysSelector {
     }
 
     calculate(dayToToggle: number) {
-        // console.log("dayToToggle:", dayToToggle);
         // tslint:disable-next-line:no-bitwise
         this.days = this._days ^ dayToToggle;
         this.daysSelectedChanged.emit(this._days);

@@ -14,7 +14,8 @@ module.exports = {
       components: path.resolve(__dirname, "../src/components"),
       app: path.resolve(__dirname, "../src/app"),
       models: path.resolve(__dirname, "../src/models"),
-      misc: path.resolve(__dirname, "../src/misc")
+      misc: path.resolve(__dirname, "../src/misc"),
+      mock: path.resolve(__dirname, ".")
     }
   },
 
