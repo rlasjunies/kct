@@ -141,6 +141,6 @@
   },
   "rulesDirectory": [
     "node_modules/tslint-eslint-rules/dist/rules",
-    "node_modules/codemyzer"
+    "node_modules/codelyzer"
   ]
 }
