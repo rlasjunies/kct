@@ -3,7 +3,6 @@ var path = require('path');
 
 module.exports = {
 
-  entry: {},
   devtool: 'inline-source-map',
 
   resolve: {
