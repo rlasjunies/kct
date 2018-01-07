@@ -8,7 +8,7 @@ export let title = 'timer configuration';
 // export let urlRoot = '/';
 
 // navigated to
-export const navigatedTo_Icon = 'avatar-selection';
+export const navigatedTo_Icon = 'icon-selection';
 
 // page components
 

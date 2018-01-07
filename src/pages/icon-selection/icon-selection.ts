@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController, ViewController, NavParams } from 'ionic-angular';
 
-export const ID_avatarSelection = 'avatar-selection';
+export const ID_IconSelection = 'icon-selection';
 @IonicPage({
-    name: 'avatar-selection',
-    segment: 'avatar-selection'
+    name: 'icon-selection',
+    segment: 'icon-selection'
 })
 @Component({
-  selector: 'page-avatar-selection',
-  templateUrl: 'avatar-selection.html',
+  selector: 'page-icon-selection',
+  templateUrl: 'icon-selection.html',
 })
-export class AvatarSelectionPage {
+export class IconSelectionPage {
     public icons: string[] = [
         'game-controller-b',
         'game-controller-a',
