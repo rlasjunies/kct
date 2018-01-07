@@ -60,7 +60,8 @@ export class TimerConfigService {
                 timersConfig: [
                     {
                         guid: '569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3', weekdays: 96,
-                        title: 'Paul-game', durationMilliSecond: 3600000, durationHumanized: '01:00', icon: 'game-controller-b', enable: true
+                        title: 'Paul-game', durationMilliSecond: 3600000, durationHumanized: '01:00',
+                        icon: 'game-controller-b', enable: true
                     },
                     {
                         guid: 'a99897da-1460-409b-9778-571a3c4756ae', weekdays: 127,

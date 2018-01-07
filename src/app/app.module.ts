@@ -7,22 +7,22 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { BackgroundMode } from '@ionic-native/background-mode';
 
-import { MyApp } from './app.component';
+import { App } from './app.component';
 import * as providers from 'providers';
 import { StorageLocalProvider } from '../providers/storage-local/storage-local';
 // import { StorageInMemoryProvider } from '../providers/storage-in-memory/storage-in-memory';
 
 @NgModule({
     declarations: [
-        MyApp,
+        App,
     ],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp),
+        IonicModule.forRoot(App),
     ],
     bootstrap: [IonicApp],
     entryComponents: [
-        MyApp,
+        App,
     ],
     providers: [
         StatusBar,

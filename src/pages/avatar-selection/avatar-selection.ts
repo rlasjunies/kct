@@ -10,7 +10,7 @@ export const ID_avatarSelection = 'avatar-selection';
   selector: 'page-avatar-selection',
   templateUrl: 'avatar-selection.html',
 })
-export class AvatarSelection {
+export class AvatarSelectionPage {
     public icons: string[] = [
         'game-controller-b',
         'game-controller-a',

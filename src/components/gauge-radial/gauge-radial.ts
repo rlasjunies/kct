@@ -2,10 +2,10 @@ import { Component, Input } from '@angular/core';
 import * as models from 'models';
 
 @Component({
-    selector: 'gauge-radial',
+    selector: 'app-gauge-radial',
     templateUrl: 'gauge-radial.html'
 })
-export class GaugeRadial {
+export class GaugeRadialComponent {
     @Input() percentage = 0;
 
     iconName = 'pause';

@@ -28,14 +28,14 @@
   <h6 id="durationText">
     <u>Duration of the timer:</u> {{ timerConfig.durationHumanized }} hour(s)
   </h6>
-  <hours-selector hours="{{durationHours}}" (hoursChange)="hoursSelectionchanged($event)"></hours-selector>
+  <app-hours-selector hours="{{durationHours}}" (hoursChange)="hoursSelectionchanged($event)"></app-hours-selector>
   <br/>
-  <minutes-selector minutes="{{durationMinutes}}" (minutesChange)="minutesSelectionChanged($event)"></minutes-selector>
+  <app-minutes-selector minutes="{{durationMinutes}}" (minutesChange)="minutesSelectionChanged($event)"></app-minutes-selector>
 
   <h6>
     <u>The timer will be availbale every:</u>
   </h6>
-  <days-selector days="{{timerConfig.weekdays}}" (daysSelectedChanged)="daysSelectionChanged($event)"></days-selector>
+  <app-days-selector days="{{timerConfig.weekdays}}" (daysSelectedChanged)="daysSelectionChanged($event)"></app-days-selector>
 
   <!--{{ timerConfig.weekdays}}
     <br> Hour:{{ durationHours }} : Minutes:{{ durationMinutes}}

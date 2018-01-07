@@ -3,11 +3,11 @@ import { ActionSheetController } from 'ionic-angular';
 import * as models from 'models';
 
 @Component({
-    selector: 'timer-list-card',
+    selector: 'app-timer-list-card',
     templateUrl: 'timer-list-card.html'
 })
 
-export class TimerListCard {
+export class TimerListCardComponent {
 
     _timer: models.UITimer;
     @Input()

@@ -8,7 +8,7 @@ export const title = 'Kids Coaching - Timers';
 export const navigatedTo_TimerConfig = 'timer-config';
 
 // page components
-export const timers$$ = $$('timer-list-card');
+export const timers$$ = $$('app-timer-list-card');
 
 export const timer1$ = timers$$.first();
 

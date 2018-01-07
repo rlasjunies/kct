@@ -11,14 +11,14 @@
 	<ion-grid>
 		<ion-row align-self-center>
 			<ion-col *ngFor="let timer of timers" col-12 col-sm-8 col-md-8 col-lg-6 col-xl-4>
-				<timer-list-card
+				<app-timer-list-card
 					[timer]="timer"
 					(settingClicked)="settingClicked(timer, $event)"
 					(rewardClicked)="rewardClicked(timer, $event)"
 					(penaltyClicked)="penaltyClicked(timer, $event)"
 					(clicked)="timerClicked(timer)"
 					>
-				</timer-list-card>
+				</app-timer-list-card>
 			</ion-col>
 			</ion-row>
 	</ion-grid>

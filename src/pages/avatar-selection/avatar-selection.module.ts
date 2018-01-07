@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { AvatarSelection } from './avatar-selection';
+import { AvatarSelectionPage } from './avatar-selection';
 
 @NgModule({
   declarations: [
-    AvatarSelection,
+    AvatarSelectionPage,
   ],
   imports: [
-    IonicPageModule.forChild(AvatarSelection),
+    IonicPageModule.forChild(AvatarSelectionPage),
   ],
 })
 export class AvatarSelectionModule {}

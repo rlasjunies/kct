@@ -11,6 +11,7 @@ import * as pages from 'pages';
 import { TimerProvider } from 'providers/timer-service/timer-service';
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 import { DaysEncodingProvider } from 'providers';
+import { OnInit, OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 export interface DictionaryUITimer {
     [index: string]: models.UITimer
@@ -27,7 +28,7 @@ export const ID_timers = 'timers';
 @Component({
     templateUrl: 'timers.page.html',
 })
-export class TimersPage {
+export class TimersPage implements OnInit, OnDestroy {
     @ViewChild(Content) content: Content;
     // private _media: DictionaryMedia = {};
     public timers: models.UITimer[] = [];

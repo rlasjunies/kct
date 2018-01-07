@@ -1,9 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import * as moment from 'moment';
-import { DaysEncodingProvider } from "providers";
+import { DaysEncodingProvider } from 'providers';
 
 @Component({
-    selector: 'days-selector',
+    selector: 'app-days-selector',
     templateUrl: 'days-selector.html'
 })
 export class DaysSelectorComponent {
@@ -23,7 +22,7 @@ export class DaysSelectorComponent {
     public day6Text = '';
     public day7Text = '';
 
-    _days: number = 0;
+    _days = 0;
 
     _mql: MediaQueryList;
 
@@ -31,6 +30,7 @@ export class DaysSelectorComponent {
     set days(days: number) {
         this._days = Number(days) || 0;
 
+        // tslint:disable-next-line:max-line-length
         [this.day1, this.day2, this.day3, this.day4, this.day5, this.day6, this.day7] = this.dayEncodingService.weekdaysNumberToBooleans(days);
 
     }

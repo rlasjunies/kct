@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed, } from '@angular/core/testing';
-import { DebugElement } from '@angular/core'; 
-import { MyApp } from './app.component';
+import { DebugElement } from '@angular/core';
+import { App } from './app.component';
 import { IonicModule, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -14,16 +14,16 @@ import { StorageLocalProvider, StorageInMemoryProvider } from 'providers';
 describe('Root Component', () => {
 
   // let de: DebugElement;
-  let comp: MyApp;
-  let fixture: ComponentFixture<MyApp>;
+  let comp: App;
+  let fixture: ComponentFixture<App>;
 
   beforeEach(async(() => {
 
     TestBed.configureTestingModule({
-      declarations: [MyApp],
+      declarations: [App],
       imports: [
-        IonicModule.forRoot(MyApp)
-      ], 
+        IonicModule.forRoot(App)
+      ],
       providers: [
         { provide: StatusBar, useClass: StatusBarMock },
         { provide: SplashScreen, useClass: SplashScreenMock },
@@ -41,16 +41,16 @@ describe('Root Component', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MyApp);
+    fixture = TestBed.createComponent(App);
     comp = fixture.componentInstance;
   });
 
   it('should create component', () => {
-    expect(comp instanceof MyApp).toBe(true);
+    expect(comp instanceof App).toBe(true);
   });
 
   it('should create component #2', () => {
-    expect(comp instanceof MyApp).toBe(true);
+    expect(comp instanceof App).toBe(true);
   });
 
 });

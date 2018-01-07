@@ -1,5 +1,5 @@
 import { Component, ViewChild, isDevMode } from '@angular/core';
-import { Nav, Platform, App, MenuController } from 'ionic-angular';
+import { Nav, Platform, App as ionApp, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import * as providers from 'providers';
@@ -8,7 +8,8 @@ import * as pages from 'pages';
 @Component({
     templateUrl: 'app.html'
 })
-export class MyApp {
+// tslint:disable-next-line:component-class-suffix
+export class App {
     @ViewChild(Nav) nav: Nav;
     rootPage: any = pages.ID_timers;
     public isDevMode = false;
@@ -23,7 +24,7 @@ export class MyApp {
         // tslint:disable-next-line
         private timerSoundP: providers.TimerSoundProvider,
         private backgroundModeP: providers.BackgroundModeProvider,
-        private app: App,
+        private app: ionApp,
 
         private menuCtrl: MenuController
 
