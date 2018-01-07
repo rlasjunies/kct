@@ -1,4 +1,4 @@
-# Contributing to kct
+# Contributing to Games Timers
 
 This page is not yet finalized, but before to dot it the most important:
 

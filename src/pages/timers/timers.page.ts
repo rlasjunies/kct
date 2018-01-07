@@ -210,8 +210,6 @@ export class TimersPage implements OnInit, OnDestroy {
         //     icon: "file://assets/images/tv.png"
         // });
 
-
-        // this.scope.$on(timerValue.guid + kct.constant.TIMER_STARTED_EVENT, (evt: ng.IAngularEvent, timerValue: model.ITimerValue) => {
         console.log('timer:' + timerValue.title + '_started received');
 
         // Update controller datas

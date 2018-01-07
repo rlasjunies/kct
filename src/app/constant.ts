@@ -1,4 +1,4 @@
-    export let STORAGEKEY_PREFIX = 'kct_';
+    export let STORAGEKEY_PREFIX = 'gt_';
     export let STORAGEKEY_TIMERS: string = STORAGEKEY_PREFIX + 'timers';
 
     export let TIMER_DURATION = 1000;
