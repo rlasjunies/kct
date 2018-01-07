@@ -1,5 +1,5 @@
 import { Component, ViewChild, isDevMode } from '@angular/core';
-import { Nav, Platform, App} from 'ionic-angular';
+import { Nav, Platform, App, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import * as providers from 'providers';
@@ -24,6 +24,8 @@ export class MyApp {
         private timerSoundP: providers.TimerSoundProvider,
         private backgroundModeP: providers.BackgroundModeProvider,
         private app: App,
+
+        private menuCtrl: MenuController
 
     ) {
         this.initializeApp();
@@ -73,9 +75,14 @@ export class MyApp {
         });
     }
     openSettingPage = () => {
-        this.nav.push(pages.ID_settings);
+        this.nav.push(pages.ID_settings)
+            .then(_ => this.menuCtrl.close())
+            .catch(err => console.error(err));
     }
+
     openAboutPage = () => {
-        this.nav.push(pages.ID_about);
+        this.nav.push(pages.ID_about)
+            .then(_ => this.menuCtrl.close())
+            .catch(err => console.error(err));
     }
 }

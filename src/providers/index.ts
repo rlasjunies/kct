@@ -5,3 +5,5 @@ export * from './timer-sound/timer-sound';
 export * from './background-mode/background-mode';
 export * from './timer-storage/timer-storage';
 export * from './days-encoding/days-encoding';
+export * from './storage-local/storage-local';
+export * from './storage-in-memory/storage-in-memory';

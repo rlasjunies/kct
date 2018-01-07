@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { DaysSelector } from './days-selector';
+import { DaysSelectorComponent } from './days-selector';
 
 @NgModule({
   declarations: [
-    DaysSelector,
+    DaysSelectorComponent,
   ],
   imports: [
-    IonicPageModule.forChild(DaysSelector),
+    IonicPageModule.forChild(DaysSelectorComponent),
   ],
   exports: [
-    DaysSelector,
+    DaysSelectorComponent,
 
   ],
   providers: [

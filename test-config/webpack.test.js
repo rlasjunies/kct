@@ -2,18 +2,20 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
+
   devtool: 'inline-source-map',
 
   resolve: {
     extensions: ['.ts', '.js'],
     alias: {
-        pages: path.resolve(__dirname, "../src/pages"),
-        providers: path.resolve(__dirname, "../src/providers"),
-        components: path.resolve(__dirname, "../src/components"),
-        app: path.resolve(__dirname, "../src/app"),
-        models: path.resolve(__dirname, "../src/models"),
-        misc: path.resolve(__dirname, "../src/misc")
-      }
+      pages: path.resolve(__dirname, "../src/pages"),
+      providers: path.resolve(__dirname, "../src/providers"),
+      components: path.resolve(__dirname, "../src/components"),
+      app: path.resolve(__dirname, "../src/app"),
+      models: path.resolve(__dirname, "../src/models"),
+      misc: path.resolve(__dirname, "../src/misc"),
+      mock: path.resolve(__dirname, ".")
+    }
   },
 
   module: {
