@@ -1,15 +1,17 @@
-import * as page from './pages/app.po';
+import * as page from './app.po';
 import { browser, ExpectedConditions } from 'protractor';
-import { takeScreenShot } from './helper/screenshot';
+import { isDate } from 'util';
+import { beforeEachSleep, navigateSleep, takeScreenShot } from './_helper';
+
 
 describe('KCT app', function () {
 
-    beforeAll((done) => {
-        browser.get(page.url)
-            .then(_ => done());
+    beforeAll(async () => {
+        await browser.get(page.url);
     });
 
-    beforeEach(() => {
+    beforeEach(async () => {
+        await browser.sleep(beforeEachSleep);
     });
 
     afterEach(() => {
@@ -20,76 +22,70 @@ describe('KCT app', function () {
         beforeEach(() => {
         });
 
-        it('should have a title ', () => {
-            browser.getTitle()
-                .then(title => {
-                    expect(title).toEqual(page.title);
-                });
+        it('should have a title ', async () => {
+            const title = await browser.getTitle();
+            expect(title).toEqual(page.title);
         });
     });
 
     describe('sidebar menu', () => {
-        it('should be hidden', () => {
-            page.sidebar$.isDisplayed()
-                .then(isDisplayed => {
-                    expect(isDisplayed).toBeFalsy();
-                });
+        it('should be hidden', async () => {
+            const isDisplayed = await page.sidebar$.isDisplayed();
+            expect(isDisplayed).toBeFalsy();
         });
 
-        it('should appears on clicking on the toogle menu ', () => {
-            page.sidebarToggle$.click()
-                .then(_ => page.sidebar$.isDisplayed())
-                .then(isDisplayed => {
-                    expect(isDisplayed).toBeTruthy();
-                });
+        it('should appears on clicking on the toogle menu ', async () => {
+            await page.sidebarToggle$.click();
+            const isDisplayed = await page.sidebar$.isDisplayed();
+            expect(isDisplayed).toBeTruthy();
         });
 
-        it('should have title', () => {
-            browser.wait(ExpectedConditions.textToBePresentInElement(page.sidebarTitle$, page.title), 5000);
+        it('should have title', async () => {
+            const title = await page.sidebarTitle$.getText();
+            expect(title).toEqual(page.title);
         });
 
-        it('should have 2 menus', () => {
-            page.sidebarMenus$$.count()
-                .then(count => {
-                    expect(count).toEqual(2);
-                });
+        it('should have 2 menus', async () => {
+            const count = await page.sidebarMenus$$.count();
+            expect(count).toEqual(2);
         });
 
-        it('should navigate to "about" when clicking on about button', () => {
-            browser.wait(ExpectedConditions.elementToBeClickable(page.aboutMenu$), 5000);
-            page.aboutMenu$.click()
-                .then(_ => {
-                    browser.wait(ExpectedConditions.urlContains('about'), 5000);
-                });
+        it('should navigate to "about" when clicking on about button', async () => {
+            const isDisplayed = await page.aboutMenu$.isDisplayed();
+
+            await page.aboutMenu$.click();
+            await browser.sleep(navigateSleep);
+            browser.wait(ExpectedConditions.urlContains(page.navigatedTo_About), 5000);
         });
 
-        it('should sidebar collapsed', () => {
-            browser.wait(ExpectedConditions.invisibilityOf(page.sidebar$), 5000);
+        it('should sidebar collapsed', async () => {
+            const isDisplayed = await page.sidebar$.isDisplayed();
+            expect(isDisplayed).toBeFalsy();
         });
 
-        it('should be back to "timers" when back button is pressed', () => {
-            browser.navigate().back();
+        it('should be back to "timers" when back button is pressed', async () => {
+            await browser.navigate().back();
 
-            browser.wait(ExpectedConditions.urlContains('timers'), 5000);
+            const url = await browser.getCurrentUrl();
+            expect(url).toContain('timers');
         });
 
-        it('should appears again clicking on the toogle menu ', () => {
-            browser.wait(ExpectedConditions.elementToBeClickable(page.sidebarToggle$), 5000);
-            page.sidebarToggle$.click()
-                .then(_ => page.sidebar$.isDisplayed())
-                .then(isDisplayed => {
-                    expect(isDisplayed).toBeTruthy();
-                });
+        it('should appears again clicking on the toogle menu ', async () => {
+            await page.sidebarToggle$.click();
+            const isDisplayed = await page.sidebar$.isDisplayed();
+            expect(isDisplayed).toBeTruthy();
         });
 
-        it('should navigate to "settings" when clicking first', () => {
-            browser.wait(ExpectedConditions.elementToBeClickable(page.settingMenu$));
-            page.settingMenu$.click();
-            browser.wait(ExpectedConditions.urlContains('settings'), 5000);
+        it('should navigate to "settings" when clicking first', async () => {
+            await page.settingMenu$.click();
+            await browser.sleep(navigateSleep);
+            const url = await browser.getCurrentUrl();
+            expect(url).toContain(page.navigatedTo_Setting);
         });
 
-        it('should sidebar collapsed', () => {
-            browser.wait(ExpectedConditions.invisibilityOf(page.sidebar$), 5000);
+        it('should sidebar collapsed', async () => {
+            const isDisplayed = await page.sidebar$.isDisplayed();
+            expect(isDisplayed).toBeFalsy();
         });
 
     });

@@ -1,7 +1,14 @@
 import { $, $$ } from 'protractor';
 
+// page
 export let url = '/#';
 export let title = 'Kids Coaching - Timers';
+
+// navigated to
+export const navigatedTo_Setting = 'setting';
+export const navigatedTo_About = 'about';
+
+// page components
 
 export const sidebarToggle$ = $('ion-header ion-navbar button[menutoggle]');
 export const sidebar$ = $('ion-menu');

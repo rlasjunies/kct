@@ -1,8 +1,13 @@
 import { $, $$ } from 'protractor';
 
-export let url = '/#timers';
-export let title = 'Kids Coaching - Timers';
+// page
+export const url = '/#timers';
+export const title = 'Kids Coaching - Timers';
 
+// navigated to
+export const navigatedTo_TimerConfig = 'timer-config';
+
+// page components
 export const timers$$ = $$('timer-list-card');
 
 export const timer1$ = timers$$.first();

@@ -22,17 +22,19 @@ exports.config = {
     defaultTimeoutInterval: 30000,
     print: function () {}
   },
-  // rootElement: '.app-root',
+  SELENIUM_PROMISE_MANAGER: false,
   useAllAngular2AppRoots: true,
   beforeLaunch: function () {
     require('ts-node').register({
       project: 'e2e'
     });
 
+    // this could be used if there is no 'npm run serve' running 
     // require('connect')().use(require('serve-static')('www')).listen(8100);
   },
   onPrepare: function () {
     jasmine.getEnv().addReporter(new SpecReporter());
+    // browser.driver.manage().window().setSize(1600, 1024);
   },
 
   onComplete: function () {
@@ -53,15 +55,4 @@ exports.config = {
       });
     }
   }
-};
-
-// for use with Protractor/Webdriver
-var fs = require('fs');
-var path = require('path');
-
-var saveScreenshot = function(pathname) {
-  browser.takeScreenshot().then(function(png) {
-    var file = path.resolve(pathname);
-    fs.writeFileSync(file, png, { encoding: 'base64' }, console.log);
-  });
 };
