@@ -3,6 +3,12 @@ Command to generate the resources:
 
 `ionic cordova resources`
 
+=> 'resources\working folder\splash.pdn' (2732*2732)
+    => save modification
+    => save modification in 'resources\splash.png'
+
+
+
 > this command requires now account on ionic server to convert the pictures
 
 gamepad icon - free for commercial use
