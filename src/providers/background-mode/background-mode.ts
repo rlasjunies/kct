@@ -1,50 +1,35 @@
 import { Injectable } from '@angular/core';
 import { BackgroundMode } from '@ionic-native/background-mode';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
 import * as models from 'models';
+import * as constant from 'app/constant';
 import { TimerProvider } from 'providers/timer-service/timer-service';
+import { Events } from 'ionic-angular';
 
 @Injectable()
 export class BackgroundModeProvider {
-    private _notification = new BehaviorSubject<string>(null);
-    notification$ = this._notification.asObservable();
+
 
     private _timerSubscription: Subscription;
 
     constructor(
         private backgroundModeNative: BackgroundMode,
         private timerService: TimerProvider,
+        private events: Events,
     ) {
-        this._notification.subscribe(this.effectOnBackgroundModeEvents);
+        this.events.subscribe(constant.EVENT_APP_PAUSE, this.activateBackgroundMode);
+        this.events.subscribe(constant.EVENT_APP_RESUME, this.disableBackgroundMode);
+        this.events.subscribe(constant.EVENT_APP_READY, this.initializationToDoWhenDeviceReady);
+
         this._timerSubscription = this.timerService.notification$.subscribe(this.effectOnTimerNotification);
     }
 
-    public initializationToDoWhenDeviceReady() {
+    private initializationToDoWhenDeviceReady = () => {
         this.backgroundModeNative.setDefaults({
             title: 'Timers are running in background',
             text: '',
         });
-    }
-
-    public dispatch = (event: string) => {
-        this._notification.next(event);
-    }
-
-    effectOnBackgroundModeEvents = (event: string) => {
-        // console.log('effectOnBackgroundMoveEvents:', event);
-        switch (event) {
-            case 'pause':
-                this.activateBackgroundMode();
-                break;
-
-            case 'resume':
-                this.disableBackgroundMode();
-                break;
-
-            default:
-                break;
-        }
+        console.log('background-mode:initializationToDoWhenDeviceReady');
     }
 
     effectOnTimerNotification = (timerNotification: models.TimerChangeNotification) => {
@@ -67,15 +52,17 @@ export class BackgroundModeProvider {
         this.backgroundModeNative.disable();
     }
 
-    private disableBackgroundMode() {
+    private disableBackgroundMode = () => {
         if (this.backgroundModeNative.isEnabled()) {
             this.backgroundModeNative.disable();
         }
+        console.log('background-mode:disableBackgroundMode');
     }
 
-    private activateBackgroundMode() {
+    private activateBackgroundMode = () => {
         if (this.timerService.isThereAtLeastOneTimerRunning()) {
             this.backgroundModeNative.enable();
         }
+        console.log('background-mode:activateBackgroundMode');
     }
 }
