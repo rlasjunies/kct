@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { Events } from 'ionic-angular';
 
 import * as constant from 'app/constant';
@@ -7,7 +7,6 @@ import * as models from 'models';
 import * as misc from 'misc/misc';
 import { TimerProvider } from 'providers/timer-service/timer-service';
 import { TimerStorageProvider } from 'providers/timer-storage/timer-storage';
-import { isDevMode } from '@angular/core/src/application_ref';
 
 @Injectable()
 export class TimerConfigService {
