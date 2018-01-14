@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="9" id="com.ionicframework.kct3128288" ios-CFBundleVersion="9" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>KC Timer</name>
-    <description>Application helping you to manage video and gaming usage duration for your kids</description>
+<widget android-versionCode="21" id="com.ionicframework.kct3128288" ios-CFBundleVersion="21" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Games Timers</name>
+    <description>Control the video gaming duration of your kids!</description>
     <author email="rlasjunies@gmail.com" href="http://cpairelasjunies.com/">Richard Lasjunies</author>
     <content src="index.html" />
     <access origin="*" />
@@ -79,7 +79,6 @@
         <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
     </platform>
-    <engine name="android" spec="6.4.0" />
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
     <plugin name="cordova-plugin-statusbar" spec="2.3.0" />
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
@@ -87,4 +86,5 @@
     <plugin name="cordova-plugin-console" spec="1.1.0" />
     <plugin name="cordova-plugin-device" spec="1.1.7" />
     <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
+    <engine name="android" spec="6.4.0" />
 </widget>
