@@ -7,6 +7,7 @@ import * as models from 'models';
 import * as misc from 'misc/misc';
 import { TimerProvider } from 'providers/timer-service/timer-service';
 import { TimerStorageProvider } from 'providers/timer-storage/timer-storage';
+import { isDevMode } from '@angular/core/src/application_ref';
 
 @Injectable()
 export class TimerConfigService {
@@ -53,37 +54,49 @@ export class TimerConfigService {
     }
 
     private checkIfFirstLoad() {
-        if (!this._config) {
-            // 1st time in the application
-            const config: models.IConfig = {
-                dayOfLastTimersCalculation: '2016-08-10',
-                timersConfig: [
-                    {
-                        guid: '569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3', weekdays: 96,
-                        title: 'Paul-game', durationMilliSecond: 3600000, durationHumanized: '01:00',
-                        icon: 'game-controller-b', enable: true
-                    },
-                    {
-                        guid: 'a99897da-1460-409b-9778-571a3c4756ae', weekdays: 127,
-                        title: 'Paul-TV', durationMilliSecond: 3600000, durationHumanized: '01:00', icon: 'film', enable: true
-                    },
-                    {
-                        guid: '17913ab4-b7b2-4aba-af9f-01e6019844b3', weekdays: 96,
-                        title: 'Louis-game', durationMilliSecond: 3600000, durationHumanized: '01:00', icon: 'game-controller-b',
-                        enable: true
-                    },
-                    {
-                        guid: 'ef8d4703-d939-4b75-a814-0157cb8ac0b5', weekdays: 127,
-                        title: 'Louis-TV', durationMilliSecond: 3600000, durationHumanized: '01:00', icon: 'film', enable: true
-                    },
-                ]
-            };
-            this._config = config;
+        const firstLoad = !this._config;
+        let firstLoadConfig: models.IConfig;
+        if (firstLoad) {
+            if (isDevMode()) {
+
+                // 1st time in the application in dev Mode
+                firstLoadConfig = {
+                    dayOfLastTimersCalculation: '2016-08-10',
+                    timersConfig: [
+                        {
+                            guid: '569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3', weekdays: 96,
+                            title: 'Paul-game', durationMilliSecond: 5000, durationHumanized: '01:00',
+                            icon: 'game-controller-b', enable: true
+                        },
+                        {
+                            guid: 'a99897da-1460-409b-9778-571a3c4756ae', weekdays: 127,
+                            title: 'Paul-TV', durationMilliSecond: 5000, durationHumanized: '01:00', icon: 'film', enable: true
+                        },
+                        {
+                            guid: '17913ab4-b7b2-4aba-af9f-01e6019844b3', weekdays: 96,
+                            title: 'Louis-game', durationMilliSecond: 5000, durationHumanized: '01:00', icon: 'game-controller-b',
+                            enable: true
+                        },
+                        {
+                            guid: 'ef8d4703-d939-4b75-a814-0157cb8ac0b5', weekdays: 127,
+                            title: 'Louis-TV', durationMilliSecond: 5000, durationHumanized: '01:00', icon: 'film', enable: true
+                        },
+                    ]
+                };
+            } else {
+
+                // initial config in released version
+                firstLoadConfig = {
+                    dayOfLastTimersCalculation: '2016-08-10',
+                    timersConfig: []
+                };
+            }
+            this._config = firstLoadConfig;
             this._storeConfig();
 
             // For each timer create an unique timerValue
-            for (const timerConf in config.timersConfig) {
-                this._storeTimerValue(config.timersConfig[timerConf]);
+            for (const timerConf in firstLoadConfig.timersConfig) {
+                this._storeTimerValue(firstLoadConfig.timersConfig[timerConf]);
             }
 
             console.warn('1st initialisation done');
