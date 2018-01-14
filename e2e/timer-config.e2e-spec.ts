@@ -3,7 +3,7 @@ import * as pageTimers from './timers.po';
 import { browser, ExpectedConditions, protractor } from 'protractor';
 import { isDate } from 'util';
 import { beforeEachSleep, navigateSleep, takeScreenShot } from './_helper';
-import { minutesSelector$, durationOfTimerText$ } from './timer-config.po';
+import { minutesSelector$, durationOfTimerText$, modalPageIconSelection, modalPageIconSelection_title, modalPageIconSelection_listIcon, iconButtonIcon$, deleteIcon, deleteAlert, deleteAlert_title, deleteAlert_cancel } from './timer-config.po';
 
 const uid = 'e2e timer config' + Date.now();
 
@@ -90,6 +90,55 @@ describe('Timer config', function () {
             const days = await page.daysSelector$.getAttribute('ng-reflect-days');
             expect(days.toString()).toEqual('103', 'days selector');
         });
+
+        it('should allows modifications - icon', async () => {
+            await page.iconButton$.click();
+
+            browser.wait(ExpectedConditions.visibilityOf(modalPageIconSelection), navigateSleep);
+
+            const title = await modalPageIconSelection_title.getText();
+
+            expect(title).toEqual('Select an icon');
+        });
+
+        it('should have a list of 21 icons', async () => {
+            const numberOfIcons = await modalPageIconSelection_listIcon.count();
+
+            expect(numberOfIcons).toEqual(21);
+        });
+
+        it('should navigate back when clicking on 1 icon', async () => {
+            // click on 1st element
+            await modalPageIconSelection_listIcon.first().click();
+
+            browser.wait(ExpectedConditions.invisibilityOf(modalPageIconSelection), navigateSleep);
+        });
+
+        it('icon selected should a gamepad', async () => {
+
+
+            const iconName = await iconButtonIcon$.getAttribute('ng-reflect-name');
+
+            expect(iconName).toEqual('game-controller-b');
+        });
+
+        it('should allow deletion', async () => {
+            await deleteIcon.click();
+
+            browser.wait(ExpectedConditions.visibilityOf(deleteAlert), navigateSleep);
+
+            const title = await deleteAlert_title.getText();
+
+            expect(title).toEqual('Delete');
+        });
+
+        it('should close delete alert on cancel', async () => {
+            await deleteAlert_cancel.click();
+
+            browser.wait(ExpectedConditions.invisibilityOf(deleteAlert), navigateSleep);
+
+        });
+
 
     });
 });

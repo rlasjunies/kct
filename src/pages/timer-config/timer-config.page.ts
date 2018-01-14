@@ -116,7 +116,8 @@ export class TimerConfigPage {
                     text: 'Cancel',
                     handler: data => {
                         // console.log('Cancel clicked');
-                    }
+                    },
+                    cssClass: 'fakeidCancel4e2e'
                 },
                 {
                     text: 'Delete',

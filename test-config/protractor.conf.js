@@ -9,7 +9,10 @@ let logAtTheEnd = false;
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
-    '../e2e/**/*.e2e-spec.ts'
+    // '../e2e/**/*.e2e-spec.ts'
+    // '../e2e/app.e2e-spec.ts',
+    // '../e2e/timers.e2e-spec.ts',
+    '../e2e/timer-config.e2e-spec.ts',
   ],
   capabilities: {
     'browserName': 'chrome'
