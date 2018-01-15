@@ -1,7 +1,5 @@
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-// import { Observable } from 'rxjs/Observable';
-// import { EventEmitter } from 'selenium-webdriver';
 import * as angularCore from '@angular/core';
 export class NativeAudioMock {
     preloadSimple(id: string, assetPath: string): Promise<any> {
@@ -347,4 +345,14 @@ export class ModalControllerMock {
 
 export class DeepLinkerMock {
 
+}
+
+export class EventsMock {
+    subscribe(topic: string, ...handlers: Function[]): void { }
+    unsubscribe(topic: string, handler?: Function): boolean {
+        return true;
+    }
+    publish(topic: string, ...args: any[]): any[] {
+        return [];
+    }
 }

@@ -12,3 +12,7 @@
     export let SOUND_OVERTIME_ALERT = 'assets/sounds/alert.m4a'; // 45610__flick3r__bounce-seq-5wav.www.freesound.org.wav";
 
     export let DATE_STORE_FORMAT = 'YYYY-MM-DD';
+
+    export const EVENT_APP_PAUSE = 'app:pause';
+    export const EVENT_APP_RESUME = 'app:resume';
+    export const EVENT_APP_READY = 'app:ready';
