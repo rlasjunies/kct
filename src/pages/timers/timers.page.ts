@@ -116,7 +116,7 @@ export class TimersPage implements OnInit, OnDestroy {
                 done: false,
                 alert: false,
             };
-        misc.statusCalcultation(newUITimer);
+        misc.statusCalculation(newUITimer);
         this.arrayAddOrReplaceInTimers(newUITimer);
     }
 
@@ -217,7 +217,7 @@ export class TimersPage implements OnInit, OnDestroy {
         timerUI.percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration);
         timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
         timerUI.status = models.enumTimerStatus.RUNNING; // timerValue.status;
-        misc.statusCalcultation(timerUI);
+        misc.statusCalculation(timerUI);
     }
 
     private timerTicked(timerValue: models.TimerValue, timerUI: models.UITimer) {
@@ -228,7 +228,7 @@ export class TimersPage implements OnInit, OnDestroy {
         timerUI.percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration);
         timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
         timerUI.status = timerValue.status;
-        misc.statusCalcultation(timerUI);
+        misc.statusCalculation(timerUI);
     }
 
     private timerOvered(timerValue: models.TimerValue, timerUI: models.UITimer) {
@@ -238,7 +238,7 @@ export class TimersPage implements OnInit, OnDestroy {
         timerUI.percentageDone = 100;
         timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
         timerUI.status = timerValue.status;
-        misc.statusCalcultation(timerUI);
+        misc.statusCalculation(timerUI);
 
         // Play the alert (if not already playing)
         // if (!this._media[timerUI.guid]) {
@@ -255,7 +255,7 @@ export class TimersPage implements OnInit, OnDestroy {
         timerUI.percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration);
         timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
         timerUI.status = models.enumTimerStatus.ACKNOWLEDGE;  // timerValue.status;
-        misc.statusCalcultation(timerUI);
+        misc.statusCalculation(timerUI);
     }
 
     private timerHeld(timerValue: models.TimerValue, timerUI: models.UITimer) {
@@ -265,7 +265,7 @@ export class TimersPage implements OnInit, OnDestroy {
         timerUI.percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration);
         timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
         timerUI.status = models.enumTimerStatus.HOLD; // timerValue.status;
-        misc.statusCalcultation(timerUI);
+        misc.statusCalculation(timerUI);
     }
 
     calculPercentage(left: number, total: number) {

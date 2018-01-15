@@ -9,7 +9,7 @@ export function durationHourMinSecondFormat(d: moment.Duration): string {
 export function durationHumanized(d: moment.Duration): string {
     return d.hours() + ' hour(s) and ' + d.minutes() + ' min(s).';
 }
-export function statusCalcultation(timer: models.UITimer): void {
+export function statusCalculation(timer: models.UITimer): void {
     switch (timer.status) {
         case models.enumTimerStatus.READY:
             timer.ready = true;
