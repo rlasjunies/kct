@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="22" id="com.ionicframework.kct3128288" ios-CFBundleVersion="22" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="23" id="com.ionicframework.kct3128288" ios-CFBundleVersion="23" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Games Timers</name>
     <description>Control the video gaming duration of your kids!</description>
     <author email="rlasjunies@gmail.com" href="http://cpairelasjunies.com/">Richard Lasjunies</author>
@@ -86,5 +86,6 @@
     <plugin name="cordova-plugin-console" spec="1.1.0" />
     <plugin name="cordova-plugin-device" spec="1.1.7" />
     <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
+    <plugin name="cordova-plugin-tts" spec="^0.2.3" />
     <engine name="android" spec="6.4.0" />
 </widget>
