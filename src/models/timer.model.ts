@@ -58,3 +58,12 @@ export class TimerChangeNotification {
     constructor(public guidEvent: string, public timerValue: TimerValue) {
     }
 }
+
+export class TimerChangeNotification1stTime extends TimerChangeNotification {}
+
+export class TimerChangeNotificationOver extends
+TimerChangeNotification {}
+
+export class TimerChangeNotificationOverStarted extends TimerChangeNotification {}
+export class TimerChangeNotificationAcknowledged extends TimerChangeNotification {}
+export class TimerChangeNotificationHeld extends TimerChangeNotification {}

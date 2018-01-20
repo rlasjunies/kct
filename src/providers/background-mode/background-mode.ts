@@ -20,8 +20,7 @@ export class BackgroundModeProvider {
         this.events.subscribe(constant.EVENT_APP_PAUSE, this.activateBackgroundMode);
         this.events.subscribe(constant.EVENT_APP_RESUME, this.disableBackgroundMode);
         this.events.subscribe(constant.EVENT_APP_READY, this.initializationToDoWhenDeviceReady);
-
-        this._timerSubscription = this.timerService.notification$.subscribe(this.effectOnTimerNotification);
+        this.events.subscribe(constant.EVENT_TIMER_TICK, this.effectOnTimerNotification);
     }
 
     private initializationToDoWhenDeviceReady = () => {

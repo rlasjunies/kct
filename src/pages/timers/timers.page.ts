@@ -5,13 +5,22 @@ import { Subscription } from 'rxjs/Subscription';
 
 import * as models from 'models';
 import * as misc from 'misc';
-// import * as constant from 'app/constant';
 import * as pages from 'pages';
+import * as constants from 'app/constant';
 
 import { TimerProvider } from 'providers/timer-service/timer-service';
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 import { DaysEncodingProvider } from 'providers';
 import { OnInit, OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { instanceAvailability } from '@ionic-native/core';
+import {
+    TimerChangeNotification,
+    TimerChangeNotificationOverStarted,
+    TimerChangeNotificationHeld,
+    TimerChangeNotification1stTime,
+    TimerChangeNotificationOver,
+    TimerChangeNotificationAcknowledged
+} from 'models';
 
 export interface DictionaryUITimer {
     [index: string]: models.UITimer
@@ -21,14 +30,15 @@ export interface DictionaryUITimer {
 export interface DictionaryMedia extends misc.Dictionary<any> { }
 export const ID_timers = 'timers';
 @IonicPage({
-        name: 'timers',
-        segment: 'timers'
-    }
+    name: 'timers',
+    segment: 'timers'
+}
 )
 @Component({
     templateUrl: 'timers.page.html',
 })
-export class TimersPage implements OnInit, OnDestroy {
+// export class TimersPage implements OnInit, OnDestroy {
+export class TimersPage {
     @ViewChild(Content) content: Content;
     // private _media: DictionaryMedia = {};
     public timers: models.UITimer[] = [];
@@ -41,24 +51,15 @@ export class TimersPage implements OnInit, OnDestroy {
         private timerConfigService: TimerConfigService,
         private events: Events,
         private daysEncodingService: DaysEncodingProvider,
-        ) {
+    ) {
 
         this.loadTimers();
         this.events.subscribe(timerConfigService.eventsTimersconfigChanged, this.refreshListWhenTimerConfigChanged);
         this.events.subscribe(timerConfigService.eventsTimersconfigDeleted, this.refreshListWhenTimerConfigDeleted);
+        this.events.subscribe(constants.EVENT_TIMER_TICK, this.manageTimerNotification);
     }
     ionViewWillEnter() {
         this.content.resize();
-    }
-
-    ngOnInit() {
-        this._timerSubscription = this.timerService.notification$.subscribe(this.manageTimerNotification);
-    }
-
-
-    ngOnDestroy() {
-        // prevent memory leak when component is destroyed
-        this._timerSubscription.unsubscribe();
     }
 
     refreshListWhenTimerConfigChanged = (timerConfig: models.TimerConfig) => {
@@ -120,10 +121,10 @@ export class TimersPage implements OnInit, OnDestroy {
         this.arrayAddOrReplaceInTimers(newUITimer);
     }
 
-    arrayAddOrReplaceInTimers( newUITimer: models.UITimer) {
+    arrayAddOrReplaceInTimers(newUITimer: models.UITimer) {
         const index = this.timers.findIndex((uiTimer: models.UITimer) => uiTimer.guid === newUITimer.guid);
         const numberToRemove = index === -1 ? 0 : 1;
-        this.timers.splice(index, numberToRemove, newUITimer );
+        this.timers.splice(index, numberToRemove, newUITimer);
     }
     // orderTimers() {
     //     let timersRunnings = this.timers.filter((value) => {
@@ -272,41 +273,64 @@ export class TimersPage implements OnInit, OnDestroy {
         return Math.round(100 * (total - left) / total);
     }
     private manageTimerNotification = (timerNotification: models.TimerChangeNotification) => {
-        if (timerNotification) {
-            const timerUI = this.helperRetrieveTimerFromGuid(timerNotification.timerValue.guid);
+        // if (timerNotification) {
+        const timerUI = this.helperRetrieveTimerFromGuid(timerNotification.timerValue.guid);
 
-            switch (timerNotification.timerValue.status) {
-                case models.enumTimerStatus.STARTED:
-                    this.timerStarted(timerNotification.timerValue, timerUI);
-                    break;
+        if (timerNotification instanceof TimerChangeNotificationOverStarted) {
+            this.timerStarted(timerNotification.timerValue, timerUI);
 
-                case models.enumTimerStatus.HOLD:
-                    this.timerHeld(timerNotification.timerValue, timerUI);
-                    break;
+        } else if (timerNotification instanceof TimerChangeNotificationHeld) {
+            this.timerHeld(timerNotification.timerValue, timerUI);
 
-                case models.enumTimerStatus.RUNNING:
-                    this.timerTicked(timerNotification.timerValue, timerUI);
-                    break;
+        } else if (timerNotification instanceof TimerChangeNotification1stTime) {
+            this.timerOvered(timerNotification.timerValue, timerUI);
 
-                case models.enumTimerStatus.OVER_1ST_TIME:
-                    this.timerOvered(timerNotification.timerValue, timerUI);
+        } else if (timerNotification instanceof TimerChangeNotificationOver) {
+            this.timerOvered(timerNotification.timerValue, timerUI);
 
-                    break;
-                case models.enumTimerStatus.OVER:
-                    this.timerOvered(timerNotification.timerValue, timerUI);
+        } else if (timerNotification instanceof TimerChangeNotificationAcknowledged) {
+            this.timerStopped(timerNotification.timerValue, timerUI);
 
-                    break;
-                case models.enumTimerStatus.ACKNOWLEDGE:
-                    // this.WhenIsNext(timerNotification.guid);
-                    this.timerStopped(timerNotification.timerValue, timerUI);
-                    break;
+        } else if (timerNotification instanceof TimerChangeNotification) {
+            console.log('timerNotification');
+            this.timerTicked(timerNotification.timerValue, timerUI);
 
-                default:
-                    console.log('WRONG TIMER STATUS VALUE');
-            }
         } else {
-            console.log('timerNotification value null');
+            console.log('WRONG TIMER STATUS VALUE');
         }
+
+        // switch (timerNotification.timerValue.status) {
+        //     case models.enumTimerStatus.STARTED:
+        //         this.timerStarted(timerNotification.timerValue, timerUI);
+        //         break;
+
+        //     case models.enumTimerStatus.HOLD:
+        //         this.timerHeld(timerNotification.timerValue, timerUI);
+        //         break;
+
+        //     case models.enumTimerStatus.RUNNING:
+        //         this.timerTicked(timerNotification.timerValue, timerUI);
+        //         break;
+
+        //     case models.enumTimerStatus.OVER_1ST_TIME:
+        //         this.timerOvered(timerNotification.timerValue, timerUI);
+
+        //         break;
+        //     case models.enumTimerStatus.OVER:
+        //         this.timerOvered(timerNotification.timerValue, timerUI);
+
+        //         break;
+        //     case models.enumTimerStatus.ACKNOWLEDGE:
+        //         // this.WhenIsNext(timerNotification.guid);
+        //         this.timerStopped(timerNotification.timerValue, timerUI);
+        //         break;
+
+        //     default:
+        //         console.log('WRONG TIMER STATUS VALUE');
+        // }
+        // } else {
+        //     console.log('timerNotification value null');
+        // }
     }
 
     timerClicked(timer: models.UITimer, evt: Event) {
