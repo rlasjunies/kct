@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { GaugeRadial } from './gauge-radial';
+import { GaugeRadialComponent } from './gauge-radial';
 
 @NgModule({
   declarations: [
-    GaugeRadial,
+    GaugeRadialComponent,
   ],
   imports: [
-    IonicPageModule.forChild(GaugeRadial),
+    IonicPageModule.forChild(GaugeRadialComponent),
   ],
   exports: [
-    GaugeRadial
+    GaugeRadialComponent
   ]
 })
 export class GaugeRadialModule {}

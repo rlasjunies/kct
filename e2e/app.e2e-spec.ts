@@ -4,7 +4,7 @@ import { isDate } from 'util';
 import { beforeEachSleep, navigateSleep, takeScreenShot } from './_helper';
 
 
-describe('KCT app', function () {
+describe('Games Timers app', function () {
 
     beforeAll(async () => {
         await browser.get(page.url);

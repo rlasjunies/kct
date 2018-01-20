@@ -125,7 +125,7 @@
     "component-selector": [
       true,
       "element",
-      "app",
+      ["app", "page"],
       "kebab-case"
     ],
     "use-input-property-decorator": true,
@@ -135,9 +135,8 @@
     "no-output-rename": true,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
-    "component-class-suffix": true,
-    "directive-class-suffix": true,
-    "invoke-injectable": true
+    "component-class-suffix": [true, "Component", "Page"],
+    "directive-class-suffix": true
   },
   "rulesDirectory": [
     "node_modules/tslint-eslint-rules/dist/rules",

@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-    selector: 'minutes-selector',
+    selector: 'app-minutes-selector',
     templateUrl: 'minutes-selector.html'
 })
-export class MinutesSelector {
+export class MinutesSelectorComponent {
 
     @Input()
     minutes = 0;

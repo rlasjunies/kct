@@ -26,7 +26,7 @@ export class TimerConfigPage {
     public timerConfig: model.TimerConfig;
     public durationMinutes: number;
     public durationHours: number;
-    private modalAvatar: Modal;
+    private modalIcon: Modal;
 
     constructor(
         public navCtrl: NavController,
@@ -64,21 +64,21 @@ export class TimerConfigPage {
     }
 
 
-    avatarClicked() {
-        this.modalAvatar = this.modalController
-            .create(pages.ID_avatarSelection, { id: this.timerConfig.icon });
+    iconClicked() {
+        this.modalIcon = this.modalController
+            .create(pages.ID_IconSelection, { id: this.timerConfig.icon });
 
-        this.modalAvatar.onDidDismiss((iconSelected: string) => {
+        this.modalIcon.onDidDismiss((iconSelected: string) => {
             if (iconSelected !== '') {
                 this.timerConfig.icon = iconSelected;
                 this.saveTimerConfig();
             }
         });
 
-        this.modalAvatar.present();
+        this.modalIcon.present();
     }
     backButtonAction() {
-        this.modalAvatar.dismiss();
+        this.modalIcon.dismiss();
     }
     titleChange(value: string) {
         console.log('Title changed:', value);
@@ -116,7 +116,8 @@ export class TimerConfigPage {
                     text: 'Cancel',
                     handler: data => {
                         // console.log('Cancel clicked');
-                    }
+                    },
+                    cssClass: 'fakeidCancel4e2e'
                 },
                 {
                     text: 'Delete',

@@ -2,7 +2,7 @@ import { $, $$ } from 'protractor';
 
 // page
 export let url = '/#';
-export let title = 'Kids Coaching - Timers';
+export let title = 'Games Timers';
 
 // navigated to
 export const navigatedTo_Setting = 'setting';

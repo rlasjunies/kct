@@ -11,6 +11,7 @@ import * as pages from 'pages';
 import { TimerProvider } from 'providers/timer-service/timer-service';
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 import { DaysEncodingProvider } from 'providers';
+import { OnInit, OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 export interface DictionaryUITimer {
     [index: string]: models.UITimer
@@ -27,7 +28,7 @@ export const ID_timers = 'timers';
 @Component({
     templateUrl: 'timers.page.html',
 })
-export class TimersPage {
+export class TimersPage implements OnInit, OnDestroy {
     @ViewChild(Content) content: Content;
     // private _media: DictionaryMedia = {};
     public timers: models.UITimer[] = [];
@@ -115,7 +116,7 @@ export class TimersPage {
                 done: false,
                 alert: false,
             };
-        misc.statusCalcultation(newUITimer);
+        misc.statusCalculation(newUITimer);
         this.arrayAddOrReplaceInTimers(newUITimer);
     }
 
@@ -209,8 +210,6 @@ export class TimersPage {
         //     icon: "file://assets/images/tv.png"
         // });
 
-
-        // this.scope.$on(timerValue.guid + kct.constant.TIMER_STARTED_EVENT, (evt: ng.IAngularEvent, timerValue: model.ITimerValue) => {
         console.log('timer:' + timerValue.title + '_started received');
 
         // Update controller datas
@@ -218,7 +217,7 @@ export class TimersPage {
         timerUI.percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration);
         timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
         timerUI.status = models.enumTimerStatus.RUNNING; // timerValue.status;
-        misc.statusCalcultation(timerUI);
+        misc.statusCalculation(timerUI);
     }
 
     private timerTicked(timerValue: models.TimerValue, timerUI: models.UITimer) {
@@ -229,7 +228,7 @@ export class TimersPage {
         timerUI.percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration);
         timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
         timerUI.status = timerValue.status;
-        misc.statusCalcultation(timerUI);
+        misc.statusCalculation(timerUI);
     }
 
     private timerOvered(timerValue: models.TimerValue, timerUI: models.UITimer) {
@@ -239,7 +238,7 @@ export class TimersPage {
         timerUI.percentageDone = 100;
         timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
         timerUI.status = timerValue.status;
-        misc.statusCalcultation(timerUI);
+        misc.statusCalculation(timerUI);
 
         // Play the alert (if not already playing)
         // if (!this._media[timerUI.guid]) {
@@ -256,7 +255,7 @@ export class TimersPage {
         timerUI.percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration);
         timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
         timerUI.status = models.enumTimerStatus.ACKNOWLEDGE;  // timerValue.status;
-        misc.statusCalcultation(timerUI);
+        misc.statusCalculation(timerUI);
     }
 
     private timerHeld(timerValue: models.TimerValue, timerUI: models.UITimer) {
@@ -266,7 +265,7 @@ export class TimersPage {
         timerUI.percentageDone = this.calculPercentage(timerValue.durationLeft_MilliSecond, timerValue.duration);
         timerUI.durationLeftString = misc.durationHourMinSecondFormat(timerUI.durationLeft);
         timerUI.status = models.enumTimerStatus.HOLD; // timerValue.status;
-        misc.statusCalcultation(timerUI);
+        misc.statusCalculation(timerUI);
     }
 
     calculPercentage(left: number, total: number) {

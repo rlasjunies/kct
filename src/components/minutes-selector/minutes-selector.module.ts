@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { MinutesSelector } from './minutes-selector';
+import { MinutesSelectorComponent } from './minutes-selector';
 
 @NgModule({
   declarations: [
-    MinutesSelector,
+    MinutesSelectorComponent,
   ],
   imports: [
-    IonicPageModule.forChild(MinutesSelector),
+    IonicPageModule.forChild(MinutesSelectorComponent),
   ],
   exports: [
-    MinutesSelector
+    MinutesSelectorComponent
   ]
 })
 export class MinutesSelectorModule {}

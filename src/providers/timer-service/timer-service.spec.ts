@@ -37,7 +37,7 @@ describe('timer provider', () => {
     describe('isThereAtLeastOneTimerRunning', () => {
         it('should return no when no timer are runnung', () => {
             (<StorageInMemoryProvider>(<any>timerService.timerStorage).storage)._data = {
-                'kct_timers': {
+                'gt_timers': {
                     'dayOfLastTimersCalculation': '2017-12-27',
                     'timersConfig': [
                         {
@@ -69,21 +69,21 @@ describe('timer provider', () => {
                         }
                     ]
                 },
-                'kct_569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3': {
+                'gt_569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3': {
                     'guid': '569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3',
                     'title': 'Paul - game',
                     'durationLeft_MilliSecond': 5000,
                     'duration': 5000,
                     'status': 10
                 },
-                'kct_a99897da-1460-409b-9778-571a3c4756ae': {
+                'gt_a99897da-1460-409b-9778-571a3c4756ae': {
                     'guid': 'a99897da-1460-409b-9778-571a3c4756ae',
                     'title': 'Paul - TV',
                     'durationLeft_MilliSecond': 5000,
                     'duration': 5000,
                     'status': 10
                 },
-                'kct_17913ab4-b7b2-4aba-af9f-01e6019844b3': {
+                'gt_17913ab4-b7b2-4aba-af9f-01e6019844b3': {
                     'guid': '17913ab4-b7b2-4aba-af9f-01e6019844b3',
                     'title': 'Louis - game',
                     'durationLeft_MilliSecond': 5000,
@@ -101,7 +101,7 @@ describe('timer provider', () => {
 
         it('should return yes when one timer is started', () => {
             (<StorageInMemoryProvider>(<any>timerService.timerStorage).storage)._data = {
-                'kct_timers': {
+                'gt_timers': {
                     'dayOfLastTimersCalculation': '2017-12-27',
                     'timersConfig': [
                         {
@@ -133,21 +133,21 @@ describe('timer provider', () => {
                         }
                     ]
                 },
-                'kct_569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3': {
+                'gt_569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3': {
                     'guid': '569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3',
                     'title': 'Paul - game',
                     'durationLeft_MilliSecond': 5000,
                     'duration': 5000,
                     'status': 60
                 },
-                'kct_a99897da-1460-409b-9778-571a3c4756ae': {
+                'gt_a99897da-1460-409b-9778-571a3c4756ae': {
                     'guid': 'a99897da-1460-409b-9778-571a3c4756ae',
                     'title': 'Paul - TV',
                     'durationLeft_MilliSecond': 5000,
                     'duration': 5000,
                     'status': 10
                 },
-                'kct_17913ab4-b7b2-4aba-af9f-01e6019844b3': {
+                'gt_17913ab4-b7b2-4aba-af9f-01e6019844b3': {
                     'guid': '17913ab4-b7b2-4aba-af9f-01e6019844b3',
                     'title': 'Louis - game',
                     'durationLeft_MilliSecond': 5000,
@@ -166,7 +166,7 @@ describe('timer provider', () => {
 
         it('should return yes when 1 timer is running', () => {
             (<StorageInMemoryProvider>(<any>timerService.timerStorage).storage)._data = {
-                'kct_timers': {
+                'gt_timers': {
                     'dayOfLastTimersCalculation': '2017-12-27',
                     'timersConfig': [
                         {
@@ -198,21 +198,21 @@ describe('timer provider', () => {
                         }
                     ]
                 },
-                'kct_569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3': {
+                'gt_569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3': {
                     'guid': '569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3',
                     'title': 'Paul - game',
                     'durationLeft_MilliSecond': 5000,
                     'duration': 5000,
                     'status': 30
                 },
-                'kct_a99897da-1460-409b-9778-571a3c4756ae': {
+                'gt_a99897da-1460-409b-9778-571a3c4756ae': {
                     'guid': 'a99897da-1460-409b-9778-571a3c4756ae',
                     'title': 'Paul - TV',
                     'durationLeft_MilliSecond': 5000,
                     'duration': 5000,
                     'status': 10
                 },
-                'kct_17913ab4-b7b2-4aba-af9f-01e6019844b3': {
+                'gt_17913ab4-b7b2-4aba-af9f-01e6019844b3': {
                     'guid': '17913ab4-b7b2-4aba-af9f-01e6019844b3',
                     'title': 'Louis - game',
                     'durationLeft_MilliSecond': 5000,

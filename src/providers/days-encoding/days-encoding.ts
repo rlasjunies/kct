@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { weekdays } from 'moment';
 
 @Injectable()
 export class DaysEncodingProvider {
@@ -8,6 +7,7 @@ export class DaysEncodingProvider {
     public weekdaysNumberToBooleans(weekDaysEncoded: number): [boolean, boolean, boolean, boolean, boolean, boolean, boolean] {
 
         return [
+            // tslint:disable:no-bitwise
             (weekDaysEncoded & 1) === 1,
             (weekDaysEncoded & 2) === 2,
             (weekDaysEncoded & 4) === 4,
@@ -34,13 +34,13 @@ export class DaysEncodingProvider {
     public weekDaysNumberToHumanizeds(weekDaysNumber: number): string[] {
         const weekDaysHumanized: string[] = [];
 
-        const weekDaysBooleansArray = this.weekdaysNumberToBooleans(weekDaysNumber)
+        const weekDaysBooleansArray = this.weekdaysNumberToBooleans(weekDaysNumber);
 
         weekDaysBooleansArray.map((daySelected: boolean, index: number) => {
             if (daySelected) {
                 weekDaysHumanized.push(this.weekdaysShort(index + 1));
             }
-        })
+        });
 
         return weekDaysHumanized;
     }

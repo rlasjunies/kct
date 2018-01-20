@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as constant from 'app/constant';
-import { TimerValue, TimerConfig, IConfig } from 'models';
+import { TimerValue, IConfig } from 'models';
 // import { StorageInMemoryProvider } from 'providers/storage-in-memory/storage-in-memory';
 import { StorageLocalProvider } from 'providers/storage-local/storage-local';
 

@@ -1,8 +1,8 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>timer configuration</ion-title>
+    <ion-title>Timer configuration</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="Delete()">
+      <button id="delete" ion-button (click)="Delete()">
         <ion-icon color="danger" name="trash"></ion-icon>
       </button>
     </ion-buttons>
@@ -12,8 +12,8 @@
 <ion-content class="has-header" padding>
   <ion-row align-items-center align-items-middle>
     <ion-col col-4 col-sm-3 text-center>
-      <button id="icon" ion-button round outline large color="dark" (click)="avatarClicked()">
-        <ion-icon class="kct-avatar" [name]="timerConfig.icon"></ion-icon>
+      <button id="icon" ion-button round outline large color="dark" (click)="iconClicked()">
+        <ion-icon class="kct-icon" [name]="timerConfig.icon"></ion-icon>
       </button>
     </ion-col>
     <ion-col col-8 col-sm-9>
@@ -28,14 +28,14 @@
   <h6 id="durationText">
     <u>Duration of the timer:</u> {{ timerConfig.durationHumanized }} hour(s)
   </h6>
-  <hours-selector hours="{{durationHours}}" (hoursChange)="hoursSelectionchanged($event)"></hours-selector>
+  <app-hours-selector hours="{{durationHours}}" (hoursChange)="hoursSelectionchanged($event)"></app-hours-selector>
   <br/>
-  <minutes-selector minutes="{{durationMinutes}}" (minutesChange)="minutesSelectionChanged($event)"></minutes-selector>
+  <app-minutes-selector minutes="{{durationMinutes}}" (minutesChange)="minutesSelectionChanged($event)"></app-minutes-selector>
 
   <h6>
-    <u>The timer will be availbale every:</u>
+    <u>The timer will be available every:</u>
   </h6>
-  <days-selector days="{{timerConfig.weekdays}}" (daysSelectedChanged)="daysSelectionChanged($event)"></days-selector>
+  <app-days-selector days="{{timerConfig.weekdays}}" (daysSelectedChanged)="daysSelectionChanged($event)"></app-days-selector>
 
   <!--{{ timerConfig.weekdays}}
     <br> Hour:{{ durationHours }} : Minutes:{{ durationMinutes}}

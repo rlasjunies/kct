@@ -1,14 +1,17 @@
 import { Component, ViewChild, isDevMode } from '@angular/core';
-import { Nav, Platform, App, MenuController } from 'ionic-angular';
+import { Nav, Platform, App as ionApp, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import * as providers from 'providers';
 import * as pages from 'pages';
+import { Events } from 'ionic-angular';
+import * as constant from 'app/constant';
 
 @Component({
     templateUrl: 'app.html'
 })
-export class MyApp {
+// tslint:disable-next-line:component-class-suffix
+export class App {
     @ViewChild(Nav) nav: Nav;
     rootPage: any = pages.ID_timers;
     public isDevMode = false;
@@ -18,14 +21,18 @@ export class MyApp {
         public statusBarNative: StatusBar,
         public splashScreenNative: SplashScreen,
 
+        // made to warn up the services
+        // is there another solution ?
         // tslint:disable-next-line
         private timerServiceP: providers.TimerProvider,
         // tslint:disable-next-line
         private timerSoundP: providers.TimerSoundProvider,
+        // tslint:disable-next-line
         private backgroundModeP: providers.BackgroundModeProvider,
-        private app: App,
+        private app: ionApp,
 
-        private menuCtrl: MenuController
+        private menuCtrl: MenuController,
+        public events: Events,
 
     ) {
         this.initializeApp();
@@ -39,10 +46,8 @@ export class MyApp {
             this.statusBarNative.hide();
             this.splashScreenNative.hide();
 
-            this.backgroundModeP.initializationToDoWhenDeviceReady();
-
-            this.platformNative.pause.subscribe(() => { this.backgroundModeP.dispatch('pause'); });
-            this.platformNative.resume.subscribe(() => { this.backgroundModeP.dispatch('resume'); });
+            this.platformNative.pause.subscribe( this.dispatchPauseEvent);
+            this.platformNative.resume.subscribe( this.dispatchResumeEvent);
 
             this.platformNative.registerBackButtonAction((evt) => {
                 // avoid app exit on back button when in home page
@@ -72,17 +77,22 @@ export class MyApp {
                 }
             }, 1000);
 
+            this.events.publish(constant.EVENT_APP_READY);
         });
     }
+
+    dispatchPauseEvent = () => {
+        this.events.publish(constant.EVENT_APP_PAUSE);
+    }
+
+    dispatchResumeEvent = () => {
+        this.events.publish(constant.EVENT_APP_RESUME);
+    }
     openSettingPage = () => {
-        this.nav.push(pages.ID_settings)
-            .then(_ => this.menuCtrl.close())
-            .catch(err => console.error(err));
+        this.nav.push(pages.ID_settings);
     }
 
     openAboutPage = () => {
-        this.nav.push(pages.ID_about)
-            .then(_ => this.menuCtrl.close())
-            .catch(err => console.error(err));
+        this.nav.push(pages.ID_about);
     }
 }

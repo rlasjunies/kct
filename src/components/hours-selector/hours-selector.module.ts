@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { HoursSelector } from './hours-selector';
+import { HoursSelectorComponent } from './hours-selector';
 
 @NgModule({
   declarations: [
-    HoursSelector,
+    HoursSelectorComponent,
   ],
   imports: [
-    IonicPageModule.forChild(HoursSelector),
+    IonicPageModule.forChild(HoursSelectorComponent),
   ],
   exports: [
-    HoursSelector
+    HoursSelectorComponent
   ]
 })
 export class HoursSelectorModule {}
