@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="21" id="com.ionicframework.kct3128288" ios-CFBundleVersion="21" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="22" id="com.ionicframework.kct3128288" ios-CFBundleVersion="22" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Games Timers</name>
     <description>Control the video gaming duration of your kids!</description>
     <author email="rlasjunies@gmail.com" href="http://cpairelasjunies.com/">Richard Lasjunies</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.36:8100" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-navigation href="http://192.168.1.36:8100" />
