@@ -19,6 +19,34 @@ export class BackgroundModeMock {
     }
 }
 
+export interface ITTSOptions {
+    /** text to speak */
+    text: string;
+    /** a string like 'en-US', 'zh-CN', etc */
+    locale?: string;
+    /** speed rate, 0 ~ 1 */
+    rate?: number;
+}
+export class TextToSpeechMock {
+
+    speak(textOrOption: string | ITTSOptions): Promise<null> {
+        return new Promise( (resolve) => {
+            resolve(null);
+        } );
+    }
+
+    stop(): Promise<null> {
+        return new Promise( (resolve) => {
+            resolve(null);
+        } );
+    }
+
+
+
+
+
+}
+
 export class PlatformMock {
     public ready(): Promise<String> {
         return new Promise((resolve) => {
@@ -348,6 +376,7 @@ export class DeepLinkerMock {
 }
 
 export class EventsMock {
+    private _channels;
     subscribe(topic: string, ...handlers: Function[]): void { }
     unsubscribe(topic: string, handler?: Function): boolean {
         return true;
