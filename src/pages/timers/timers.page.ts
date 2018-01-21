@@ -273,7 +273,6 @@ export class TimersPage {
         return Math.round(100 * (total - left) / total);
     }
     private manageTimerNotification = (timerNotification: models.TimerChangeNotification) => {
-        // if (timerNotification) {
         const timerUI = this.helperRetrieveTimerFromGuid(timerNotification.timerValue.guid);
 
         if (timerNotification instanceof TimerChangeNotificationOverStarted) {
@@ -296,41 +295,8 @@ export class TimersPage {
             this.timerTicked(timerNotification.timerValue, timerUI);
 
         } else {
-            console.log('WRONG TIMER STATUS VALUE');
+            console.warn('WRONG TIMER STATUS VALUE');
         }
-
-        // switch (timerNotification.timerValue.status) {
-        //     case models.enumTimerStatus.STARTED:
-        //         this.timerStarted(timerNotification.timerValue, timerUI);
-        //         break;
-
-        //     case models.enumTimerStatus.HOLD:
-        //         this.timerHeld(timerNotification.timerValue, timerUI);
-        //         break;
-
-        //     case models.enumTimerStatus.RUNNING:
-        //         this.timerTicked(timerNotification.timerValue, timerUI);
-        //         break;
-
-        //     case models.enumTimerStatus.OVER_1ST_TIME:
-        //         this.timerOvered(timerNotification.timerValue, timerUI);
-
-        //         break;
-        //     case models.enumTimerStatus.OVER:
-        //         this.timerOvered(timerNotification.timerValue, timerUI);
-
-        //         break;
-        //     case models.enumTimerStatus.ACKNOWLEDGE:
-        //         // this.WhenIsNext(timerNotification.guid);
-        //         this.timerStopped(timerNotification.timerValue, timerUI);
-        //         break;
-
-        //     default:
-        //         console.log('WRONG TIMER STATUS VALUE');
-        // }
-        // } else {
-        //     console.log('timerNotification value null');
-        // }
     }
 
     timerClicked(timer: models.UITimer, evt: Event) {
