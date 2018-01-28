@@ -1,27 +1,22 @@
 import { Injectable } from '@angular/core';
 import { BackgroundMode } from '@ionic-native/background-mode';
-import { Subscription } from 'rxjs/Subscription';
 import * as models from 'models';
 import * as constant from 'app/constant';
 import { TimerProvider } from 'providers/timer-service/timer-service';
-import { Events } from 'ionic-angular';
+import { EventsBroadcasterProvider } from 'providers/events-broadcaster/events-broadcaster';
 
 @Injectable()
 export class BackgroundModeProvider {
 
-
-    private _timerSubscription: Subscription;
-
     constructor(
+        private events: EventsBroadcasterProvider,
         private backgroundModeNative: BackgroundMode,
         private timerService: TimerProvider,
-        private events: Events,
     ) {
         this.events.subscribe(constant.EVENT_APP_PAUSE, this.activateBackgroundMode);
         this.events.subscribe(constant.EVENT_APP_RESUME, this.disableBackgroundMode);
         this.events.subscribe(constant.EVENT_APP_READY, this.initializationToDoWhenDeviceReady);
-
-        this._timerSubscription = this.timerService.notification$.subscribe(this.effectOnTimerNotification);
+        this.events.subscribe(constant.EVENT_TIMER_TICK, this.effectOnTimerNotification);
     }
 
     private initializationToDoWhenDeviceReady = () => {

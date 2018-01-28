@@ -1,10 +1,10 @@
 import { Component, ViewChild, isDevMode } from '@angular/core';
-import { Nav, Platform, App as ionApp, MenuController } from 'ionic-angular';
+import { Nav, Platform, App as ionApp } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import * as providers from 'providers';
 import * as pages from 'pages';
-import { Events } from 'ionic-angular';
+
 import * as constant from 'app/constant';
 
 @Component({
@@ -29,10 +29,12 @@ export class App {
         private timerSoundP: providers.TimerSoundProvider,
         // tslint:disable-next-line
         private backgroundModeP: providers.BackgroundModeProvider,
+        // tslint:disable-next-line
+        public tts: providers.TtsProvider,
+        // tslint:disable-next-line
+        public voiceAlert: providers.VoiceAlertProvider,
         private app: ionApp,
-
-        private menuCtrl: MenuController,
-        public events: Events,
+        public events: providers.EventsBroadcasterProvider,
 
     ) {
         this.initializeApp();

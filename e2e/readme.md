@@ -30,6 +30,7 @@ https://www.engineyard.com/blog/measuring-clientside-javascript-test-coverage-wi
 
 https://exceptionshub.com/code-coverage-for-protractor-tests-in-angularjs.html  
 
+https://www.jujens.eu/posts/en/2015/Sep/25/code-coverage-istanbul-protractor/  
 
 ### abandonned plugin  
 https://github.com/bennyhat/protractor-istanbul-plugin
