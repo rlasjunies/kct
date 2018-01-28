@@ -1,5 +1,7 @@
 # Games Timers
 
+![build status](https://travis-ci.org/rlasjunies/kct.svg?branch=master)
+
 > This project is a personal project in order to learn some technologies and technics. This project is not finalized, it should envolve to add new features and/or try new technos or technics. Do not hesitate to participate or fork the project.
 
 Games Timers is made to help managing the duration of distractions (games, tv, ...) of our kids. The purpose is to define with our kids distractions duration for certain days of the week, define duration as timers in the app, start the timers when they start playing and the timer will alert you when duration is over.
