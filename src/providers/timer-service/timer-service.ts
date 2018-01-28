@@ -21,7 +21,7 @@ export class TimerProvider {
 
     constructor(
         private events: EventsBroadcasterProvider,
-        private timerStorage: TimerStorageProvider
+        public timerStorage: TimerStorageProvider
     ) { }
 
     public isThereAtLeastOneTimerRunning = (): boolean => {
