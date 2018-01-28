@@ -1,18 +1,17 @@
 import * as moment from 'moment';
 import { Component, ViewChild } from '@angular/core';
-import { NavController, IonicPage, Events, Content } from 'ionic-angular';
-import { Subscription } from 'rxjs/Subscription';
+import { NavController, IonicPage, Content } from 'ionic-angular';
 
 import * as models from 'models';
 import * as misc from 'misc';
 import * as pages from 'pages';
 import * as constants from 'app/constant';
+import * as providers from 'providers';
 
 import { TimerProvider } from 'providers/timer-service/timer-service';
 import { TimerConfigService } from 'providers/timer-config-service/timer-config-service';
 import { DaysEncodingProvider } from 'providers';
-import { OnInit, OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
-import { instanceAvailability } from '@ionic-native/core';
+// import { instanceAvailability } from '@ionic-native/core';
 import {
     TimerChangeNotification,
     TimerChangeNotificationOverStarted,
@@ -43,13 +42,11 @@ export class TimersPage {
     // private _media: DictionaryMedia = {};
     public timers: models.UITimer[] = [];
 
-    private _timerSubscription: Subscription;
-
     constructor(
         private navCtrl: NavController,
         private timerService: TimerProvider,
         private timerConfigService: TimerConfigService,
-        private events: Events,
+        private events: providers.EventsBroadcasterProvider,
         private daysEncodingService: DaysEncodingProvider,
     ) {
 

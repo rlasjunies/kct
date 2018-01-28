@@ -36,7 +36,7 @@ export class EventsBroadcasterProvider {
         // console.log('unsubscribe:end', this);
     }
 
-    publish(event: string, msg: any) {
+    publish(event: string, msg?: any) {
         if (this._threads[event]) {
             const thread = this._threads[event];
 

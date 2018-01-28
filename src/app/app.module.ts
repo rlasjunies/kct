@@ -10,9 +10,10 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
 
 import { App } from './app.component';
 import * as providers from 'providers';
-import { StorageLocalProvider } from '../providers/storage-local/storage-local';
-import { TtsProvider } from '../providers/tts/tts';
-import { VoiceAlertProvider } from '../providers/voice-alert/voice-alert';
+import { StorageLocalProvider } from 'providers';
+import { TtsProvider } from 'providers';
+import { VoiceAlertProvider } from 'providers';
+import { EventsBroadcasterProvider } from 'providers';
 // import { StorageInMemoryProvider } from '../providers/storage-in-memory/storage-in-memory';
 
 @NgModule({
@@ -45,8 +46,9 @@ import { VoiceAlertProvider } from '../providers/voice-alert/voice-alert';
         providers.VoiceAlertProvider,
         // use for test in Memory { provide: StorageLocalProvider, useClass: StorageInMemoryProvider},
         StorageLocalProvider,
-    TtsProvider,
-    VoiceAlertProvider,
+        TtsProvider,
+        VoiceAlertProvider,
+        EventsBroadcasterProvider
     ]
 })
 export class AppModule { }

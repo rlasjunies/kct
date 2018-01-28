@@ -4,6 +4,8 @@ import { TimerProvider } from './timer-service';
 import { StorageLocalProvider } from 'providers/storage-local/storage-local';
 import { StorageInMemoryProvider } from 'providers/storage-in-memory/storage-in-memory';
 import { TimerStorageProvider } from 'providers';
+import { EventsBroadcasterProvider } from 'providers/events-broadcaster/events-broadcaster';
+import { EventsMock } from '../../../test-config/mocks-ionic';
 import { } from 'jasmine';
 describe('timer provider', () => {
 
@@ -19,7 +21,9 @@ describe('timer provider', () => {
             providers: [
                 TimerProvider,
                 TimerStorageProvider,
-                { provide: StorageLocalProvider, useClass: StorageInMemoryProvider }
+                { provide: StorageLocalProvider, useClass: StorageInMemoryProvider },
+                // { provide: Events, useClass: EventsMock}
+                EventsBroadcasterProvider
             ]
         });
 

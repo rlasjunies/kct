@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Events } from 'ionic-angular';
 import * as constants from 'app/constant';
 import { TimerChangeNotification } from 'models';
+import { EventsBroadcasterProvider } from 'providers';
 @Injectable()
 export class VoiceAlertProvider {
 
-    constructor(private events: Events) {
+    constructor(private events: EventsBroadcasterProvider) {
         this.events.subscribe(constants.EVENT_TIMER_TICK, this.manageTimerNotification);
 
     }

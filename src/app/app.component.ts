@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import * as providers from 'providers';
 import * as pages from 'pages';
-import { Events } from 'ionic-angular';
+
 import * as constant from 'app/constant';
 
 @Component({
@@ -34,7 +34,7 @@ export class App {
         // tslint:disable-next-line
         public voiceAlert: providers.VoiceAlertProvider,
         private app: ionApp,
-        public events: Events,
+        public events: providers.EventsBroadcasterProvider,
 
     ) {
         this.initializeApp();

@@ -1,9 +1,7 @@
 import * as moment from 'moment';
 import * as constants from 'app/constant';
-import { Events } from 'ionic-angular';
 
 import { Injectable } from '@angular/core';
-// import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { arrayRemove } from 'misc';
 import {
     TimerValue,
@@ -14,15 +12,16 @@ import {
     TimerChangeNotificationOverStarted,
     TimerChangeNotificationAcknowledged,
     TimerChangeNotificationHeld } from 'models';
-import { TimerStorageProvider } from 'providers/timer-storage/timer-storage';
+import { EventsBroadcasterProvider } from '../../providers/events-broadcaster/events-broadcaster';
+import { TimerStorageProvider } from '../../providers/timer-storage/timer-storage';
 
 @Injectable()
 export class TimerProvider {
     private _timers: string[] = [];
 
     constructor(
-        public timerStorage: TimerStorageProvider,
-        private events: Events,
+        private events: EventsBroadcasterProvider,
+        private timerStorage: TimerStorageProvider
     ) { }
 
     public isThereAtLeastOneTimerRunning = (): boolean => {

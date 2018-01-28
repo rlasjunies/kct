@@ -3,7 +3,6 @@
 // import { AsyncTest, SetupFixture, Expect, Test, TestCase, TestFixture } from "alsatian";
 
 // import * as mock from '../../misc/storageMock';
-// import { Events } from 'ionic-angular';
 // import { TimerConfigService } from './timer-config-service';
 
 // let defaultTimer1 = { 

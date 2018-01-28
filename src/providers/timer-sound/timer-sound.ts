@@ -1,19 +1,15 @@
 import { Injectable } from '@angular/core';
 import { SmartAudioProvider } from 'providers/smart-audio/smart-audio';
-import { Subscription } from 'rxjs/Subscription';
-import { TimerProvider } from 'providers/timer-service/timer-service';
 
 import * as models from 'models';
 import * as constants from 'app/constant';
-import { Events } from 'ionic-angular';
+import { EventsBroadcasterProvider } from 'providers/events-broadcaster/events-broadcaster';
 
 @Injectable()
 export class TimerSoundProvider {
-    private _timerSubscription: Subscription;
     constructor(
+        private events: EventsBroadcasterProvider,
         private smartAudio: SmartAudioProvider,
-        private timerService: TimerProvider,
-        private events: Events
     ) {
         this.events.subscribe(constants.EVENT_TIMER_TICK, this.manageTimerNotification);
 
