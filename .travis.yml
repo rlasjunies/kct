@@ -20,5 +20,6 @@ install:
   - npm install
 script:
   - npm run test:ci
-  - if [[ "$BRANCH" == "master" ]]; then npm run release
+  - if [[ "$BRANCH" == "master" ]]; then
+      npm run release;
     fi
