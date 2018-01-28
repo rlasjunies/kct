@@ -9,25 +9,13 @@ node_js:
   - "8.9"
 
 before_install:
-    - export DISPLAY=:99.0
-    - sh -e /etc/init.d/xvfb start
+#- export DISPLAY=:99.0
+#- sh -e /etc/init.d/xvfb start
+    - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
     
 install:
   - npm install -g cordova@8.0.0 ionic@3.19.0
   - npm install
-
-#before_script:
-#  - wget http://dl.google.com/android/android-sdk_r24.4-linux.tgz
-#  - tar -xvf android-sdk_r24.4-linux.tgz
-#  - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter platform-tools
-#  - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter build-tools-23.0.2
-#  - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter android-23
-#  - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter extra-android-support
-#  - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter extra-android-m2repository
-#  - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter extra-google-m2repository
-#  - export ANDROID_HOME=$PWD/android-sdk-linux
-#  - export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/23.0.2
-
 script:
   - npm run test:ci
   - npm run release
