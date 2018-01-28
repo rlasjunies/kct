@@ -1,24 +1,17 @@
-sudo: false
+
+sudo: required
+
+addons:
+  chrome: stable
 
 language: node_js
 node_js:
   - "8.9"
 
-#addons:
-#  apt:
-#    sources:
-#    - ubuntu-toolchain-r-test
-#    packages:
-#    - g++-4.8
-#    - openjdk-7-jdk
-#    - lib32stdc++6
-#    - lib32z1
-#env:
-#  CXX=g++-4.8
-#
 before_install:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
+    
 install:
   - npm install -g cordova@8.0.0 ionic@3.19.0
   - npm install
