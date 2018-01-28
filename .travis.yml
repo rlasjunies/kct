@@ -21,3 +21,4 @@ install:
 script:
   - npm run test:ci
   - if [[ "$BRANCH" == "master" ]]; then npm run release
+    fi

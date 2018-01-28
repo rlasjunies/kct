@@ -1,6 +1,6 @@
 # Games Timers
 
-![build status](https://travis-ci.org/rlasjunies/kct.svg?branch=master)
+![build status](http://travis-ci.org/rlasjunies/kct.svg?branch=master)
 
 > This project is a personal project in order to learn some technologies and technics. This project is not finalized, it should envolve to add new features and/or try new technos or technics. Do not hesitate to participate or fork the project.
 
