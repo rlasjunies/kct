@@ -88,7 +88,13 @@ export class TimerConfigService {
                 // initial config in released version
                 firstLoadConfig = {
                     dayOfLastTimersCalculation: '2016-08-10',
-                    timersConfig: []
+                    timersConfig: [
+                      {
+                        guid: '569dc9e5-8874-46bc-9e92-1c8cfbdaf0a3', weekdays: 127,
+                        title: 'Game John', durationMilliSecond: 900000, durationHumanized: '15:00',
+                        icon: 'game-controller-b', enable: true
+                    }
+                    ]
                 };
             }
             this._config = firstLoadConfig;

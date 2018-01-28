@@ -1,4 +1,4 @@
 export interface IVoiceMessage {
     text: string;
-    locale: string;
+    locale?: string;
 }

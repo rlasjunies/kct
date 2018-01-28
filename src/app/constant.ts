@@ -16,6 +16,7 @@ export let DATE_STORE_FORMAT = 'YYYY-MM-DD';
 export const EVENT_APP_PAUSE = 'app:pause';
 export const EVENT_APP_RESUME = 'app:resume';
 export const EVENT_APP_READY = 'app:ready';
+export const EVENT_FORCE_FOREGROUND = 'app:forceForeground';
 export const EVENT_TTS_SAY = 'tts:say';
 
 export const EVENT_TIMER_TICK = 'timer:tick';
